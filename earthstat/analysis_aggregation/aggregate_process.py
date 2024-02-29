@@ -10,7 +10,7 @@ import os
 import geopandas as gpd
 
 
-from utils import savedFilePath, extractDateFromFilename, loadTiff
+from ..utils import savedFilePath, extractDateFromFilename, loadTiff
 
 
 def conAggregate(predictor_dir, shapefile_path, output_csv_path, crop_mask_path=None, use_crop_mask=False, predictor_name="Value"):

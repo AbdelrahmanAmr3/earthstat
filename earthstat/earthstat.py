@@ -1,9 +1,9 @@
-from data_processing.data_loader import loadData
-from data_processing.data_compatibility import checkDataCompatibility
-from analysis_aggregation.process_comp_issues import processCompatibilityIssues
-from geooperations.shapefile_process import filterShapefile as extractROI
-from geooperations.clip_raster import clipMultipleRasters as clipRaster
-from analysis_aggregation.aggregate_process import conAggregate
+from .data_processing.data_loader import loadData
+from .data_processing.data_compatibility import checkDataCompatibility
+from .analysis_aggregation.process_comp_issues import processCompatibilityIssues
+from .geooperations.shapefile_process import filterShapefile as extractROI
+from .geooperations.clip_raster import clipMultipleRasters as clipRaster
+from .analysis_aggregation.aggregate_process import conAggregate
 
 
 class EarthStat():

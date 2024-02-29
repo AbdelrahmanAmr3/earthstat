@@ -31,15 +31,15 @@ class EarthStat():
         self.predictor_pathes = loaded_paths
         self.predictor_example = self.predictor_pathes[0]
 
-        print("\nPredictor Initialized Correcly, Initialize The Mask")
+        print("\nPredictor Initialized Correctly, Initialize The Mask")
 
     def initMask(self, mask_path):
         self.mask_path = mask_path
-        print("Mask Initialized Correcly, Initialize The Shapefile")
+        print("Mask Initialized Correctly, Initialize The Shapefile")
 
     def initShapefile(self, shapefile_path):
         self.shapefile_path = shapefile_path
-        print("Shapefile Initialized Correcly, Now Check The Data Compatibility")
+        print("Shapefile Initialized Correctly, Now Check The Data Compatibility")
 
     def DataCompatibility(self):
         compatibility_result = checkDataCompatibility(

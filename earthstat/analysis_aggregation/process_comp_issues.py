@@ -1,5 +1,5 @@
-from geooperations.rescale_resample_raster import rescaleResampleMask
-from geooperations.shapefile_process import reprojectShapefileToRaster
+from ..geooperations.rescale_resample_raster import rescaleResampleMask
+from ..geooperations.shapefile_process import reprojectShapefileToRaster
 
 
 def processCompatibilityIssues(actions, mask_path, predictor_data_path, shapefile_path, rescale_factor=(0, 100)):

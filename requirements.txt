@@ -1,1 +1,8 @@
+rasterio
+shapely
 numpy
+pandas
+tqdm
+geopandas
+pyproj
+glob

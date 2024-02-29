@@ -5,7 +5,7 @@ import rasterio
 from rasterio.mask import mask
 from shapely.geometry import mapping
 from tqdm import tqdm
-from utils import savedFilePath
+from ..utils import savedFilePath
 
 
 def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):

@@ -1,6 +1,6 @@
 import geopandas as gpd
 import rasterio
-from utils import savedFilePath
+from ..utils import savedFilePath
 
 
 def reprojectShapefileToRaster(raster_data_path, shapefile_path, output_shapefile_path):

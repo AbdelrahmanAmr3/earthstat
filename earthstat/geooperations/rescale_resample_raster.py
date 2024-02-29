@@ -2,7 +2,7 @@ import numpy as np
 import rasterio
 from rasterio.enums import Resampling
 from rasterio import warp
-from utils import savedFilePath
+from ..utils import savedFilePath
 
 
 def rescaleResampleMask(mask_path, raster_data_path, scale_factor=(0, 100)):

@@ -3,7 +3,7 @@ import os
 import rasterio
 from pyproj import CRS
 
-from utils import extractDateFromFilename as exDate, convertDate as conDate
+from ..utils import extractDateFromFilename as exDate, convertDate as conDate
 
 
 def loadData(directory_path, predictor):

@@ -13,3 +13,32 @@
     
 
 ## Features
+EarthStat simplifies geospatial analysis by streamlining the extraction of statistical information from spatial units, providing a comprehensive toolset for efficient data processing and analysis:
+
+- **Easy Data Preparation**: Define directories for raster files, shapefile paths, and masks effortlessly. Our library automates compatibility checks for pixel size, projection, and alignment between raster data (TIFF), mask, and shapefiles, ensuring smooth data integration.
+
+- **Efficient ROI Selection & Raster Clipping**: Select your Region of Interest (ROI) with an intuitive filtering function. Clip raster data to your ROI quickly with just one line of code.
+
+- **Advanced Data Aggregation**: aggregates raster data across selected spatial units but also intelligently masks the raster data during the aggregation process.
+
+- **Comprehensive Data Export**: After aggregation, the library compiles the aggregated data along with related information from the shapefile into CSV files for each spatial unit.
+
+
+## EarthStat Python Library - Improvements Roadmap
+### Data Processing and Scenario Management Enhancements 
+- [ ] Improve handle unwanted invalid values, allowing users to specify `None` as the preference.
+- [ ] offering more statistical options for aggregation for each scenario.
+- [ ] mask initialization: indicate the scale range and important info for mask.
+- [ ] Introduce thresholding options for masks to refine data selection.
+- [ ] Allow users the option to skip rescaling the mask.
+- [ ] Refactor Dataloader and Data Compatibility for no mask scenario.
+- [ ] Merge individual data initialization functions into a single function, streamlining user interaction and input handling.
+- [ ] Refactor code to operate as a single class, enhancing code organization, modularity, and ease of use.
+
+### Automation for User Convenience
+- [ ] Implement automatic detection of the lag between date ranges of predictor data.
+- [ ] Automatically identify the column names for countries in the dataset.
+- [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.
+
+### Code Enhancement
+- [ ] Better error handling and appropriate error responses.

@@ -42,3 +42,5 @@ EarthStat simplifies geospatial analysis by streamlining the extraction of stati
 
 ### Code Enhancement
 - [ ] Better error handling and appropriate error responses.
+
+-   TODO

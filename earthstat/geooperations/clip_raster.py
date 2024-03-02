@@ -30,8 +30,10 @@ def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
         out_image, out_transform = mask(src, geoms, crop=True)
 
         # Filter out invalid values
-        for invalid_value in invalid_values:
-            out_image = np.where(out_image == invalid_value, np.nan, out_image)
+        if invalid_values is not None:
+            for invalid_value in invalid_values:
+                out_image = np.where(
+                    out_image == invalid_value, np.nan, out_image)
 
         out_meta = src.meta.copy()
 

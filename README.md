@@ -31,3 +31,69 @@ EarthStat simplifies geospatial analysis by streamlining the extraction of stati
 - [ ] Implement automatic detection of the lag between date ranges of predictor data.
 - [ ] Automatically identify the column names for countries in the dataset.
 - [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.
+
+## Installation
+To install EarthStat, ensure you have Python 3.8 or later installed. Then run:
+```
+pip install earthstat
+```
+
+## Usage
+
+### Initializing the Library
+Import the library using:
+```python
+from earthstat.earthstat import EarthStat
+```
+
+### Initialize Configuration
+```python
+predictor_name              = 'FPAR'
+predictor_dir               = 'FPAR_Data'
+mask_path                   = 'crop_mask/Percent_Maize.tif'
+shapefile_path              = 'shapefile/gaul1_asap.shp'
+selected_countries          = ["Norway", "Spain"] 
+country_column_name         = 'adm0_name'		   # Column's name contains countries in shapefile
+invalid_values              =[255, 254, 251]       # Set None if no invalid Values
+```
+
+### Initialize the EarthStat object
+```python
+aggregate_fpar = EarthStat(predictor_name)
+```
+### Initialize Predictor/Data Directory
+```python
+aggregate_fpar.initDataDir(predictor_dir)
+```
+### Initialize Mask Path
+```python
+aggregate_fpar.initMaskPath(mask_path)
+```
+### Initialize Shapefile Path
+```python
+aggregate_fpar.initShapefilePath(shapefile_path)
+```
+### Checking Data Compatibility
+```python
+aggregate_fpar.DataCompatibility()
+```
+### Resolving Data Compatibility Issues
+```python
+# Resampling Methods [nearest, bilinear, cubic, average]
+aggregate_fpar.fixCompatibilityIssues(rescale_factor=None, # None = Rescale OFF
+                                      resampling_method="bilinear") # Defualt Bilinear
+```
+### Selecting Region of Interest (ROI)
+```python
+aggregate_fpar.selectRegionOfInterest(selected_countries,
+                                      country_column_name)
+```
+### Clipping Predictor Data
+```python
+Running clip withtout select ROI, will clip using main shapefile
+aggregate_fpar.clipPredictor()
+```
+### Executing Data Aggregation
+```python
+aggregate_fpar.runAggregation()
+```

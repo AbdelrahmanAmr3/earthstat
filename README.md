@@ -117,7 +117,6 @@ aggregate_fpar.selectRegionOfInterest(interested_ROI,
 Clip the predictor data to the boundaries defined in the main shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the shapefile will be used for clipping.
 
 ```python
-Running clip without select ROI, will clip using main shapefile
 aggregate_fpar.clipPredictor()
 ```
 > :warning: **Caution:** Using the main shapefile without filtering may led to system crash or error due to the big amount of objects in original shapefile.

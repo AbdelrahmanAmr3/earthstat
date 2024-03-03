@@ -133,9 +133,3 @@ Start data aggregation process, leveraging the clipped predictor data, resampled
 aggregate_fpar.runAggregation()
 ```
 > ❗ **Important:** Currently, the only available method for aggregation is weighted aggregation. Additional options for aggregation are under development and will be introduced soon.
-
-
-### Automation for User Convenience
-- [ ] Implement automatic detection of the lag between date ranges of predictor data.
-- [ ] Automatically identify the column names for countries in the dataset.
-- [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.

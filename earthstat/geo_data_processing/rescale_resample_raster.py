@@ -64,7 +64,7 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=(0, 100), resa
         resampling=resampling_enum
     )
 
-    output_path = f'{file_dir}/rescaled_resampled_{file_name}'
+    output_path = f'{file_dir}/rescaled_resampled_{resampling_method}_{file_name}'
 
     with rasterio.open(output_path, "w", **out_meta) as dest:
         dest.write(resampled_data, 1)

@@ -52,10 +52,11 @@ class EarthStat():
         self.shapefile_meta = shapefileMeta(self.shapefile_path)
 
         if self.mask_path and self.predictor_paths:
-            print("Shapefile Initialized Correctly, You Can Check The Data Compatibility")
+            print(
+                "\nShapefile Initialized Correctly, You Can Check The Data Compatibility")
         else:
             print(
-                "Shapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized")
+                "\nShapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized")
 
     def DataCompatibility(self):
         compatibility_result = checkDataCompatibility(

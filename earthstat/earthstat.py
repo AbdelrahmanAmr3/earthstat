@@ -96,9 +96,6 @@ class EarthStat():
             if self.process_compatibility['resample_mask']:
                 print(
                     f"Mask resampled successfully. Updated mask path: [{self.mask_path}]")
-            if self.process_compatibility['reproject_shapefile']:
-                print(
-                    f"Shapefile reprojected successfully. Updated shapefile path: [{self.shapefile_path}]")
 
             print("\nRe-checking data compatibility after applying fixes...\n")
 

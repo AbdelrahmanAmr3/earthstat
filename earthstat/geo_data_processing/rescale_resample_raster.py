@@ -42,9 +42,10 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampli
             rescaled_data = ((mask_data - old_min) /
                              (old_max - old_min)) * (new_max - new_min) + new_min
             print("\nRescaling Mask...")
+            print("Resampling mask...")
         else:
             rescaled_data = mask_data  # Skip rescaling if scale_factor is None
-        print("Resampling mask...")
+            print("\nResampling mask...")
         out_meta = mask.meta.copy()
         out_meta.update({
             "driver": "GTiff",
@@ -73,5 +74,7 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampli
 
     with rasterio.open(output_path, "w", **out_meta) as dest:
         dest.write(resampled_data, 1)
+
+    print(f"Filtered shapefile saved to: {output_path}")
 
     return output_path

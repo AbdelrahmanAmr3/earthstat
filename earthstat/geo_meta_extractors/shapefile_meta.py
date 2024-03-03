@@ -18,6 +18,6 @@ def shapefileMeta(shapefile_path):
     }
     print("Shapefile Summary:\n")
     print('\n'.join(f"{key}: {value}" for key,
-                    value in shapefile_summary.items()))
+                    value in shapefile_meta.items()))
 
     return shapefile_meta

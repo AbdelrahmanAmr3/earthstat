@@ -127,18 +127,23 @@ class EarthStat():
             print("Failed to select the Region of Interest (ROI). Please check the country names and column name provided.")
 
     def clipPredictor(self, invalid_values=None):
+        print("Clipping the predictor data...")
+        if self.ROI:
+            self.clipped_dir = clipRaster(
+                self.predictor_paths, self.ROI, invalid_values=invalid_values)
+            print("Clipping operation successful with the Region of Interest (ROI).")
 
-        self.clipped_dir = clipRaster(
-            self.predictor_paths, self.ROI, invalid_values=invalid_values)
-        if self.clipped_dir:
-            print(
-                f"Clipping operation successful. Clipped data stored in: {self.clipped_dir}")
+        elif not self.ROI:
+            self.clipped_dir = clipRaster(
+                self.predictor_paths, self.shapefile_path, invalid_values=invalid_values)
+            print("Clipping operation successful with main the shapefile.")
 
         else:
             print(
-                "Failed to clip the predictor data. Please check the input paths and parameters.")
+                "Failed to clip the predictor data. Check the shapefile and predictor paths")
 
     def runAggregation(self):
+        print("Starting aggregation...")
         aggregate_output = f'Aggregated_{self.predictor_name}.csv'
 
         # Check if a Region of Interest (ROI) has been selected for aggregation

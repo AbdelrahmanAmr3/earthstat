@@ -53,8 +53,8 @@ predictor_dir               = 'FPAR_Data'
 mask_path                   = 'crop_mask/Percent_Maize.tif'
 shapefile_path              = 'shapefile/gaul1_asap.shp'
 selected_countries          = ["Norway", "Spain"] 
-country_column_name         = 'adm0_name'		   # Column's name contains countries in shapefile
-invalid_values              =[255, 254, 251]       # Set None if no invalid Values
+country_column_name         = 'adm0_name' # Column's name contains countries in shapefile
+invalid_values              =[255, 254, 251]  # Set None if no invalid Values
 ```
 
 ### Initialize the EarthStat object

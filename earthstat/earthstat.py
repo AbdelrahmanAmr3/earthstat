@@ -1,14 +1,18 @@
-from .data_processing.data_loader import loadData
-from .data_processing.data_compatibility import checkDataCompatibility
-from .analysis_aggregation.process_comp_issues import processCompatibilityIssues
-from .geooperations.shapefile_process import filterShapefile as extractROI
-from .geooperations.clip_raster import clipMultipleRasters as clipRaster
+from .geo_meta_extractors.predictor_meta import predictorMeta
+from .geo_meta_extractors.mask_meta import maskSummary
+from .geo_meta_extractors.shapefile_meta import shapefileMeta
+from .data_compatibility.data_compatibility import checkDataCompatibility
+from .data_compatibility.process_comp_issues import processCompatibilityIssues
+from .geo_data_processing.shapefile_process import filterShapefile as extractROI
+from .geo_data_processing.clip_raster import clipMultipleRasters as clipRaster
 from .analysis_aggregation.aggregate_process import conAggregate
+from utils import loadTiff
 
 
 class EarthStat():
 
     def __init__(self, predictor_name):
+
         self.predictor_name = predictor_name
         self.predictor_pathes = None
         self.predictor_example = None
@@ -17,6 +21,11 @@ class EarthStat():
         self.process_compatibility = None
         self.use_crop_mask = True  # IMPROVE: We have to change it relate the user
 
+        # Meta Data
+        self.predictory_meta = None
+        self.mask_meta = None
+        self.shapefile_meta = None
+
         # Modified Data
         self.ROI = None
         self.clipped_dir = None
@@ -24,22 +33,29 @@ class EarthStat():
         # Aggregated Data path
         self.aggregated_csv = None
 
-    def initDataDir(self, path):
-
-        loaded_paths = loadData(path, self.predictor_name)
-
-        self.predictor_pathes = loaded_paths
+    def initDataDir(self, data_dir):
+        self.predictor_pathes = loadTiff(data_dir)
         self.predictor_example = self.predictor_pathes[0]
+        self.predictory_meta = predictorMeta(
+            data_dir, self.predictor_name)
 
-        print("\nPredictor Initialized Correctly, Initialize The Mask")
+        print("\nPredictor Pathes Initialized Correctly, Initialize The Mask's Path")
 
-    def initMask(self, mask_path):
+    def initMaskPath(self, mask_path):
         self.mask_path = mask_path
-        print("Mask Initialized Correctly, Initialize The Shapefile")
+        # Function to identify mask information
+        self.mask_meta = maskSummary(self.mask_path)
+        print("\nMask Initialized Correctly, Initialize The Shapefile")
 
-    def initShapefile(self, shapefile_path):
+    def initShapefilePath(self, shapefile_path):
         self.shapefile_path = shapefile_path
-        print("Shapefile Initialized Correctly, Now Check The Data Compatibility")
+        self.shapefile_meta = shapefileMeta(self.shapefile_path)
+
+        if self.mask_path and self.predictor_pathes:
+            print("Shapefile Initialized Correctly, You Can Check The Data Compatibility")
+        else:
+            print(
+                "Shapefile Initialized Correctly, But The Mask or Predictor Pathes are not initialized")
 
     def DataCompatibility(self):
         compatibility_result = checkDataCompatibility(
@@ -51,7 +67,7 @@ class EarthStat():
             print(
                 "\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible based on the current checks.")
 
-    def fixCompatibilityIssues(self):
+    def fixCompatibilityIssues(self, resampling_method="bilinear"):
         print("Checking for compatibility issues...")
 
         if not self.process_compatibility['is_compatible']:
@@ -70,7 +86,7 @@ class EarthStat():
                 print("- The shapefile does not require reprojection.")
 
             updated_paths = processCompatibilityIssues(
-                self.process_compatibility, self.mask_path, self.predictor_example, self.shapefile_path)
+                self.process_compatibility, self.mask_path, self.predictor_example, self.shapefile_path, resampling_method)
 
             self.mask_path = updated_paths.get('crop_mask', self.mask_path)
             self.shapefile_path = updated_paths.get(
@@ -109,7 +125,7 @@ class EarthStat():
         else:
             print("Failed to select the Region of Interest (ROI). Please check the country names and column name provided.")
 
-    def clipPredictor(self, invalid_values):
+    def clipPredictor(self, invalid_values=None):
 
         self.clipped_dir = clipRaster(
             self.predictor_pathes, self.ROI, invalid_values=invalid_values)

@@ -51,16 +51,23 @@ Import the library using:
 from earthstat.earthstat import EarthStat
 ```
 
-### Initialize Configuration
+### Main Configuration Setup
+
+Initialize the core settings: assign the predictor variable and data directory, specify the path to the crop mask, and define the shapefile path. Identify the column in the shapefile that contains area or country names.
+
+> **Important:** Be sure to set `invalid_values` to `None` if you do not wish to exclude unprocessed values from the dataset.
+
 ```python
 predictor_name              = 'FPAR'
 predictor_dir               = 'FPAR_Data'
 mask_path                   = 'crop_mask/Percent_Maize.tif'
 shapefile_path              = 'shapefile/gaul1_asap.shp'
-selected_countries          = ["Norway", "Spain"] 
+interested_ROI              = ["Norway", "Spain"] 
 country_column_name         = 'adm0_name' # Column's name contains countries in shapefile
 invalid_values              =[255, 254, 251]  # Set None if no invalid Values
 ```
+> :warning: **Caution:** An increase in ROI size may lead to system crashes due to insuffienct RAM size.
+
 
 ### Initialize the EarthStat object
 ```python
@@ -83,22 +90,41 @@ aggregate_fpar.initShapefilePath(shapefile_path)
 aggregate_fpar.DataCompatibility()
 ```
 ### Resolving Data Compatibility Issues
+
+Address potential mismatches in data scale and resolution:
+
+- `rescale_factor`: Set this parameter to `None` to keep the original data scale, or specify a tuple like `(0,100)` to rescale the data to a new range.
+- `resampling_method`: Choose a method (`"nearest"`, `"bilinear"`, `"cubic"`, `"average"`) to resample the data. The default is `"bilinear"`.
+
+Example usage:
+
 ```python
-# Resampling Methods [nearest, bilinear, cubic, average]
-aggregate_fpar.fixCompatibilityIssues(rescale_factor=None, # None = Rescale OFF
-                                      resampling_method="bilinear") # Default Bilinear
+# Disable rescaling and use default bilinear resampling
+aggregate_fpar.fixCompatibilityIssues(rescale_factor=None, resampling_method="bilinear")
+
+# Rescale data to a new range (0, 100) and use default bilinear resampling
+aggregate_fpar.fixCompatibilityIssues(rescale_factor=(0,100), resampling_method="bilinear")
 ```
+
 ### Selecting Region of Interest (ROI)
+Specify the area for data analysis by identifying the region of interest. Configure the target ROI and link it to the corresponding column that designates country or area names within the dataset.
+
 ```python
-aggregate_fpar.selectRegionOfInterest(selected_countries,
+aggregate_fpar.selectRegionOfInterest(interested_ROI,
                                       country_column_name)
 ```
 ### Clipping Predictor Data
+Clip the predictor data to the boundaries defined in the main shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the shapefile will be used for clipping.
+
 ```python
 Running clip without select ROI, will clip using main shapefile
 aggregate_fpar.clipPredictor()
 ```
+> :warning: **Caution:** Using the main shapefile without filtering may led to system crash or error due to the big amount of objects in original shapefile.
+
 ### Executing Data Aggregation
+Execute the data aggregation process utilizing the clipped predictor, resampled mask, and a filtered shapefile. If the shapefile is not filtered, the aggregation will encompass the entire shapefile.
+
 ```python
 aggregate_fpar.runAggregation()
 ```

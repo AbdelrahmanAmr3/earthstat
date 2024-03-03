@@ -81,7 +81,7 @@ aggregate_fpar.DataCompatibility()
 ```python
 # Resampling Methods [nearest, bilinear, cubic, average]
 aggregate_fpar.fixCompatibilityIssues(rescale_factor=None, # None = Rescale OFF
-                                      resampling_method="bilinear") # Defualt Bilinear
+                                      resampling_method="bilinear") # Default Bilinear
 ```
 ### Selecting Region of Interest (ROI)
 ```python
@@ -90,7 +90,7 @@ aggregate_fpar.selectRegionOfInterest(selected_countries,
 ```
 ### Clipping Predictor Data
 ```python
-Running clip withtout select ROI, will clip using main shapefile
+Running clip without select ROI, will clip using main shapefile
 aggregate_fpar.clipPredictor()
 ```
 ### Executing Data Aggregation

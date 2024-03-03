@@ -68,7 +68,7 @@ class EarthStat():
             print(
                 "\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible based on the current checks.")
 
-    def fixCompatibilityIssues(self, rescale_factor=(0, 100), resampling_method="bilinear"):
+    def fixCompatibilityIssues(self, rescale_factor=None, resampling_method="bilinear"):
         print("Checking for compatibility issues...")
 
         if not self.process_compatibility['is_compatible']:
@@ -136,7 +136,7 @@ class EarthStat():
         elif not self.ROI:
             self.clipped_dir = clipRaster(
                 self.predictor_paths, self.shapefile_path, invalid_values=invalid_values)
-            print("Clipping operation successful with main the shapefile.")
+            print("Clipping operation successful with the main shapefile.")
 
         else:
             print(

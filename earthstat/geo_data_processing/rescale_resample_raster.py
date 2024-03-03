@@ -22,7 +22,7 @@ def resamplingMethod(method):
     return resampling_methods.get(method.lower(), Resampling.bilinear)
 
 
-def rescaleResampleMask(mask_path, raster_data_path, scale_factor=(0, 100), resampling_method=None):
+def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampling_method=None):
 
     file_dir, file_name = savedFilePath(mask_path)
 
@@ -34,12 +34,17 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=(0, 100), resa
     with rasterio.open(mask_path) as mask:
         mask_data = mask.read(1)
 
-        old_min, old_max = 0, 10000
-        new_min, new_max = scale_factor
-
-        rescaled_data = ((mask_data - old_min) /
-                         (old_max - old_min)) * (new_max - new_min) + new_min
-
+        # Conditionally rescale data if scale_factor is provided
+        if scale_factor:
+            # Use actual min and max from the data
+            old_min, old_max = mask_data.min(), mask_data.max()
+            new_min, new_max = scale_factor
+            rescaled_data = ((mask_data - old_min) /
+                             (old_max - old_min)) * (new_max - new_min) + new_min
+            print("\nRescaling Mask...")
+        else:
+            rescaled_data = mask_data  # Skip rescaling if scale_factor is None
+        print("Resampling mask...")
         out_meta = mask.meta.copy()
         out_meta.update({
             "driver": "GTiff",

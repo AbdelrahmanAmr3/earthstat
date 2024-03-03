@@ -1,7 +1,7 @@
 # earthstat
 
-
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
+[![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)
 [![image](https://img.shields.io/conda/vn/conda-forge/earthstat.svg)](https://anaconda.org/conda-forge/earthstat)
 
 

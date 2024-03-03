@@ -1,6 +1,5 @@
 # Welcome to earthstat
 
-
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![image](https://img.shields.io/conda/vn/conda-forge/earthstat.svg)](https://anaconda.org/conda-forge/earthstat)
 
@@ -26,19 +25,12 @@ EarthStat simplifies geospatial analysis by streamlining the extraction of stati
 
 ## EarthStat Python Library - Improvements Roadmap
 ### Data Processing and Scenario Management Enhancements 
-- [ ] Improve handle unwanted invalid values, allowing users to specify `None` as the preference.
-- [ ] offering more statistical options for aggregation for each scenario.
-- [ ] mask initialization: indicate the scale range and important info for mask.
-- [ ] Introduce thresholding options for masks to refine data selection.
-- [ ] Allow users the option to skip rescaling the mask.
+- [ ] offering more statistical options for aggregation.
+- [ ] Introduce thresholding option for masks to refine data selection.
 - [ ] Refactor Dataloader and Data Compatibility for no mask scenario.
 - [ ] Merge individual data initialization functions into a single function, streamlining user interaction and input handling.
-- [ ] Refactor code to operate as a single class, enhancing code organization, modularity, and ease of use.
 
 ### Automation for User Convenience
 - [ ] Implement automatic detection of the lag between date ranges of predictor data.
 - [ ] Automatically identify the column names for countries in the dataset.
 - [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.
-
-### Code Enhancement
-- [ ] Better error handling and appropriate error responses.

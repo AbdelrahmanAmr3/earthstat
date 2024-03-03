@@ -23,6 +23,6 @@ def convertDate(date):
     return datetime.strptime(date, '%Y%m%d').date()
 
 
-def loadTiff(directory_path):
-    paths = glob.glob(directory_path+'/*.tif')
+def loadTiff(directory):
+    paths = glob.glob(directory+'/*.tif')
     return paths

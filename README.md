@@ -73,28 +73,33 @@ invalid_values              =[255, 254, 251]  # Set None if no invalid Values
 ```python
 aggregate_fpar = EarthStat(predictor_name)
 ```
-### Initialize Predictor/Data Directory
+### Initialize Predictor/Data Directory, Mask, and Shapefile Path
+
+Set up the foundational paths for your data processing pipeline. This includes initializing the directory for the predictor data, the path for the mask file, and the location of the shapefile. Each step is crucial for ensuring that the subsequent data processing and analysis can proceed smoothly.
+
+#### Example Usage:
+
 ```python
+# Initialize the predictor data directory
 aggregate_fpar.initDataDir(predictor_dir)
-```
-### Initialize Mask Path
-```python
+
+# Set the path for the mask file
 aggregate_fpar.initMaskPath(mask_path)
-```
-### Initialize Shapefile Path
-```python
+
+# Define the location of the shapefile
 aggregate_fpar.initShapefilePath(shapefile_path)
 ```
+
 ### Checking Data Compatibility
+Evaluate the compatibility of projections and pixel sizes across the mask, raster, and shapefile to ensure seamless data integration. This check confirms that the projection systems align for the mask, raster, and shapefile, and it also verifies that the pixel sizes between the raster and mask are compatible.
 ```python
 aggregate_fpar.DataCompatibility()
 ```
 ### Resolving Data Compatibility Issues
+This section addresses how to rectify issues identified by the data compatibility check. It focuses on resolving mismatches in pixel size between the raster and mask, or discrepancies in the Coordinate Reference System (CRS) among the raster, mask, and shapefile. The objective is to ensure uniformity in scale, resolution, and geospatial alignment across all datasets involved in the analysis.
 
-Address potential mismatches in data scale and resolution:
-
-- `rescale_factor`: Set this parameter to `None` to keep the original data scale, or specify a tuple like `(0,100)` to rescale the data to a new range.
-- `resampling_method`: Choose a method (`"nearest"`, `"bilinear"`, `"cubic"`, `"average"`) to resample the data. The default is `"bilinear"`.
+- `rescale_factor`: This parameter allows for the adjustment of the data's scale. By default, it is set to `None`, maintaining the original scale of the data. To alter the scale, specify a new range with a tuple, such as `(0,100)`.
+- `resampling_method`: This specifies the technique used to resample the data, with options including `"nearest"`, `"bilinear"`, `"cubic"`, and `"average"`. The default method is `"bilinear"`, suitable for a wide range of applications.
 
 Example usage:
 
@@ -122,8 +127,9 @@ aggregate_fpar.clipPredictor()
 > :warning: **Caution:** Using the main shapefile without filtering may led to system crash or error due to the big amount of objects in original shapefile.
 
 ### Executing Data Aggregation
-Execute the data aggregation process utilizing the clipped predictor, resampled mask, and a filtered shapefile. If the shapefile is not filtered, the aggregation will encompass the entire shapefile.
+Start data aggregation process, leveraging the clipped predictor data, resampled mask, and the selectively filtered shapefile to perform detailed analysis.
 
 ```python
 aggregate_fpar.runAggregation()
 ```
+> ❗ **Important:** Currently, the only available method for aggregation is weighted aggregation. Additional options for aggregation are under development and will be introduced soon.

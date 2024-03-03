@@ -68,7 +68,7 @@ class EarthStat():
             print(
                 "\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible based on the current checks.")
 
-    def fixCompatibilityIssues(self, resampling_method="bilinear"):
+    def fixCompatibilityIssues(self, rescale_factor=(0, 100), resampling_method="bilinear"):
         print("Checking for compatibility issues...")
 
         if not self.process_compatibility['is_compatible']:
@@ -87,7 +87,7 @@ class EarthStat():
                 print("- The shapefile does not require reprojection.")
 
             updated_paths = processCompatibilityIssues(
-                self.process_compatibility, self.mask_path, self.predictor_example, self.shapefile_path, resampling_method)
+                self.process_compatibility, self.mask_path, self.predictor_example, self.shapefile_path, rescale_factor, resampling_method)
 
             self.mask_path = updated_paths.get('crop_mask', self.mask_path)
             self.shapefile_path = updated_paths.get(

@@ -14,7 +14,7 @@ class EarthStat():
     def __init__(self, predictor_name):
 
         self.predictor_name = predictor_name
-        self.predictor_pathes = None
+        self.predictor_paths = None
         self.predictor_example = None
         self.mask_path = None
         self.shapefile_path = None
@@ -34,12 +34,12 @@ class EarthStat():
         self.aggregated_csv = None
 
     def initDataDir(self, data_dir):
-        self.predictor_pathes = loadTiff(data_dir)
-        self.predictor_example = self.predictor_pathes[0]
+        self.predictor_paths = loadTiff(data_dir)
+        self.predictor_example = self.predictor_paths[0]
         self.predictory_meta = predictorMeta(
             data_dir, self.predictor_name)
 
-        print("\nPredictor Pathes Initialized Correctly, Initialize The Mask's Path")
+        print("\nPredictor Paths Initialized Correctly, Initialize The Mask's Path")
 
     def initMaskPath(self, mask_path):
         self.mask_path = mask_path
@@ -51,11 +51,11 @@ class EarthStat():
         self.shapefile_path = shapefile_path
         self.shapefile_meta = shapefileMeta(self.shapefile_path)
 
-        if self.mask_path and self.predictor_pathes:
+        if self.mask_path and self.predictor_paths:
             print("Shapefile Initialized Correctly, You Can Check The Data Compatibility")
         else:
             print(
-                "Shapefile Initialized Correctly, But The Mask or Predictor Pathes are not initialized")
+                "Shapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized")
 
     def DataCompatibility(self):
         compatibility_result = checkDataCompatibility(
@@ -128,7 +128,7 @@ class EarthStat():
     def clipPredictor(self, invalid_values=None):
 
         self.clipped_dir = clipRaster(
-            self.predictor_pathes, self.ROI, invalid_values=invalid_values)
+            self.predictor_paths, self.ROI, invalid_values=invalid_values)
         if self.clipped_dir:
             print(
                 f"Clipping operation successful. Clipped data stored in: {self.clipped_dir}")

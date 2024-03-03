@@ -17,11 +17,9 @@ def processCompatibilityIssues(actions, mask_path, predictor_data_path, shapefil
                                                              resampling_method=resampling_method)
 
         if actions['reproject_shapefile']:
-            print("Reprojecting shapefile...")
-            reprojectShapefileToRaster(shapefile_path,
-                                       predictor_data_path,
-                                       output_shapefile_path=output_reprojected_shapefile_path)
-            updated_paths['shapefile'] = output_reprojected_shapefile_path
+            print("\nReprojecting shapefile...")
+            updated_paths['shapefile'] = reprojectShapefileToRaster(
+                predictor_data_path, shapefile_path)
 
     else:
         print("No compatibility issues detected. Proceeding without resampling or reprojection.")

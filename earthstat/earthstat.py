@@ -6,7 +6,7 @@ from .data_compatibility.process_comp_issues import processCompatibilityIssues
 from .geo_data_processing.shapefile_process import filterShapefile as extractROI
 from .geo_data_processing.clip_raster import clipMultipleRasters as clipRaster
 from .analysis_aggregation.aggregate_process import conAggregate
-from utils import loadTiff
+from .utils import loadTiff
 
 
 class EarthStat():

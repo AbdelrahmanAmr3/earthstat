@@ -1,4 +1,5 @@
 from .geo_meta_extractors.predictor_meta import predictorMeta
+from .data_converter.netcdf_to_tiff import convertToTIFF
 from .geo_meta_extractors.mask_meta import maskSummary
 from .geo_meta_extractors.shapefile_meta import shapefileMeta
 from .data_compatibility.data_compatibility import checkDataCompatibility
@@ -7,6 +8,8 @@ from .geo_data_processing.shapefile_process import filterShapefile as extractROI
 from .geo_data_processing.clip_raster import clipMultipleRasters as clipRaster
 from .analysis_aggregation.aggregate_process import conAggregate
 from .utils import loadTiff
+
+import os
 
 
 class EarthStat():
@@ -34,11 +37,39 @@ class EarthStat():
         self.aggregated_csv = None
 
     def initDataDir(self, data_dir):
-        self.predictor_paths = loadTiff(data_dir)
-        self.predictor_example = self.predictor_paths[0]
-        self.predictory_meta = predictorMeta(
-            data_dir, self.predictor_name)
 
+        has_tiff = any(file.endswith('.tif') for file in os.listdir(data_dir))
+
+        if has_tiff:
+            print("TIFF data found. Loading...\n")
+            # Proceed to load TIFF data without conversion
+            self.predictor_paths = loadTiff(data_dir)
+        else:
+            # If no TIFF files, check for netCDF files
+            has_netcdf = any(file.endswith('.nc')
+                             for file in os.listdir(data_dir))
+
+            if has_netcdf:
+                convert_choice = input(
+                    "The data is in netCDF format. Do you want to convert it to TIFF? (y/n): ")
+
+                if convert_choice.lower() == 'y':
+                    # If user chooses to convert, convert the data to TIFF
+                    data_dir = convertToTIFF(data_dir)
+                    print("Data converted to TIFF successfully.\n")
+                    self.predictor_paths = loadTiff(data_dir)
+                else:
+
+                    print(
+                        "Data will not be converted. EarthStat just works with TIFF data.")
+                    return
+            else:
+                print("No netCDF or TIFF data found in the directory.")
+                return
+
+        # Common steps to process loaded TIFF data
+        self.predictor_example = self.predictor_paths[0]
+        self.predictory_meta = predictorMeta(data_dir, self.predictor_name)
         print("\nPredictor Paths Initialized Correctly, Initialize The Mask's Path")
 
     def initMaskPath(self, mask_path):

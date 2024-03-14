@@ -7,6 +7,7 @@ from .data_compatibility.process_comp_issues import processCompatibilityIssues
 from .geo_data_processing.shapefile_process import filterShapefile as extractROI
 from .geo_data_processing.clip_raster import clipMultipleRasters as clipRaster
 from .analysis_aggregation.aggregate_process import conAggregate
+from .analysis_aggregation.parallel_clip_aggregate import parallelAggregate
 from .utils import loadTiff
 
 import os
@@ -190,5 +191,28 @@ class EarthStat():
                                                self.mask_path,
                                                use_crop_mask=self.use_crop_mask,
                                                predictor_name=self.predictor_name)
+
+        print(f"Aggregation complete. Data saved to {aggregate_output}.")
+
+    def runParallelAggregation(self):
+        print("Starting aggregation...")
+        aggregate_output = f'Aggregated_{self.predictor_name}.csv'
+
+        # Check if a Region of Interest (ROI) has been selected for aggregation
+        if self.ROI:
+            print(
+                f"Starting aggregation with the selected Region of Interest (ROI) for {self.predictor_name}.")
+            self.aggregated_csv = parallelAggregate(self.clipped_dir, self.ROI, aggregate_output, self.mask_path,
+                                                    use_crop_mask=self.use_crop_mask, predictor_name=self.predictor_name)
+
+        else:
+            print(
+                f"Starting aggregation with the original shapefile for {self.predictor_name}.")
+            self.aggregated_csv = parallelAggregate(self.clipped_dir,
+                                                    self.shapefile_path,
+                                                    aggregate_output,
+                                                    self.mask_path,
+                                                    use_crop_mask=self.use_crop_mask,
+                                                    predictor_name=self.predictor_name)
 
         print(f"Aggregation complete. Data saved to {aggregate_output}.")

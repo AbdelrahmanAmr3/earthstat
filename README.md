@@ -158,10 +158,9 @@ The `runParallelAggregation` method is designed to process and aggregate raster 
 The following example demonstrates how to use `runParallelAggregation` to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:
 
 ```python
-aggregate_fpar.runParallelAggregation(
-    use_mask=False,
-    invalid_values=[255, 254, 251],
-    calculation_mode="overall_mean",
-    all_touched=False
-)
+use_mask=False # True to use mask 
+calculation_mode="overall_mean" # Options: weighted_mean, filtered_mean
+all_touched=False
 
+aggregate_fpar.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+```

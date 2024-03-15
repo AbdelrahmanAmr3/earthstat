@@ -21,44 +21,47 @@ def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, u
         no_data_value = src.nodata
         geoms = [mapping(shape) for shape in shape_file.geometry]
 
-        with rasterio.open(mask_path) as mask_src:
+        mask_no_data_value = None
+        mask_src = None
+
+        if use_mask and mask_path:
+            mask_src = rasterio.open(mask_path)
             mask_no_data_value = mask_src.nodata
 
-            for index, geom in enumerate(geoms):
-                geom_mask, geom_transform = mask(
-                    src, [geom], crop=True, all_touched=all_touched)
-                geom_mask = geom_mask.astype('float32')
+        for index, geom in enumerate(geoms):
+            geom_mask, geom_transform = mask(
+                src, [geom], crop=True, all_touched=all_touched)
+            geom_mask = geom_mask.astype('float32')
+            geom_mask[geom_mask == no_data_value] = np.nan
 
-                geom_mask[geom_mask == no_data_value] = np.nan
+            if invalid_values:
+                for invalid_value in invalid_values:
+                    geom_mask[geom_mask == invalid_value] = np.nan
 
-                if invalid_values:
-                    for invalid_value in invalid_values:
-                        geom_mask[geom_mask == invalid_value] = np.nan
+            if use_mask and mask_path and mask_src:
+                crop_mask, _ = mask(
+                    mask_src, [geom], crop=True, all_touched=all_touched)
+                if calculation_mode == "weighted_mean":
+                    valid_mask = (crop_mask[0] != mask_no_data_value)
+                    valid_data = geom_mask[0][valid_mask]
+                    valid_weights = crop_mask[0][valid_mask]
+                    mean_value = np.nansum(valid_data * valid_weights) / np.nansum(
+                        valid_weights) if np.nansum(valid_weights) > 0 else np.nan
+                elif calculation_mode == "filtered_mean":
+                    valid_mask = (crop_mask[0] != mask_no_data_value)
+                    masked_data = geom_mask[0][valid_mask]
+                    mean_value = np.nanmean(masked_data) if np.nansum(
+                        masked_data) > 0 else np.nan
+            elif calculation_mode == "overall_mean" or not use_mask:
+                mean_value = np.nanmean(geom_mask)
 
-                if use_mask and mask_path:
-                    crop_mask, _ = mask(
-                        mask_src, [geom], crop=True, all_touched=all_touched)
-                    if calculation_mode == "weighted_mean":
-                        valid_mask = (crop_mask[0] != mask_no_data_value)
-                        valid_data = geom_mask[0][valid_mask]
-                        valid_weights = crop_mask[0][valid_mask]
-                        mean_value = np.nansum(valid_data * valid_weights) / np.nansum(
-                            valid_weights) if np.nansum(valid_weights) > 0 else np.nan
+            new_row = {col: shape_file.iloc[index][col]
+                       for col in shape_file.columns if col != 'geometry'}
+            new_row.update({'date': date_str, predictor_name: mean_value})
+            aggregated_data.append(new_row)
 
-                    elif calculation_mode == "filtered_mean":
-                        valid_mask = (crop_mask[0] != mask_no_data_value)
-                        masked_data = geom_mask[0][valid_mask]
-                        mean_value = np.nanmean(masked_data) if np.nansum(
-                            masked_data) > 0 else np.nan
-
-                if calculation_mode == "overall_mean":
-                    mean_value = np.nanmean(geom_mask)
-
-                new_row = {col: shape_file.iloc[index][col]
-                           for col in shape_file.columns if col != 'geometry'}
-                new_row.update(
-                    {'date': date_str, predictor_name: mean_value})
-                aggregated_data.append(new_row)
+        if mask_src:
+            mask_src.close()
 
     return aggregated_data
 

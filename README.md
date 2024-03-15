@@ -135,3 +135,33 @@ Start data aggregation process, leveraging the clipped predictor data, resampled
 aggregate_fpar.runAggregation()
 ```
 > ❗ **Important:** Currently, the only available method for aggregation is weighted aggregation. Additional options for aggregation are under development and will be introduced soon.
+
+### Parallel Processing with `runParallelAggregation`
+
+The `runParallelAggregation` method is designed to process and aggregate raster data across multiple files in parallel, enhancing performance for large datasets. This method leverages multiple CPU cores to simultaneously process different portions of the data, reducing overall computation time.
+
+#### Parameters
+
+- `use_mask` (**bool**): Specifies whether to apply a mask to the raster data. When set to `True`, the function will use the mask path provided (if applicable) to only process areas within the mask. Default is `False`.
+  
+- `invalid_values` (**list of int**): A list of pixel values to be treated as invalid and excluded from the aggregation. For example, `[255, 254, 251]` can be used to ignore certain values that represent no data or errors in the raster files.
+
+- `calculation_mode` (**str**): Determines the mode of aggregation for pixel values. Supported modes include:
+  - `"overall_mean"`: Calculates the mean of all valid pixel values across the raster dataset.
+  - `"weighted_mean"`: Calculates the weighted mean of the valid pixel values using the mask values as weights. This mode is applicable only when `use_mask` is `True` and a valid `mask_path` is provided.
+  - `"filtered_mean"`: Applies a filter using the validated mask values to mask the data before calculating the mean. This mode is intended for scenarios where only specific parts of the raster that meet certain conditions (defined by the mask) should contribute to the mean calculation.
+
+- `all_touched` (**bool**): If set to `True`, all pixels touched by geometries will be included in the mask. If `False`, only pixels whose center is within the geometry or touching the geometry boundary will be included. Default is `False`.
+
+#### Usage Example
+
+The following example demonstrates how to use `runParallelAggregation` to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:
+
+```python
+aggregate_fpar.runParallelAggregation(
+    use_mask=False,
+    invalid_values=[255, 254, 251],
+    calculation_mode="overall_mean",
+    all_touched=False
+)
+

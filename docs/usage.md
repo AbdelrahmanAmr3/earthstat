@@ -1,11 +1,5 @@
 # Usage
 
-## Installation
-To install EarthStat, ensure you have Python 3.8 or later installed. Then run:
-```
-pip install earthstat
-```
-
 ### Initializing the Library
 Import the library using:
 ```python

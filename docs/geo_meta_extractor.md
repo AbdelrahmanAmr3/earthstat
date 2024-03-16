@@ -11,4 +11,4 @@
 
 ## Shapefile's Metadata
 
-::: earthstat.geo_meta_extractors.shapefile_aggregate
+::: earthstat.geo_meta_extractors.shapefile_meta

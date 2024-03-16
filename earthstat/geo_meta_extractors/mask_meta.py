@@ -4,29 +4,17 @@ from pyproj import CRS
 
 def maskSummary(raster_path):
     """
-    Generates a summary of essential information for a raster mask file.
+    Generates a summary of a single-band raster file, including CRS, extent, data type, 
+    NoData value, resolution, pixel size, and min/max values. Assumes the file is readable 
+    by rasterio and contains geospatial data.
 
-    This function opens a raster file, reads its first band with masking enabled to handle nodata values, and then computes and extracts several key pieces of information about the raster. These include the coordinate reference system (CRS) name, geographical extent, data type of the raster, nodata value, spatial resolution, pixel size, and the minimum and maximum values within the raster.
-
-    Parameters:
-    - raster_path (str): The file path to the raster file.
+    Args:
+        raster_path (str): Path to the raster file.
 
     Returns:
-    dict: A dictionary containing the mask path, CRS, geographical extent, data type, nodata value, spatial resolution (as width and height), pixel size, and the minimum and maximum value of the raster's first band.
-
-    Example of use:
-    >>> raster_summary = maskSummary('path/to/raster.tif')
-    >>> print(raster_summary)
-    {
-        'Mask_path': 'path/to/raster.tif',
-        'CRS': 'EPSG:4326',
-        'Extent': BoundingBox(left=0.0, bottom=0.0, right=10.0, top=10.0),
-        'Data Type': 'uint16',
-        'NoData Value': -9999.0,
-        'Spatial Resolution': (1024, 768),
-        'Pixel Size': (0.1, 0.1),
-        'Min/Max Value': (0, 255)
-    }
+        dict: Summary of raster properties. Includes 'Mask_path', 'CRS', 'Extent', 
+              'Data Type', 'NoData Value', 'Spatial Resolution', 'Pixel Size', 
+              and 'Min/Max Value'.
     """
     with rasterio.open(raster_path) as src:
 

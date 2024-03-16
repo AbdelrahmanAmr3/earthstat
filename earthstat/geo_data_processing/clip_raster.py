@@ -9,7 +9,7 @@ from ..utils import savedFilePath
 
 
 def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
-   """
+    """
     Clips a raster file using a shapefile, optionally filtering out specified invalid values.
     The clipped raster is saved in a new directory named 'clipped' plus the original file directory.
 
@@ -20,7 +20,7 @@ def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
 
     The function creates a new directory (if it doesn't already exist) and saves the clipped raster there.
     """
-    
+
     file_dir, file_name = savedFilePath(raster_path)
 
     global output_clip

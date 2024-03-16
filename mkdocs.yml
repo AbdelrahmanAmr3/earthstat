@@ -86,3 +86,4 @@ nav:
     - API Reference:
           - earthstat module: earthstat.md
           - Analysis Aggregation functions: analysis_aggregation.md
+          - Utilities: utils.md

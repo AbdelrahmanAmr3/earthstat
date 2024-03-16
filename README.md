@@ -12,7 +12,7 @@
 
 ## EarthStat Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat.
-![Geospatial Data Processing Workflow](docs/images/EarthStat.png)
+![Geospatial Data Processing Workflow](docs/images/EarthStat_workflow.png)
 
 
 ## Features

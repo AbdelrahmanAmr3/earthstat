@@ -29,7 +29,7 @@ EarthStat simplifies geospatial analysis by streamlining the extraction of stati
 
 ## EarthStat Python Library - Improvements Roadmap
 ### Data Processing and Scenario Management Enhancements 
-- [ ] offering more statistical options for aggregation.
+- [x] offering more statistical options for aggregation.
 - [ ] Introduce thresholding option for masks to refine data selection.
 - [ ] Refactor Dataloader and Data Compatibility for no mask scenario.
 - [ ] Merge individual data initialization functions into a single function, streamlining user interaction and input handling.

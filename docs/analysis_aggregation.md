@@ -1,0 +1,1 @@
+::: earthstat.analysis_aggregation

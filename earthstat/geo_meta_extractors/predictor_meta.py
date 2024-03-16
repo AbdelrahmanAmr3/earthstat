@@ -13,17 +13,7 @@ def predictorMeta(predictor_dir, predictor_name):
     This function specifically looks for `.tif` files, extracting dates, spatial
     resolution, Coordinate Reference System (CRS), and other relevant metadata.
 
-    The summary also includes:
-    -the predictor name,
-    -the total number of TIFF files found within the directory,
-    -the date range of the TIFF files, if any dates are found, or a note indicating
-    that no dates were found,
-    -the directory path,
-    -the CRS of the TIFF files,
-    -the spatial extent of the TIFF files,
-    -the data type of the TIFF files,
-    -the NoData value of the TIFF files,-the range of dates found within the TIFF files,
-    total number of TIFF files, the directory path, CRS, spatial extent, data type,
+    The summary also includes: total number of TIFF files, the directory path, CRS, spatial extent, data type,
     NoData value, spatial resolution in pixels, and pixel size.
 
     Args:
@@ -36,26 +26,7 @@ def predictorMeta(predictor_dir, predictor_name):
         FileNotFoundError: If `predictor_dir` does not exist or contains no `.tif` files.
 
     Returns:
-        dict: A dictionary containing the following keys:
-            - 'predictor': The given `predictor_name`.
-            - 'total_tiff_files': The total number of TIFF files found in `predictor_dir`.
-            - 'date_range': A string representing the range of dates across all TIFF files,
-              or a note indicating no identifiable dates were found.
-            - 'directory': The path to the directory scanned.
-            - 'CRS': The Coordinate Reference System of the first TIFF file.
-            - 'Extent': The spatial extent of the first TIFF file.
-            - 'Data Type': The data type of the first TIFF file.
-            - 'NoData Value': The NoData value of the first TIFF file.
-            - 'Spatial Resolution': The spatial resolution of the first TIFF file, as width x height.
-            - 'Pixel Size': The pixel size of the first TIFF file.
-
-    Example usage:
-        >>> summary = predictorMeta("/path/to/tiff/directory", "Example Predictor")
-        >>> print(summary)
-        {
-            'predictor': 'Example Predictor',
-            ...
-        }
+        dict: A dictionary containing extracted metadata.
     """
     if not os.path.exists(predictor_dir):
 

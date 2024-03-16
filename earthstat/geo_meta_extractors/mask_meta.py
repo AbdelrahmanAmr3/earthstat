@@ -3,17 +3,13 @@ from pyproj import CRS
 
 
 def maskSummary(raster_path):
-    """
-    This function takes a raster path as input and returns a dictionary containing the following information:
+    """_summary_
 
-    - Mask_path: The path to the raster file
-    - CRS: The coordinate reference system of the raster
-    - Extent: The extent of the raster in the form of a tuple (min_x, min_y, max_x, max_y)
-    - Data Type: The data type of the raster
-    - NoData Value: The no data value of the raster
-    - Spatial Resolution: The spatial resolution of the raster in the form of a tuple (width, height)
-    - Pixel Size: The pixel size of the raster in the form of a tuple (x_size, y_size)
-    - Min/Max Value: The minimum and maximum values of the raster
+    Args:
+        raster_path (_type_): _description_
+
+    Returns:
+        _type_: _description_
     """
     with rasterio.open(raster_path) as src:
 

@@ -20,6 +20,7 @@ class EarthStat():
 
         self.predictor_name = predictor_name
         self.predictor_paths = None
+        self.predictor_dir = None
         self.predictor_example = None
         self.mask_path = None
         self.shapefile_path = None
@@ -69,7 +70,7 @@ class EarthStat():
                 print("No netCDF or TIFF data found in the directory.")
                 return
 
-        # Common steps to process loaded TIFF data
+        self.predictor_dir = data_dir
         self.predictor_example = self.predictor_paths[0]
         self.predictory_meta = predictorMeta(data_dir, self.predictor_name)
         print("\nPredictor Paths Initialized Correctly, Initialize The Mask's Path")

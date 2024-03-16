@@ -1,5 +1,6 @@
 # Welcome to EarthStat
-![EarthStat Logo](images/EarthStat.png)
+<div style="display: flex; justify-content: center; align-items: center; height: 50vh;"><img src="images/EarthStat.png" alt="Logo" style="max-width: 50%; height: auto;"></div>
+
 [![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)
@@ -11,7 +12,7 @@
 
 ## EarthStat Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat.
-![Geospatial Data Processing Workflow](images/EarthStat.png)
+![Geospatial Data Processing Workflow](images/EarthStat_workflow.png)
 
 
 ## Features

@@ -1,5 +1,4 @@
 # Geospatial Metadata Extraction Toolkit
-::: earthstat.geo_meta_extractors
 
 ## Predictor Dataset's Metadata Retrieval
 

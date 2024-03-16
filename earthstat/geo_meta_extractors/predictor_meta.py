@@ -7,7 +7,18 @@ from ..utils import extractDateFromFilename as exDate, convertDate as convDate
 
 
 def predictorMeta(predictor_dir, predictor_name):
+    """_summary_
 
+    Args:
+        predictor_dir (_type_): _description_
+        predictor_name (_type_): _description_
+
+    Raises:
+        FileNotFoundError: _description_
+
+    Returns:
+        _type_: _description_
+    """
     if not os.path.exists(predictor_dir):
 
         raise FileNotFoundError(

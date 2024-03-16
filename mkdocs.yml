@@ -83,5 +83,6 @@ nav:
         - examples/intro.ipynb
     - API Reference:
           - earthstat module: earthstat.md
+          - Geospatial Metadata Extraction: geo_meta_extractor.md
           - Analysis Aggregation functions: analysis_aggregation.md
           - Utilities: utils.md

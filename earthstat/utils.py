@@ -5,7 +5,9 @@ import glob
 
 
 def savedFilePath(file_path):
-    """Get file directory and name"""
+    """Get file directory and name.
+
+    """
     file_dir = os.path.dirname(file_path)
     file_name = os.path.basename(file_path)
 

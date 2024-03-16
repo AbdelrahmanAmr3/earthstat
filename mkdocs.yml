@@ -38,9 +38,7 @@ theme:
 
 plugins:
     - search
-    - mkdocstrings:
-          watch:
-              - earthstat/*
+    - mkdocstrings
     - git-revision-date
     # - git-revision-date-localized:
     #       enable_creation_date: true

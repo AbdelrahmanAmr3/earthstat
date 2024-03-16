@@ -87,5 +87,5 @@ nav:
           - Geospatial Data Converter: data_converter.md
           - Check and Fix Data Compatibility Issues: data_compatibility.md
           - Geospatial Data Preprocessing: geo_data_processing.md
-          - Analysis Aggregation functions: analysis_aggregation.md
+          - Extract Statistical Information: analysis_aggregation.md
           - Utilities: utils.md

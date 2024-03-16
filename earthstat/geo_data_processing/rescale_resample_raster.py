@@ -63,7 +63,7 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampli
             "width": target_raster.width,
             "transform": target_transform,
             "crs": target_raster.crs,
-            "compress": "DEFLATE",  # Future Enhance Ment:specify best compression scheme here
+            "compress": "DEFLATE",  # Future Enhancement:specify best compression scheme here
             "predictor": "2",  # !!! good for continuous data !!!
             "zlevel": 1  # compression level, 9 is the highest
         })

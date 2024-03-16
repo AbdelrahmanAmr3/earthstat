@@ -12,7 +12,22 @@ from ..utils import extractDateFromFilename, loadTiff
 
 
 def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, use_mask=False, mask_path=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+    """
+    Processes a single raster for aggregation into shapefile geometries.
 
+    Args:
+        raster_path (str): Path to the raster file.
+        shape_file (GeoDataFrame): Loaded shapefile for geometries.
+        invalid_values (list, optional): Values to consider as invalid in raster.
+        use_mask (bool): If True, uses an additional mask for calculations.
+        mask_path (str, optional): Path to the mask file, required if use_mask is True.
+        calculation_mode (str): Mode of calculation ('overall_mean', 'weighted_mean', or 'filtered_mean').
+        predictor_name (str): Column name for the output data.
+        all_touched (bool): Consider all pixels that touch geometry for masking.
+
+    Returns:
+        list: Aggregated data for each geometry in the shapefile.
+    """
     file_name = os.path.basename(raster_path)
     date_str = extractDateFromFilename(file_name)
     aggregated_data = []
@@ -67,6 +82,25 @@ def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, u
 
 
 def parallelAggregate(predictor_dir, shapefile_path, output_csv_path, mask_path=None, use_mask=False, invalid_values=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+    """
+    Aggregates raster data from a directory in parallel into shapefile geometries, optionally using a mask.
+
+    Args:
+        predictor_dir (str): Directory containing raster datasets.
+        shapefile_path (str): Path to the shapefile.
+        output_csv_path (str): Path to save the aggregated CSV.
+        mask_path (str, optional): Path to the mask file, required if use_mask is True.
+        use_mask (bool): Use a mask for the aggregation process.
+        invalid_values (list, optional): List of values to treat as invalid in the raster data.
+        calculation_mode (str): Determines how values are aggregated ('overall_mean', 'weighted_mean', or 'filtered_mean').
+        predictor_name (str): Name for the output predictor column.
+        all_touched (bool): Include all pixels touching geometry in the aggregation.
+
+    Raises:
+        ValueError: If use_mask is True and mask_path is not provided.
+
+    Returns a CSV with aggregated data per shapefile geometry. Utilizes multiprocessing for efficiency.
+    """
     predictor_paths = loadTiff(predictor_dir)
     data_list = []
 

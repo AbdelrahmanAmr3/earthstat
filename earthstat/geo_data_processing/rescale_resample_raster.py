@@ -10,20 +10,31 @@ from ..utils import savedFilePath
 
 def resamplingMethod(method):
 
-    # Define the resampling method
     resampling_methods = {
         "bilinear": Resampling.bilinear,
         "nearest": Resampling.nearest,
         "average": Resampling.average,
         "cubic": Resampling.cubic,
-        # Add more mappings as needed
+
     }
 
     return resampling_methods.get(method.lower(), Resampling.bilinear)
 
 
-def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampling_method=None):
+def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampling_method="bilinear"):
+    """
+    Rescales and resamples a mask raster based on a target raster's specifications. 
+    Optionally applies scaling to the mask data's values and resamples using a specified method.
 
+    Args:
+        mask_path (str): Path to the mask raster file to be rescaled and resampled.
+        raster_data_path (str): Path to the target raster file for matching specifications.
+        scale_factor (tuple, optional): Min and max values for rescaling the mask data. Defaults to None.
+        resampling_method (str, optional): Method for resampling ('bilinear', 'cubic', 'average', 'nearest'.). Defaults to bilinear.
+
+    Returns:
+        str: The path to the saved rescaled and resampled raster file.
+    """
     file_dir, file_name = savedFilePath(mask_path)
 
     resampling_enum = resamplingMethod(resampling_method)
@@ -34,7 +45,6 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampli
     with rasterio.open(mask_path) as mask:
         mask_data = mask.read(1)
 
-        # Conditionally rescale data if scale_factor is provided
         if scale_factor:
             # Use actual min and max from the data
             old_min, old_max = mask_data.min(), mask_data.max()
@@ -53,9 +63,9 @@ def rescaleResampleMask(mask_path, raster_data_path, scale_factor=None, resampli
             "width": target_raster.width,
             "transform": target_transform,
             "crs": target_raster.crs,
-            "compress": "DEFLATE",  # Specify compression scheme here
-            "predictor": "2",  # Good for continuous data
-            "zlevel": 1  # Compression level, 9 is the highest
+            "compress": "DEFLATE",  # Future Enhance Ment:specify best compression scheme here
+            "predictor": "2",  # !!! good for continuous data !!!
+            "zlevel": 1  # compression level, 9 is the highest
         })
 
     resampled_data = np.empty(

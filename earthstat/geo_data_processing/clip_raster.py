@@ -9,7 +9,18 @@ from ..utils import savedFilePath
 
 
 def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
+   """
+    Clips a raster file using a shapefile, optionally filtering out specified invalid values.
+    The clipped raster is saved in a new directory named 'clipped' plus the original file directory.
 
+    Args:
+        raster_path (str): Path to the raster file to be clipped.
+        shapefile_path (str): Path to the shapefile used for clipping.
+        invalid_values (list, optional): Values in the raster to treat as invalid and replace with NaN.
+
+    The function creates a new directory (if it doesn't already exist) and saves the clipped raster there.
+    """
+    
     file_dir, file_name = savedFilePath(raster_path)
 
     global output_clip
@@ -55,7 +66,20 @@ def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
 
 
 def clipMultipleRasters(raster_paths, shapefile_path, invalid_values=None):
+    """
+    Clips multiple raster files using a single shapefile, optionally filtering out specified invalid values.
+    Each clipped raster is saved in a new directory named 'clipped' plus the original file directory.
 
+    Args:
+        raster_paths (list of str): Paths to the raster files to be clipped.
+        shapefile_path (str): Path to the shapefile used for clipping.
+        invalid_values (list, optional): Values in the raster to treat as invalid and replace with NaN.
+
+    Returns:
+        str: The path to the directory where clipped rasters are saved.
+
+    Processes each raster sequentially, showing progress with a progress bar.
+    """
     for raster_path in tqdm(raster_paths, total=len(raster_paths), desc="Clipping Rasters"):
         clipRasterWithShapefile(raster_path, shapefile_path, invalid_values)
 

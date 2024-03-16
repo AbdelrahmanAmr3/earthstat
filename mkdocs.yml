@@ -47,7 +47,7 @@ plugins:
     - mkdocs-jupyter:
           include_source: True
           ignore_h1_titles: True
-          execute: True
+          execute: false
           allow_errors: false
           ignore: ["conf.py"]
           execute_ignore: ["*ignore.ipynb"]
@@ -84,5 +84,8 @@ nav:
     - API Reference:
           - earthstat module: earthstat.md
           - Geospatial Metadata Extraction: geo_meta_extractor.md
+          - Geospatial Data Converter: data_converter.md
+          - Check and Fix Data Compatibility Issues: data_compatibility.md
+          - Geospatial Data Preprocessing: geo_data_processing.md
           - Analysis Aggregation functions: analysis_aggregation.md
           - Utilities: utils.md

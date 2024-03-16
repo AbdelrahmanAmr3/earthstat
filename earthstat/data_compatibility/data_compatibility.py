@@ -6,6 +6,25 @@ from .compatibility_utils import checkPixelSize, checkProjection
 
 
 def checkDataCompatibility(raster_data_path, mask_path, shapefile_path):
+    """
+    Checks spatial resolution and CRS compatibility among a raster dataset, mask, and shapefile.
+
+    Determines if the mask needs resampling to match the raster dataset's resolution or if the shapefile
+    needs reprojecting to match the raster's CRS. Identifies overall data compatibility.
+
+    Args:
+        raster_data_path (str): Path to the raster dataset file.
+        mask_path (str): Path to the mask file.
+        shapefile_path (str): Path to the shapefile.
+
+    Returns:
+        dict: A dictionary indicating required actions (resample_mask, reproject_shapefile) and 
+              overall compatibility (is_compatible).
+
+    Raises:
+        CRSError: If there's an issue reading the CRS data from any file.
+        Exception: For general errors encountered during processing.
+    """
     actions = {'resample_mask': False,
                'reproject_shapefile': False, 'is_compatible': True}
 

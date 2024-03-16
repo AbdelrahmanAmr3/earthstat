@@ -10,10 +10,28 @@ import os
 import geopandas as gpd
 
 
-from ..utils import savedFilePath, extractDateFromFilename, loadTiff
+from ..utils import extractDateFromFilename, loadTiff
 
 
 def conAggregate(predictor_dir, shapefile_path, output_csv_path, crop_mask_path=None, use_crop_mask=False, predictor_name="Value"):
+    """
+    Aggregates raster values to polygons in a shapefile, optionally using a crop mask for weighted calculations.
+
+    Args:
+        predictor_dir (str): Directory containing raster datasets.
+        shapefile_path (str): Path to the shapefile with polygons for aggregation.
+        output_csv_path (str): Path where the aggregated output CSV will be saved.
+        crop_mask_path (str, optional): Path to the crop mask raster, required if use_crop_mask is True.
+        use_crop_mask (bool): Whether to use the crop mask for weighted aggregation.
+        predictor_name (str): Column name for the aggregated values in the output CSV.
+
+    Raises:
+        ValueError: If use_crop_mask is True but crop_mask_path is not provided.
+
+    Aggregates values from each raster within the specified directory to each polygon in the shapefile,
+    writing the results to a CSV file. If a crop mask is used, values are aggregated using weights from
+    the mask; otherwise, simple averaging is applied.
+    """
     predictor_pathes = loadTiff(predictor_dir)
     data_list = []
     shape_file = gpd.read_file(shapefile_path)

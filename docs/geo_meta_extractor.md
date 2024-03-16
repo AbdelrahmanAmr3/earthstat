@@ -1,13 +1,14 @@
-# Geospatial Metadata Extraction Toolkit
+# Geospatial Metadata Extraction Toolkit Documentation
 
-## Predictor Dataset's Metadata Retrieval
+Detailed overview of the `earthstat.geo_meta_extractors` module, offering specialized tools for extracting metadata from various geospatial data formats.
 
+## Metadata Extraction Capabilities
+
+### Extracting Predictor Variables from Metadata
 ::: earthstat.geo_meta_extractors.predictor_meta
 
-## Geospatial Mask Metadata
-
+### Generating Metadata Masks for Geospatial Analysis
 ::: earthstat.geo_meta_extractors.mask_meta
 
-## Shapefile's Metadata
-
+### Shapefile Metadata Extraction for Enhanced Data Insight
 ::: earthstat.geo_meta_extractors.shapefile_meta

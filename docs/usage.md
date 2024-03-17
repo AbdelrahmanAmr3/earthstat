@@ -2,13 +2,22 @@
 
 ### Initializing the Library
 Import the library using:
+
 ```python
 from earthstat.earthstat import EarthStat
 ```
 
 ### Main Configuration Setup
 
-Initialize the core settings: assign the predictor variable and data directory, specify the path to the crop mask, and define the shapefile path. Identify the column in the shapefile that contains area or country names.
+Initialize the core settings:
+
+`predictor_name`: The name of the predictor being used.  
+`predictor_dir`: The directory where the predictor's related files are stored.  
+`mask_file_path`: The file path to the mask file, used for calculate weighted mean or mask the raster.  
+`shapefile_file_path`: Path to the shapefile containing geographical boundaries.
+`selected_countries`: A list of countries - Region of interest (ROI).
+`country_column_name`: The column's name in the dataset that contains country names.  
+`invalid_values`: A list of values considered invalid within the dataset.
 
 > **Important:** Be sure to set `invalid_values` to `None` if you do not wish to exclude unprocessed values from the dataset.
 
@@ -18,37 +27,39 @@ predictor_dir               = 'FPAR_Data'
 mask_file_path              = 'crop_mask/Percent_Maize.tif'
 shapefile_file_path         = 'shapefile/gaul1_asap.shp'
 interested_ROI              = ["Norway", "Spain"] 
-country_column_name         = 'adm0_name' # Column's name contains countries in shapefile
+country_column_name         = 'adm0_name' 
 invalid_values              =[255, 254, 251]  # Set None if no invalid Values
 ```
-> :warning: **Caution:** An increase in ROI size may lead to system crashes due to insuffienct RAM size.
+
+> **Caution:** An increase in ROI size may lead to system crashes due to insuffienct RAM size, if you will not do parallel aggregation.
 
 
 ### Initialize the EarthStat object
+
 ```python
-aggregate_fpar = EarthStat(predictor_name)
+fpar_aggregator = EarthStat(predictor_name)
 ```
 ### Initialize Predictor/Data Directory, Mask, and Shapefile Path
 
 Set up the foundational paths for your data processing pipeline. This includes initializing the directory for the predictor data, the path for the mask file, and the location of the shapefile. Each step is crucial for ensuring that the subsequent data processing and analysis can proceed smoothly.
 
-#### Example Usage:
+Example Usage:
 
 ```python
 # Initialize the predictor data directory
-aggregate_fpar.initDataDir(predictor_dir)
+fpar_aggregator.initDataDir(predictor_dir)
 
 # Set the path for the mask file
-aggregate_fpar.initMaskPath(mask_file_path)
+fpar_aggregator.initMaskPath(mask_file_path)
 
 # Define the location of the shapefile
-aggregate_fpar.initShapefilePath(shapefile_file_path)
+fpar_aggregator.initShapefilePath(shapefile_file_path)
 ```
 
 ### Checking Data Compatibility
 Evaluate the compatibility of projections and pixel sizes across the mask, raster, and shapefile to ensure seamless data integration. This check confirms that the projection systems align for the mask, raster, and shapefile, and it also verifies that the pixel sizes between the raster and mask are compatible.
 ```python
-aggregate_fpar.DataCompatibility()
+fpar_aggregator.DataCompatibility()
 ```
 ### Resolving Data Compatibility Issues
 This section addresses how to rectify issues identified by the data compatibility check. It focuses on resolving mismatches in pixel size between the raster and mask, or discrepancies in the Coordinate Reference System (CRS) among the raster, mask, and shapefile. The objective is to ensure uniformity in scale, resolution, and geospatial alignment across all datasets involved in the analysis.
@@ -60,24 +71,24 @@ Example usage:
 
 ```python
 # Disable rescaling and use default bilinear resampling
-aggregate_fpar.fixCompatibilityIssues(rescale_factor=None, resampling_method="bilinear")
+fpar_aggregator.fixCompatibilityIssues(rescale_factor=None, resampling_method="bilinear")
 
 # Rescale data to a new range (0, 100) and use default bilinear resampling
-aggregate_fpar.fixCompatibilityIssues(rescale_factor=(0,100), resampling_method="bilinear")
+fpar_aggregator.fixCompatibilityIssues(rescale_factor=(0,100), resampling_method="bilinear")
 ```
 
 ### Selecting Region of Interest (ROI)
 Specify the area for data analysis by identifying the region of interest. Configure the target ROI and link it to the corresponding column that designates country or area names within the dataset.
 
 ```python
-aggregate_fpar.selectRegionOfInterest(interested_ROI,
+fpar_aggregator.selectRegionOfInterest(interested_ROI,
                                       country_column_name)
 ```
 ### Clipping Predictor Data
 Clip the predictor data to the boundaries defined in the main shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the shapefile will be used for clipping.
 
 ```python
-aggregate_fpar.clipPredictor()
+fpar_aggregator.clipPredictor()
 ```
 > :warning: **Caution:** Using the main shapefile without filtering may led to system crash or error due to the big amount of objects in original shapefile.
 
@@ -85,7 +96,7 @@ aggregate_fpar.clipPredictor()
 Start data aggregation process, leveraging the clipped predictor data, resampled mask, and the selectively filtered shapefile to perform detailed analysis.
 
 ```python
-aggregate_fpar.runAggregation()
+fpar_aggregator.runAggregation()
 ```
 > ❗ **Important:** Currently, the only available method for aggregation is weighted aggregation. Additional options for aggregation are under development and will be introduced soon.
 
@@ -106,14 +117,35 @@ The `runParallelAggregation` method is designed to process and aggregate raster 
 
 - `all_touched` (**bool**): If set to `True`, all pixels touched by geometries will be included in the mask. If `False`, only pixels whose center is within the geometry or touching the geometry boundary will be included. Default is `False`.
 
-#### Usage Example
+Usage Example:
 
 The following example demonstrates how to use `runParallelAggregation` to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:
 
 ```python
+# Without Mask 
 use_mask=False # True to use mask 
 calculation_mode="overall_mean" # Options: weighted_mean, filtered_mean
 all_touched=False
 
-aggregate_fpar.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+```
+In this example, it processes raster data by applying a mask, excluding defined invalid values and the values out of intersect between them, calculating the weighted mean using the mask values as weights values.
+
+```python
+# With Mask
+use_mask=True
+calculation_mode="weighted_mean"
+all_touched=False
+
+fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+```
+The last option is applying a mask to exclude the defined invalid values with the values out of intersect between raster and mask, calculating the overall mean.
+
+```python
+# With Mask
+use_mask=True
+calculation_mode="filtered_mean"
+all_touched=False
+
+fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
 ```

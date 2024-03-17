@@ -8,7 +8,7 @@ copyright: "Copyright &copy; 2024 - 2024 Abdelrahman Saleh"
 
 theme:
     palette:
-        - scheme: default
+        - scheme: python
           #   primary: blue
           #   accent: indigo
           toggle:
@@ -23,7 +23,7 @@ theme:
     name: material
     icon:
         repo: fontawesome/brands/github
-    logo: images/EarthStat.png
+    logo: images/logo_white.png
     # favicon: assets/favicon.png
     features:
         - navigation.instant

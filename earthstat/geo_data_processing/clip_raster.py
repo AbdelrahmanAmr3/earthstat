@@ -55,7 +55,8 @@ def clipRasterWithShapefile(raster_path, shapefile_path, invalid_values=None):
         "width": out_image.shape[2],
         "transform": out_transform,
         # Ensure dtype is float to accommodate NaN values
-        "dtype": 'float32'
+        "dtype": 'float32',
+        "compress": "lzw"
     })
 
     output_path = os.path.join(

@@ -1,5 +1,7 @@
 # EarthStat
 
+<div style="display: flex; justify-content: center; align-items: center; height: 30vh;"><img src="docs/assests/logo_white.png" alt="Logo" style="max-width: 40%; height: auto;"></div>
+
 [![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)

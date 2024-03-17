@@ -7,6 +7,13 @@
 [![image](https://img.shields.io/conda/vn/conda-forge/earthstat.svg)](https://anaconda.org/conda-forge/earthstat)
 <a href="https://www.buymeacoffee.com/abdelrahmansaleh"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" height="20px"></a>
 
+**A Python package for efficiently generating statistical datasets from raster data for spatial units.**
+
+
+* GitHub repo: https://github.com/AbdelrahmanAmr3/earthstat
+* Documentation: https://abdelrahmanamr3.github.io/earthstat/
+* PyPI: https://pypi.org/project/earthstat/
+* Free software: MIT license
 
 ## Introduction
 

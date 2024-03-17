@@ -9,7 +9,7 @@ copyright: "Copyright &copy; 2024 - 2024 Abdelrahman Saleh"
 theme:
     palette:
         - scheme: default
-            primary: green
+            # primary: blue
           #   accent: indigo
           toggle:
               icon: material/toggle-switch-off-outline

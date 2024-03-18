@@ -22,6 +22,7 @@ Drawing inspiration from participating in the AgML community's "Regional Crop Yi
 
 ## EarthStat Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat from the initialized dataset to the created CSV file.
+
 ![Geospatial Data Processing Workflow](docs/assests/workflow.png)
 
 ## EarthStat's Features

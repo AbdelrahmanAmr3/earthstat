@@ -10,30 +10,39 @@
 **A Python package for efficiently generating statistical datasets from raster data for spatial units.**
 
 
-* GitHub repo: https://github.com/AbdelrahmanAmr3/earthstat
-* Documentation: https://abdelrahmanamr3.github.io/earthstat/
-* PyPI: https://pypi.org/project/earthstat/
+* GitHub repo: [https://github.com/AbdelrahmanAmr3/earthstat](https://github.com/AbdelrahmanAmr3/earthstat)
+* Documentation: [https://abdelrahmanamr3.github.io/earthstat](https://abdelrahmanamr3.github.io/earthstat)
+* PyPI: [https://pypi.org/project/earthstat](https://pypi.org/project/earthstat/)
 * Free software: MIT license
 
 ## Introduction
 
-Inspired through participating in the AgML community's "Forecast Subnational Yield" activity, this Python library emerges as a vital tool for professionals and researchers engaged with remote sensing raster data. Designed with a focus on processing huge amount of TIFF files, our package excels at extracting statistical information for specific spatial units. By converting raster datasets into easily accessible CSV files. This library Ideal to prepare csv datasets for training Machine Learning (ML) models for different purposes. Also, significantly enhances the ability to leverage remote sensing data for impactful analyses (monitoring climate change, etc.). AgML community and the challenge of forecasting subnational agricultural yields has directly influenced the development of this library, ensuring it meets the high standards required for advanced environmental and agricultural data processing.
+Drawing inspiration from participating in the AgML community's "Regional Crop Yield Forecasting" activity, I've developed a Python library to build benchmarks for training Machine Learning models. As the sole developer, I've focused on creating a tool that efficiently processes large volumes of TIFF files, extracting statistical information and converting raster data into easily manageable CSV files. This library is particularly suited for training Machine Learning (ML) models or conducting in-depth environmental analyses.
 
 ## EarthStat Workflow
-This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat.
+This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat from the initialized dataset to the created CSV file.
 ![Geospatial Data Processing Workflow](assests/workflow.png)
 
 
-## Features
-EarthStat simplifies geospatial analysis by streamlining the extraction of statistical information from spatial units, providing a comprehensive toolset for efficient data processing and analysis:
+## EarthStat's Features
 
-- **Easy Data Preparation**: Define directories for raster files, shapefile paths, and masks effortlessly. Our library automates compatibility checks for pixel size, projection, and alignment between raster data (TIFF), mask, and shapefiles, ensuring smooth data integration.
+EarthStat revolutionizes the extraction of statistical information from geographic data, offering a seamless workflow for effective data management:
 
-- **Efficient ROI Selection & Raster Clipping**: Select your Region of Interest (ROI) with an intuitive filtering function. Clip raster data to your ROI quickly with just one line of code.
+- **Data Initialization & Geo-metadata Readability:** Streamlines the incorporation of datasets into EarthStat workflow, and getting insights of vital geo-metadata for data (Raster, Mask, Shapefile).
 
-- **Advanced Data Aggregation**: aggregates raster data across selected spatial units but also intelligently masks the raster data during the aggregation process.
+- **netCDF Conversion:** Seamlessly integrates netCDF files into the workflow, converting them effortlessly into GeoTIFF format.
 
-- **Comprehensive Data Export**: After aggregation, the library compiles the aggregated data along with related information from the shapefile into CSV files for each spatial unit.
+- **Data Compatibility Assurance:** Simplifies ensuring data compatibility, swiftly identifying and addressing geo data discrepancies among initialized data (Raster, Mask, Shapefile).
+
+- **Automated Resolution of Compatibility Issues:** EarthStat resolves compatibility concerns, employing automatic resampling or reprojecting techniques for masks, and appropriate projection adjustments for shapefiles.
+
+- **Targeted Region Selection:** Easily filter the shapefile to the targeted region.
+
+- **Data Clipping:** Allows for clip raster data to specific shapefile boundaries.
+
+- **Advanced Statistical Data Extraction:** Offers a variety of statistical aggregation methods.
+
+- **Efficient Parallel Processing:** Leverages the power of multiprocessing, significantly accelerating data processing across extensive datasets for quicker, more efficient computation.
 
 ## EarthStat Python Library - Improvements Roadmap
 ### Data Processing and Scenario Management Enhancements 
@@ -45,5 +54,6 @@ EarthStat simplifies geospatial analysis by streamlining the extraction of stati
 - [ ] Implement automatic detection of the lag between date ranges of predictor data.
 - [ ] Automatically identify the column names for countries in the dataset.
 - [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.
+
 ### Add more Workflow utilizing different Geospatial libraries
-- [ ] Workflow handle NetCDF files combine (Xarray + CuPy)
+- [ ] Workflow handle NetCDF files (Xarray + CuPy)

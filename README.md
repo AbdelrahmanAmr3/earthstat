@@ -71,7 +71,7 @@ pip install earthstat
 Import the library using:
 
 ```python
-from earthstat.earthstat import EarthStat
+from earthstat import EarthStat
 ```
 
 ### Main Configuration Setup
@@ -95,7 +95,7 @@ mask_file_path              = 'crop_mask/Percent_Maize.tif'
 shapefile_file_path         = 'shapefile/gaul1_asap.shp'
 interested_ROI              = ["Norway", "Spain"] 
 country_column_name         = 'adm0_name' 
-invalid_values              =[255, 254, 251]  # Set None if no invalid Values
+invalid_values              =[255, 254, 251] # None-> No Invalid Values
 ```
 
 > **Caution:** An increase in ROI size may lead to system crashes due to insuffienct RAM size, if you will not do parallel aggregation.
@@ -124,11 +124,14 @@ fpar_aggregator.initShapefilePath(shapefile_file_path)
 ```
 
 ### Checking Data Compatibility
+
 Evaluate the compatibility of projections and pixel sizes across the mask, raster, and shapefile to ensure seamless data integration. This check confirms that the projection systems align for the mask, raster, and shapefile, and it also verifies that the pixel sizes between the raster and mask are compatible.
+
 ```python
 fpar_aggregator.DataCompatibility()
 ```
 ### Resolving Data Compatibility Issues
+
 This section addresses how to rectify issues identified by the data compatibility check. It focuses on resolving mismatches in pixel size between the raster and mask, or discrepancies in the Coordinate Reference System (CRS) among the raster, mask, and shapefile. The objective is to ensure uniformity in scale, resolution, and geospatial alignment across all datasets involved in the analysis.
 
 - `rescale_factor`: This parameter allows for the adjustment of the data's scale. By default, it is set to `None`, maintaining the original scale of the data. To alter the scale, specify a new range with a tuple, such as `(0,100)`.
@@ -152,24 +155,15 @@ fpar_aggregator.selectRegionOfInterest(interested_ROI,
                                       country_column_name)
 ```
 ### Clipping Predictor Data
-Clip the predictor data to the boundaries defined in the main shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the shapefile will be used for clipping.
+Clip the predictor data to the boundaries defined in a shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the main shapefile (Not filtered shapefile) will be used for clipping.
 
 ```python
 fpar_aggregator.clipPredictor()
 ```
-> :warning: **Caution:** Using the main shapefile without filtering may led to system crash or error due to the big amount of objects in original shapefile.
+> **Note & Caution:** The Function is a multiprocessing process. Using the main shapefile without filtering may led to system crash or error due to the big amount of geometry objects in original shapefile.
 
 ### Executing Data Aggregation
-Start data aggregation process, leveraging the clipped predictor data, resampled mask, and the selectively filtered shapefile to perform detailed analysis.
-
-```python
-fpar_aggregator.runAggregation()
-```
-> ❗ **Important:** Currently, the only available method for aggregation is weighted aggregation. Additional options for aggregation are under development and will be introduced soon.
-
-### Parallel Processing with `runParallelAggregation`
-
-The `runParallelAggregation` method is designed to process and aggregate raster data across multiple files in parallel, enhancing performance for large datasets. This method leverages multiple CPU cores to simultaneously process different portions of the data, reducing overall computation time.
+Start data aggregation process, leveraging the clipped predictor data, resampled mask, and the filtered shapefile.
 
 #### Parameters
 
@@ -186,7 +180,7 @@ The `runParallelAggregation` method is designed to process and aggregate raster 
 
 Usage Example:
 
-The following example demonstrates how to use `runParallelAggregation` to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:
+The following example demonstrates how to use `runAggregation` to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:
 
 ```python
 # Without Mask 
@@ -194,7 +188,7 @@ use_mask=False # True to use mask
 calculation_mode="overall_mean" # Options: weighted_mean, filtered_mean
 all_touched=False
 
-fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+fpar_aggregator.runAggregation(use_mask, invalid_values, calculation_mode, all_touched)
 ```
 In this example, it processes raster data by applying a mask, excluding defined invalid values and the values out of intersect between them, calculating the weighted mean using the mask values as weights values.
 
@@ -204,7 +198,7 @@ use_mask=True
 calculation_mode="weighted_mean"
 all_touched=False
 
-fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+fpar_aggregator.runAggregation(use_mask, invalid_values, calculation_mode, all_touched)
 ```
 The last option is applying a mask to exclude the defined invalid values with the values out of intersect between raster and mask, calculating the overall mean.
 
@@ -212,6 +206,22 @@ The last option is applying a mask to exclude the defined invalid values with th
 # With Mask
 use_mask=True
 calculation_mode="filtered_mean"
+all_touched=False
+
+fpar_aggregator.runAggregation(use_mask, invalid_values, calculation_mode, all_touched)
+```
+
+### Parallel Processing with `runParallelAggregation`
+
+The `runParallelAggregation` method is designed to process and aggregate raster data across multiple files in parallel, enhancing performance for large datasets. This method leverages multiple CPU cores to simultaneously process different portions of the data, reducing overall computation time.
+
+Usage Example:
+
+It follows the same structure of `runAggregation` and the same parameters.
+```python
+# Without Mask 
+use_mask=False # True to use mask 
+calculation_mode="overall_mean" # Options: weighted_mean, filtered_mean
 all_touched=False
 
 fpar_aggregator.runParallelAggregation(use_mask, invalid_values, calculation_mode, all_touched)

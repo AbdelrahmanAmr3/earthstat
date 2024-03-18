@@ -2,6 +2,6 @@
 
 __author__ = """Abdelrahman Saleh"""
 __email__ = "abdulrahman.amr.ali@gmail.com"
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 from .earthstat import EarthStat

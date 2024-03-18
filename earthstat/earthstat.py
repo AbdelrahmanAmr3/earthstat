@@ -15,6 +15,23 @@ from datetime import datetime
 
 
 class EarthStat():
+    """
+    A class to manage and process geospatial data for EarthStat-compatible datasets.
+
+    Attributes:
+        predictor_name (str): Name of the predictor variable.
+        predictor_paths (list): Paths to predictor raster files.
+        predictor_dir (str): Directory containing predictor data.
+        predictor_example (str): An example file from predictor data.
+        mask_path (str): Path to the mask raster file.
+        shapefile_path (str): Path to the shapefile.
+        process_compatibility (dict): Results from compatibility check.
+        use_crop_mask (bool): Whether to use a cropping mask in processing.
+        predictory_meta, mask_meta, shapefile_meta (dict): Metadata for respective data types.
+        ROI (GeoDataFrame): Selected region of interest.
+        clipped_dir (str): Directory containing clipped raster data.
+        aggregated_csv (str): Path to the output aggregated CSV file.
+    """
 
     def __init__(self, predictor_name):
 
@@ -40,7 +57,12 @@ class EarthStat():
         self.aggregated_csv = None
 
     def initDataDir(self, data_dir):
+        """
+        Initializes the directory containing predictor data, checks for data format, and optionally converts netCDF to TIFF.
 
+        Args:
+            data_dir (str): Path to the directory containing predictor data.
+        """
         has_tiff = any(file.endswith('.tif') for file in os.listdir(data_dir))
 
         if has_tiff:
@@ -76,12 +98,24 @@ class EarthStat():
         print("\nPredictor Paths Initialized Correctly, Initialize The Mask's Path")
 
     def initMaskPath(self, mask_path):
+        """
+        Initializes the path to the mask raster and extracts its metadata.
+
+        Args:
+            mask_path (str): Path to the mask raster file.
+        """
         self.mask_path = mask_path
         # Function to identify mask information
         self.mask_meta = maskSummary(self.mask_path)
         print("\nMask Initialized Correctly, Initialize The Shapefile")
 
     def initShapefilePath(self, shapefile_path):
+        """
+        Initializes the path to the shapefile and extracts its metadata.
+
+        Args:
+            shapefile_path (str): Path to the shapefile.
+        """
         self.shapefile_path = shapefile_path
         self.shapefile_meta = shapefileMeta(self.shapefile_path)
 
@@ -93,6 +127,10 @@ class EarthStat():
                 "\nShapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized")
 
     def DataCompatibility(self):
+        """
+        Checks data compatibility among the predictor, mask, and shapefile based on spatial resolution and CRS.
+        """
+
         compatibility_result = checkDataCompatibility(
             self.predictor_example, self.mask_path, self.shapefile_path)
         self.process_compatibility = compatibility_result
@@ -103,6 +141,13 @@ class EarthStat():
                 "\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible based on the current checks.")
 
     def fixCompatibilityIssues(self, rescale_factor=None, resampling_method="bilinear"):
+        """
+        Attempts to fix any detected compatibility issues between the predictor, mask, and shapefile.
+
+        Args:
+            rescale_factor (tuple, optional): Min and max values for rescaling the mask data.
+            resampling_method (str): Method for resampling. Defaults to 'bilinear'.
+        """
         print("Checking for compatibility issues...")
 
         if not self.process_compatibility['is_compatible']:
@@ -147,7 +192,13 @@ class EarthStat():
                 "No compatibility issues detected. Predictor, mask, and shapefile are already compatible.")
 
     def selectRegionOfInterest(self, countries, country_column_name):
+        """
+        Selects a region of interest (ROI) within the shapefile based on specified countries.
 
+        Args:
+            countries (list of str): Countries to include in the ROI.
+            country_column_name (str): Column name in the shapefile containing country names.
+        """
         self.ROI = extractROI(self.shapefile_path,
                               countries, country_column_name)
 
@@ -158,6 +209,12 @@ class EarthStat():
             print("Failed to select the Region of Interest (ROI). Please check the country names and column name provided.")
 
     def clipPredictor(self, invalid_values=None):
+        """
+        Clips predictor data to the selected region of interest or the entire shapefile.
+
+        Args:
+            invalid_values (list, optional): List of values to treat as invalid in the raster data.
+        """
         print("Clipping the predictor data...")
         if self.ROI:
             self.clipped_dir = clipRaster(
@@ -174,6 +231,15 @@ class EarthStat():
                 "Failed to clip the predictor data. Check the shapefile and predictor paths")
 
     def runAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
+        """
+        Runs the aggregation process for the selected region of interest or the entire shapefile.
+
+        Args:
+            use_mask (bool): Whether to use a mask for the aggregation process.
+            invalid_values (list, optional): List of values to treat as invalid in the raster data.
+            calculation_mode (str): Determines how values are aggregated.
+            all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.
+        """
         print("Starting aggregation...")
 
         self.use_mask = use_mask
@@ -201,6 +267,15 @@ class EarthStat():
         print(f"Aggregation complete. Data saved to {aggregate_output}.")
 
     def runParallelAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
+        """
+        Runs the aggregation process in parallel for the selected region of interest or the entire shapefile.
+
+        Args:
+            use_mask (bool): Whether to use a mask for the aggregation process.
+            invalid_values (list, optional): List of values to treat as invalid in the raster data.
+            calculation_mode (str): Determines how values are aggregated.
+            all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.
+        """
         print("Starting Parallel Aggregation...")
 
         self.use_mask = use_mask

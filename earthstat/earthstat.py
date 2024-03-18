@@ -173,31 +173,35 @@ class EarthStat():
             print(
                 "Failed to clip the predictor data. Check the shapefile and predictor paths")
 
-    def runAggregation(self):
+    def runAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
         print("Starting aggregation...")
-        aggregate_output = f'Aggregated_{self.predictor_name}.csv'
+
+        self.use_mask = use_mask
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+        aggregate_output = f'Aggregated_{calculation_mode}_{self.predictor_name}_{timestamp}.csv'
 
         # Check if a Region of Interest (ROI) has been selected for aggregation
         if self.ROI:
             print(
                 f"Starting aggregation with the selected Region of Interest (ROI) for {self.predictor_name}.")
-            self.aggregated_csv = conAggregate(self.clipped_dir, self.ROI, aggregate_output, self.mask_path,
-                                               use_crop_mask=self.use_crop_mask, predictor_name=self.predictor_name)
+            self.aggregated_csv = conAggregate(self.predictor_dir, self.ROI, aggregate_output, self.mask_path,
+                                               use_mask, invalid_values, calculation_mode, predictor_name=self.predictor_name, all_touched=all_touched)
 
         else:
             print(
                 f"Starting aggregation with the original shapefile for {self.predictor_name}.")
-            self.aggregated_csv = conAggregate(self.clipped_dir,
+            self.aggregated_csv = conAggregate(self.predictor_dir,
                                                self.shapefile_path,
                                                aggregate_output,
                                                self.mask_path,
-                                               use_crop_mask=self.use_crop_mask,
+                                               use_mask=self.use_mask,
                                                predictor_name=self.predictor_name)
 
         print(f"Aggregation complete. Data saved to {aggregate_output}.")
 
     def runParallelAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
-        print("Starting aggregation...")
+        print("Starting Parallel Aggregation...")
 
         self.use_mask = use_mask
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

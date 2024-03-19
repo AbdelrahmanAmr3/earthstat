@@ -2,6 +2,7 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 30vh;"><img src="assests/logo.png" alt="Logo" style="max-width: 30%; height: auto;"></div>
 
 [![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abdelrahmanamr3/earthstat/HEAD?labpath=docs%2Fexamples%2Fintro.ipynb)
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)

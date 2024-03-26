@@ -1,7 +1,5 @@
 import rasterio
 from rasterio.mask import mask
-from rasterio import warp
-from rasterio.enums import Resampling
 from shapely.geometry import mapping
 import numpy as np
 import pandas as pd

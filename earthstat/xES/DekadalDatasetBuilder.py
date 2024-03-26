@@ -4,9 +4,14 @@ import os
 import xarray as xr
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from tqdm.auto import tqdm
-import cupy as cp
 from rasterio.features import geometry_mask
 import rioxarray
+
+try:
+    import cupy as cp
+
+except ImportError:
+    import numpy as cp
 
 
 class DekadalDatasetBuilder():

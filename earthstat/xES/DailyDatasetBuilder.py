@@ -108,7 +108,10 @@ class DailyDatasetBuilder:
                 raise ValueError(
                     f"Invalid stat: {self.stat}. Options are 'mean', 'min', 'max', 'sum'.")
 
-            calculation_results = cp.asnumpy(result_gpu)
+            if gpu_available:
+                calculation_results = cp.asnumpy(result_gpu)
+            else:
+                calculation_results = result_gpu
 
             for date, mean_value in zip(ds.time.values, calculation_results):
                 date_str = str(date)

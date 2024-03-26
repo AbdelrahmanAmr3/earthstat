@@ -65,14 +65,14 @@ class DekadalDatasetBuilder():
         if self.multiprocessing:
             with ProcessPoolExecutor(max_workers=max_workers) as executor:
                 futures = [executor.submit(
-                    self._daily_datasets, folder) for folder in var_folders]
+                    self._dekadal_datasets, folder) for folder in var_folders]
 
                 for future in tqdm(as_completed(futures), total=len(futures)):
                     future.result()
 
         else:
             for folder in tqdm(var_folders, desc='Processing folders'):
-                self._daily_datasets(folder)
+                self._dekadal_datasets(folder)
 
     @staticmethod
     def adjust_date(date):
@@ -138,7 +138,10 @@ class DekadalDatasetBuilder():
                 raise ValueError(
                     f"Invalid stat: {self.stat}. Options are 'mean', 'min', 'max', 'sum'.")
 
-            calculation_results = cp.asnumpy(result_gpu)
+            if gpu_available:
+                calculation_results = cp.asnumpy(result_gpu)
+            else:
+                calculation_results = result_gpu
 
             for date, result_value in zip(resampled_ds.time.values, calculation_results):
                 date_str = str(date)

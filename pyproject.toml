@@ -37,6 +37,9 @@ extra = [
     "pandas",
 ]
 
+gpu = [
+    "cupy",
+]
 
 [tool]
 [tool.setuptools.packages.find]

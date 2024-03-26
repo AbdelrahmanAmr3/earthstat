@@ -26,6 +26,11 @@ This diagram illustrates the workflow of the geospatial data processing implemen
 
 ![Geospatial Data Processing Workflow](docs/assests/workflow.png)
 
+## xEarthStat Workflow
+This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
+
+![Geospatial Data Processing Workflow](docs/assests/xES_workflow.png)
+
 ## EarthStat's Features
 
 EarthStat revolutionizes the extraction of statistical information from geographic data, offering a seamless workflow for effective data management:
@@ -66,7 +71,7 @@ To install EarthStat, ensure you have Python 3.8 or later installed. Then run:
 pip install earthstat
 ```
 
-## Usage
+## EarthStat Main Workflow Usage
 
 ### Initializing the Library
 Import the library using:

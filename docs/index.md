@@ -25,6 +25,10 @@ This diagram illustrates the workflow of the geospatial data processing implemen
 
 ![Geospatial Data Processing Workflow](assests/workflow.png)
 
+## xEarthStat Workflow
+This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
+
+![Geospatial Data Processing Workflow](assests/xES_workflow.png)
 
 ## EarthStat's Features
 

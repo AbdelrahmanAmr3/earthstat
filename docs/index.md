@@ -1,8 +1,7 @@
 # Welcome to EarthStat
 <div style="display: flex; justify-content: center; align-items: center; height: 30vh;"><img src="assests/logo.png" alt="Logo" style="max-width: 30%; height: auto;"></div>
 
-[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abdelrahmanamr3/earthstat/HEAD?labpath=docs%2Fexamples%2Fintro.ipynb)
+
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -16,6 +15,13 @@
 * PyPI: [https://pypi.org/project/earthstat](https://pypi.org/project/earthstat/)
 * Free software: MIT license
 
+EarthStat's Library Workflows's Notebooks:
+
+* Main Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb),
+[Binder](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
+
+* xEearthStat Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/xES.ipynb),
+[Binder]()
 ## Introduction
 
 Drawing inspiration from participating in the AgML community's "Regional Crop Yield Forecasting" activity, I've developed a Python library to build benchmarks for training Machine Learning models. As the sole developer, I've focused on creating a tool that efficiently processes large volumes of TIFF files, extracting statistical information and converting raster data into easily manageable CSV files. This library is particularly suited for training Machine Learning (ML) models or conducting in-depth environmental analyses.

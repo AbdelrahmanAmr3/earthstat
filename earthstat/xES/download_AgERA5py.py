@@ -2,17 +2,19 @@ import os
 import concurrent.futures
 from .cds_param import get_retrieve_params
 from .cds_api_key_manager import APIKeyManager
+import cdsapi
 
 
 class AgERA5Downloader:
     def __init__(self, area_name, parameters, start_year, end_year, bounding_box):
-        self.api_key_manager = APIKeyManager()
+        self.api_key_manager = APIKeyManager().add_cds_api_key()
         self.area_name = area_name
         self.parameters = parameters
         self.start_year = start_year
         self.end_year = end_year
         self.bounding_box = bounding_box
-        self.cds = self.api_key_manager.add_cds_api_key()
+
+        self.cds = cdsapi.Client(progress=False)
 
     def download_AgERA5(self, num_requests):
 

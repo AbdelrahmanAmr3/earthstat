@@ -12,16 +12,15 @@ import geopandas as gpd
 
 class xEarthStat():
 
-    def __init__(self, area_name, parameters, start_year, end_year, bounding_box, shapefile_path, workflow=False):
+    def __init__(self, area_name, parameters, start_year, end_year, bounding_box, shapefile_path, workflow='daily'):
 
         self.area_name = area_name  # create directories
+        self.workflow = workflow
 
         self.data_downloader = AgERA5Downloader(
             area_name, parameters, start_year, end_year, bounding_box)
 
         self._init_shapefile(shapefile_path)
-
-        self._init_aggregation_workflow(workflow)
 
         self._check_missing(shapefile_path)
 
@@ -63,6 +62,7 @@ class xEarthStat():
         print("AgERA5 Data Extracted Successfully")
 
     def Aggregate_AgERA5(self, max_workers=os.cpu_count()):
+        self._init_aggregation_workflow(self.workflow)
         print(f"Building {self.workflow} Datasets...")
         self.dataset_builder.build_datasets(max_workers=max_workers)
         print(f"{self.workflow} Datasets Aggregated Successfully")

@@ -1,7 +1,5 @@
 # EarthStat
 
-[![image](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/abdelrahmanamr3/earthstat/HEAD?labpath=docs%2Fexamples%2Fintro.ipynb)
 [![image](https://img.shields.io/pypi/v/earthstat.svg)](https://pypi.python.org/pypi/earthstat)
 [![Downloads](https://static.pepy.tech/badge/earthstat)](https://pepy.tech/project/earthstat)
 [![image](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -15,6 +13,14 @@
 * Documentation: [https://abdelrahmanamr3.github.io/earthstat](https://abdelrahmanamr3.github.io/earthstat)
 * PyPI: [https://pypi.org/project/earthstat](https://pypi.org/project/earthstat/)
 * Free software: MIT license
+
+EarthStat's Library Workflows's Notebooks:
+
+* Main Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb),
+[Binder](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)
+
+* xEearthStat Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/xES.ipynb),
+[Binder]()
 
 
 ## Introduction

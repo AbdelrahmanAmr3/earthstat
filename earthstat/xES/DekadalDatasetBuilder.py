@@ -9,16 +9,19 @@ import rioxarray
 
 try:
     import cupy as cp
+    gpu_available = True
 
 except ImportError:
     import numpy as cp
+    gpu_available = False
 
 
 class DekadalDatasetBuilder():
-    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None):
+    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None, stat='mean'):
         self.area_name = area_name
         self.shapefile = shapefile
         self.masks = self._compute_masks()
+        self.stat = stat
 
         if multiprocessing:
             self.multiprocessing = multiprocessing
@@ -29,10 +32,16 @@ class DekadalDatasetBuilder():
         self._processing_status()
 
     def _processing_status(self):
-        if self.multiprocessing:
-            return f"Workflow will run as Multiprocessing with {self.workers} workers"
+
+        if gpu_available:
+            print("GPU found. Aggregation will use GPU parallel computation.")
         else:
-            return "Wrokflow will run as Single processing"
+            print("No GPU or CUDA issue detected. Aggregation will use CPU.")
+
+        if self.multiprocessing:
+            print(f"Multiprocessing mode on, using {self.workers} cores.")
+        else:
+            print("Single processing mode on, suitable for Google Colab.")
 
     def _compute_masks(self):
         # Assuming the first dataset has the same spatial properties as the others
@@ -116,15 +125,27 @@ class DekadalDatasetBuilder():
             masked_data_gpu = cp.where(
                 mask_gpu, gpu_data, cp.nan)
             # axis=(1, 2) for 2D data (time, lat, lon)
-            mean_temp_gpu = cp.nanmean(masked_data_gpu, axis=(1, 2))
-            mean_temp = cp.asnumpy(mean_temp_gpu)
 
-            for date, mean_value in zip(resampled_ds.time.values, mean_temp):
+            if self.stat == 'mean':
+                result_gpu = cp.nanmean(masked_data_gpu, axis=(1, 2))
+            elif self.stat == 'min':
+                result_gpu = cp.nanmin(masked_data_gpu, axis=(1, 2))
+            elif self.stat == 'max':
+                result_gpu = cp.nanmax(masked_data_gpu, axis=(1, 2))
+            elif self.stat == 'sum':
+                result_gpu = cp.nansum(masked_data_gpu, axis=(1, 2))
+            else:
+                raise ValueError(
+                    f"Invalid stat: {self.stat}. Options are 'mean', 'min', 'max', 'sum'.")
+
+            calculation_results = cp.asnumpy(result_gpu)
+
+            for date, result_value in zip(resampled_ds.time.values, calculation_results):
                 date_str = str(date)
                 new_row = {
                     col: geo_obj[col] for col in self.shapefile.columns if col != 'geometry'}
                 new_row.update(
-                    {'date': date_str, f'{ds_variable}': mean_value})
+                    {'date': date_str, f'{ds_variable}': result_value})
                 aggregated_data.append(new_row)
 
         if aggregated_data:

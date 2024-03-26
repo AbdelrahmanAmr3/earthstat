@@ -9,4 +9,3 @@ cdsapi
 regionmask
 xarray
 rioxarray
-cupy

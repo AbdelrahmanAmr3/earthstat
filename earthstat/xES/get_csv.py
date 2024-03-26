@@ -23,7 +23,7 @@ def get_merged_csv(area_name, workflow, kelvin_to_celsius=False, output_name=Non
     if kelvin_to_celsius:
         merged_df['Temperature_Air_2m_Min_24h'] = merged_df['Temperature_Air_2m_Min_24h'] - 273.15
 
-    # make the date column the first coulmn
+    # make the date column the first column
     merged_columns = merged_df.columns.tolist()
     merged_columns.remove('date')
     merged_df = merged_df[['date'] + merged_columns]

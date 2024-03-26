@@ -12,11 +12,11 @@ import geopandas as gpd
 
 class xEarthStat():
 
-    def __init__(self, area_name, parameters, start_year, end_year, bounding_box, shapefile_path, workflow='daily'):
+    def __init__(self, area_name, parameters, start_year, end_year, bounding_box, shapefile_path, workflow='daily', multi_processing=False):
 
         self.area_name = area_name  # create directories
         self.workflow = workflow
-
+        self.processing = multi_processing
         self.data_downloader = AgERA5Downloader(
             area_name, parameters, start_year, end_year, bounding_box)
 
@@ -32,7 +32,7 @@ class xEarthStat():
     def _init_aggregation_workflow(self, workflow):
         if workflow == 'dekadal':
             self.dataset_builder = DekadalDatasetBuilder(
-                self.area_name, self.shapefile)
+                self.area_name, self.shapefile, multiprocessing=self.processing)
             self.workflow = workflow
         else:
             self.dataset_builder = DailyDatasetBuilder(

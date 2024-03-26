@@ -6,6 +6,5 @@ tqdm
 geopandas
 pyproj
 cdsapi
-regionmask
 xarray
 rioxarray

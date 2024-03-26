@@ -14,7 +14,7 @@ class xEarthStat():
 
     def __init__(self, area_name, parameters, start_year, end_year, bounding_box, shapefile_path, workflow=False):
 
-        self.area_name = area_name  # create directores
+        self.area_name = area_name  # create directories
 
         self.data_downloader = AgERA5Downloader(
             area_name, parameters, start_year, end_year, bounding_box)

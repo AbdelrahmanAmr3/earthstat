@@ -6,5 +6,5 @@ tqdm
 geopandas
 pyproj
 cdsapi
-xarray
+xarray==2023.11.0
 rioxarray

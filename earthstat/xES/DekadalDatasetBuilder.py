@@ -131,6 +131,8 @@ class DekadalDatasetBuilder():
 
             if self.stat == 'mean':
                 result_gpu = cp.nanmean(masked_data_gpu, axis=(1, 2))
+            elif self.stat == 'median':
+                result_gpu = cp.nanmedian(masked_data_gpu, axis=(1, 2))
             elif self.stat == 'min':
                 result_gpu = cp.nanmin(masked_data_gpu, axis=(1, 2))
             elif self.stat == 'max':

@@ -65,7 +65,7 @@ EarthStat revolutionizes the extraction of statistical information from geograph
 - **Aggregated Data as CSV**: Ultimately, the workflow provides users with a neatly organized CSV file, compiling all downloaded and aggregated variables.
 
 ### EarthStat Google Colab Performance
-This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by useing Google Colab.
+This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by using Google Colab.
 
 | Data      | Variables | Number of Geo-Objects | Dataset | Processing Unit            | Time (Run: One Time) min |
 |-----------|-----------|-----------------------|---------|----------------------------|--------------------------|

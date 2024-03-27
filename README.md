@@ -8,7 +8,6 @@
 
 **A Python package for efficiently generating statistical datasets from raster data for spatial units.**
 
-
 * GitHub repo: [https://github.com/AbdelrahmanAmr3/earthstat](https://github.com/AbdelrahmanAmr3/earthstat)
 * Documentation: [https://abdelrahmanamr3.github.io/earthstat](https://abdelrahmanamr3.github.io/earthstat)
 * PyPI: [https://pypi.org/project/earthstat](https://pypi.org/project/earthstat/)
@@ -64,7 +63,7 @@ EarthStat revolutionizes the extraction of statistical information from geograph
 - **Aggregated Data as CSV**: Ultimately, the workflow provides users with a neatly organized CSV file, compiling all downloaded and aggregated variables.
 
 ### EarthStat Google Colab Performance
-This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by useing Google Colab.
+This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by using Google Colab.
 
 | Data      | Variables | Number of Geo-Objects | Dataset | Processing Unit            | Time (Run: One Time) min |
 |-----------|-----------|-----------------------|---------|----------------------------|--------------------------|

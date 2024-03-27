@@ -61,7 +61,7 @@ AgERA5_parameters = [
 
 ### Step 4: Define the Shapefile Path
 
-Provide the file path to your shapefile if you're using one:
+Provide the file path to your shapefile:
 
 ```python
 shapefile_file_path = 'EU/admin_3.shp'
@@ -98,12 +98,12 @@ EU_AgERA5.download_AgERA5(num_requests=6,
 
 
 ### Step 7: Aggregate Data
-f
+
 xEarthStat's Aggregation process utilize the availability of GPU for parallel computation, and using the avilalble CPU cores for multiprocessing. it automatically detect if there is a GPU or not, if not it shift computational processing on CPU.
 
 - `max_workers`: Default to total number of CPU's cores. You can change the number of cores that used in multiprocessing.
 - `all_touched`: Default to `False` to just consider pixels within the geometry object. `True` to consider all touched pixels by geo-object. 
-- `stat`: Default to `mean` to calculate the mean. There are other options, `"median"`, `"min"`, `"max"`, and `"sum"`.
+- `stat`: Default to `"mean"` to calculate the mean. There are other options, `"median"`, `"min"`, `"max"`, and `"sum"`.
 
 ```python
 import os

@@ -22,6 +22,8 @@ EarthStat's Library Workflows's Notebooks:
 
 * xEearthStat Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/xES.ipynb),
 [Binder]()
+
+
 ## Introduction
 
 Drawing inspiration from participating in the AgML community's "Regional Crop Yield Forecasting" activity, I've developed a Python library to build benchmarks for training Machine Learning models. As the sole developer, I've focused on creating a tool that efficiently processes large volumes of TIFF files, extracting statistical information and converting raster data into easily manageable CSV files. This library is particularly suited for training Machine Learning (ML) models or conducting in-depth environmental analyses.
@@ -29,12 +31,12 @@ Drawing inspiration from participating in the AgML community's "Regional Crop Yi
 ## EarthStat Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat from the initialized dataset to the created CSV file.
 
-![Geospatial Data Processing Workflow](assests/workflow.png)
+![Geospatial Data Processing Workflow](docs/assests/workflow.png)
 
 ## xEarthStat Workflow
 This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
 
-![Geospatial Data Processing Workflow](assests/xES_workflow.png)
+![Geospatial Data Processing Workflow](docs/assests/xES_workflow.png)
 
 ## EarthStat's Features
 
@@ -57,15 +59,36 @@ EarthStat revolutionizes the extraction of statistical information from geograph
 - **Efficient Parallel Processing:** Leverages the power of multiprocessing, significantly accelerating data processing across extensive datasets for quicker, more efficient computation.
 
 ## EarthStat Python Library - Improvements Roadmap
-### Data Processing and Scenario Management Enhancements 
+### EarthStat Main Workflow
+#### Data Processing and Scenario Management Enhancements 
 - [x] offering more statistical options for aggregation.
 - [ ] Introduce thresholding option for masks to refine data selection.
 - [ ] Refactor Dataloader and Data Compatibility for no mask scenario.
 
-### Automation for User Convenience
+#### Automation for User Convenience
 - [ ] Implement automatic detection of the lag between date ranges of predictor data.
 - [ ] Automatically identify the column names for countries in the dataset.
 - [ ] Enable users to specify date ranges for predictor data, improving data filtering capabilities.
 
-### Add more Workflow utilizing different Geospatial libraries
-- [ ] Workflow handle NetCDF files (Xarray + CuPy)
+### xEarthStat Workflow for AgERA5
+- [ ] Option to mask the AgERA5's data with mask
+
+
+
+## Installation
+To install EarthStat, ensure you have Python 3.9 or later installed. 
+
+Install with pip:
+```
+pip install earthstat
+```
+Install with Conda:
+```
+conda install conda-forge::earthstat
+```
+## EarthStat Usage
+* [EarthStat Main Workflow](https://abdelrahmanamr3.github.io/earthstat/usage/main_usage)
+
+
+* [xEearthStat for AgERA5 Workflow](https://abdelrahmanamr3.github.io/earthstat/usage/xES_usage)
+

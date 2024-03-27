@@ -1,4 +1,6 @@
-# Usage
+# EarthStat Main Workflow Usage
+
+EarthStat is a powerful tool for geospatial data processing and analysis. Below is a guide to the main workflow of EarthStat, including initialization, configuration, data processing, and aggregation.
 
 ### Initializing the Library
 Import the library using:

@@ -17,10 +17,13 @@ except ImportError:
 
 
 class DekadalDatasetBuilder():
-    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None, stat='mean'):
+    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None, all_touched=False, stat='mean'):
+
+        # Constructor
         self.area_name = area_name
         self.shapefile = shapefile
         self.masks = self._compute_masks()
+        self.all_touched = all_touched
         self.stat = stat
 
         if multiprocessing:
@@ -54,7 +57,7 @@ class DekadalDatasetBuilder():
         masks = []
         for _, geo_obj in self.shapefile.iterrows():
             mask = geometry_mask(
-                [geo_obj['geometry']], out_shape=out_shape, transform=transform, invert=True, all_touched=False)
+                [geo_obj['geometry']], out_shape=out_shape, transform=transform, invert=True, all_touched=self.all_touched)
             masks.append(mask)
         return masks
 

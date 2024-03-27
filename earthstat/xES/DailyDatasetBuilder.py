@@ -17,10 +17,13 @@ except ImportError:
 
 
 class DailyDatasetBuilder:
-    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None, stat='mean'):
+    def __init__(self, area_name, shapefile, multiprocessing=False, max_workers=None, all_touched=False, stat='mean'):
+
+        # Constructor
         self.area_name = area_name
         self.shapefile = shapefile
         self.masks = self._compute_masks()
+        self.all_touched = all_touched
         self.stat = stat
 
         if multiprocessing:
@@ -54,7 +57,7 @@ class DailyDatasetBuilder:
         masks = []
         for _, geo_obj in self.shapefile.iterrows():
             mask = geometry_mask(
-                [geo_obj['geometry']], out_shape=out_shape, transform=transform, invert=True, all_touched=False)
+                [geo_obj['geometry']], out_shape=out_shape, transform=transform, invert=True, all_touched=self.all_touched)
             masks.append(mask)
         return masks
 
@@ -98,15 +101,18 @@ class DailyDatasetBuilder:
 
             if self.stat == 'mean':
                 result_gpu = cp.nanmean(masked_data_gpu, axis=(1, 2))
+            elif self.stat == 'median':
+                result_gpu = cp.nanmedian(masked_data_gpu, axis=(1, 2))
             elif self.stat == 'min':
                 result_gpu = cp.nanmin(masked_data_gpu, axis=(1, 2))
             elif self.stat == 'max':
                 result_gpu = cp.nanmax(masked_data_gpu, axis=(1, 2))
             elif self.stat == 'sum':
                 result_gpu = cp.nansum(masked_data_gpu, axis=(1, 2))
+
             else:
                 raise ValueError(
-                    f"Invalid stat: {self.stat}. Options are 'mean', 'min', 'max', 'sum'.")
+                    f"Invalid stat: {self.stat}. Options are 'mean', 'median', 'min', 'max', 'sum'.")
 
             if gpu_available:
                 calculation_results = cp.asnumpy(result_gpu)

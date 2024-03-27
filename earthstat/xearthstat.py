@@ -29,17 +29,8 @@ class xEarthStat():
         # make sure the shapefile with wg84 projection
         self.shapefile = self.shapefile.to_crs(epsg=4326)
 
-    def _init_aggregation_workflow(self, workflow):
-        if workflow == 'dekadal':
-            self.dataset_builder = DekadalDatasetBuilder(
-                self.area_name, self.shapefile, multiprocessing=self.processing)
-            self.workflow = workflow
-        else:
-            self.dataset_builder = DailyDatasetBuilder(
-                self.area_name, self.shapefile)
-            self.workflow = 'daily'
-
     # create directories for xEarthStat workflow
+
     def _check_missing(self, shapefile_path):
         os.makedirs(self.area_name, exist_ok=True)
         if not shapefile_path:
@@ -61,13 +52,23 @@ class xEarthStat():
         extract_AgERA5_zips(self.area_name)
         print("AgERA5 Data Extracted Successfully")
 
-    def Aggregate_AgERA5(self, max_workers=os.cpu_count()):
-        self._init_aggregation_workflow(self.workflow)
-        print(f"Building {self.workflow} Datasets...")
+    def Aggregate_AgERA5(self, max_workers=os.cpu_count(), all_touched=False, stat='mean'):
+        self._init_aggregation_workflow(self.workflow, all_touched, stat)
+        print(f"Building {self.workflow} ({stat}) Datasets...")
         self.dataset_builder.build_datasets(max_workers=max_workers)
         print(f"{self.workflow} Datasets Aggregated Successfully")
 
-    def merge_csv(self):
+    def _init_aggregation_workflow(self, workflow, all_touched, stat):
+        if workflow == 'dekadal':
+            self.dataset_builder = DekadalDatasetBuilder(
+                self.area_name, self.shapefile, multiprocessing=self.processing, all_touched=all_touched, stat=stat)
+            self.workflow = workflow
+        else:
+            self.dataset_builder = DailyDatasetBuilder(
+                self.area_name, self.shapefile, multiprocessing=self.processing, all_touched=all_touched, stat=stat)
+            self.workflow = 'daily'
+
+    def AgERA5_merged_csv(self, kelvin_to_celsius=False, output_name=None):
         get_merged_csv(self.area_name, self.workflow,
-                       kelvin_to_celsius=False, output_name=None)
+                       kelvin_to_celsius=kelvin_to_celsius, output_name=output_name)
         print("CSV Merged Successfully")

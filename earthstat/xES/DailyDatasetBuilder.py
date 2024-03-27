@@ -62,7 +62,7 @@ class DailyDatasetBuilder:
         return masks
 
     def build_datasets(self, max_workers):
-        os.makedirs(f'{self.area_name}_Aggregated_Daily', exist_ok=True)
+        os.makedirs(f'{self.area_name}_aggregated_daily_csv', exist_ok=True)
         var_folders = glob.glob(f'{self.area_name}/*/')
 
         if self.multiprocessing:
@@ -99,18 +99,18 @@ class DailyDatasetBuilder:
 
             # axis=(1, 2) for 2D data (time, lat, lon)
 
-            if self.stat == 'mean':
-                result_gpu = cp.nanmean(masked_data_gpu, axis=(1, 2))
-            elif self.stat == 'median':
-                result_gpu = cp.nanmedian(masked_data_gpu, axis=(1, 2))
-            elif self.stat == 'min':
-                result_gpu = cp.nanmin(masked_data_gpu, axis=(1, 2))
-            elif self.stat == 'max':
-                result_gpu = cp.nanmax(masked_data_gpu, axis=(1, 2))
-            elif self.stat == 'sum':
-                result_gpu = cp.nansum(masked_data_gpu, axis=(1, 2))
+            stats_functions = {
+                'mean': cp.nanmean,
+                'median': cp.nanmedian,
+                'min': cp.nanmin,
+                'max': cp.nanmax,
+                'sum': cp.nansum
+            }
 
-            else:
+            try:
+                result_gpu = stats_functions[self.stat](
+                    masked_data_gpu, axis=(1, 2))
+            except KeyError:
                 raise ValueError(
                     f"Invalid stat: {self.stat}. Options are 'mean', 'median', 'min', 'max', 'sum'.")
 

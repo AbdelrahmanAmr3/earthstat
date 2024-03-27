@@ -7,7 +7,7 @@ def get_merged_csv(area_name, workflow, kelvin_to_celsius=False, output_name=Non
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    files_to_merge = glob.glob(f'{area_name}_Aggregated/*.csv')
+    files_to_merge = glob.glob(f'{area_name}_Aggregated_{workflow}_csv/*.csv')
 
     common_columns = _common_columns_csvs(files_to_merge)
     merged_df = pd.read_csv(files_to_merge[0])
@@ -21,7 +21,15 @@ def get_merged_csv(area_name, workflow, kelvin_to_celsius=False, output_name=Non
     merged_df['date'] = pd.to_datetime(merged_df['date'])
 
     if kelvin_to_celsius:
-        merged_df['Temperature_Air_2m_Min_24h'] = merged_df['Temperature_Air_2m_Min_24h'] - 273.15
+        temperature_columns = ['Temperature_Air_2m_Max_24h',
+                               'Temperature_Air_2m_Min_24h', 'Temperature_Air_2m_Mean_24h']
+        conversion_factor = 273.15
+
+        for column in temperature_columns:
+            if column in merged_df.columns:
+                merged_df[column] -= conversion_factor
+            else:
+                print(f"Column {column} does not exist in the DataFrame.")
 
     # make the date column the first column
     merged_columns = merged_df.columns.tolist()
@@ -29,12 +37,12 @@ def get_merged_csv(area_name, workflow, kelvin_to_celsius=False, output_name=Non
     merged_df = merged_df[['date'] + merged_columns]
 
     if output_name:
-        merged_df.to_csv(
-            f'{output_name}_{workflow}_{timestamp}.csv', index=False)
+        filename = f'{output_name}_{workflow}_{timestamp}.csv'
+        merged_df.to_csv(filename, index=False)
 
     else:
-        merged_df.to_csv(
-            f'AgERA5_{area_name}_merged_parameters_{workflow}_{timestamp}.csv', index=False)
+        filename = f'AgERA5_{area_name}_merged_parameters_{workflow}_{timestamp}.csv'
+        merged_df.to_csv(filename, index=False)
 
 
 def _common_columns_csvs(file_paths):

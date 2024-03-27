@@ -22,7 +22,6 @@ class DekadalDatasetBuilder():
         # Constructor
         self.area_name = area_name
         self.shapefile = shapefile
-        self.masks = self._compute_masks()
         self.all_touched = all_touched
         self.stat = stat
 
@@ -33,6 +32,7 @@ class DekadalDatasetBuilder():
             self.multiprocessing = False
 
         self._processing_status()
+        self.masks = self._compute_masks()
 
     def _processing_status(self):
 

@@ -53,19 +53,20 @@ class xEarthStat():
         print("AgERA5 Data Extracted Successfully")
 
     def Aggregate_AgERA5(self, max_workers=os.cpu_count(), all_touched=False, stat='mean'):
-        self._init_aggregation_workflow(self.workflow, all_touched, stat)
+        self._init_aggregation_workflow(
+            self.workflow, all_touched=all_touched, stat=stat)
         print(f"Building {self.workflow} ({stat}) Datasets...")
         self.dataset_builder.build_datasets(max_workers=max_workers)
         print(f"{self.workflow} Datasets Aggregated Successfully")
 
-    def _init_aggregation_workflow(self, workflow, all_touched, stat):
+    def _init_aggregation_workflow(self, workflow, max_workers=os.cpu_count(), all_touched=False, stat='mean'):
         if workflow == 'dekadal':
             self.dataset_builder = DekadalDatasetBuilder(
-                self.area_name, self.shapefile, multiprocessing=self.processing, all_touched=all_touched, stat=stat)
+                self.area_name, self.shapefile, multiprocessing=self.processing, max_workers=max_workers, all_touched=all_touched, stat=stat)
             self.workflow = workflow
         else:
             self.dataset_builder = DailyDatasetBuilder(
-                self.area_name, self.shapefile, multiprocessing=self.processing, all_touched=all_touched, stat=stat)
+                self.area_name, self.shapefile, multiprocessing=self.processing, max_workers=max_workers, all_touched=all_touched, stat=stat)
             self.workflow = 'daily'
 
     def AgERA5_merged_csv(self, kelvin_to_celsius=False, output_name=None):

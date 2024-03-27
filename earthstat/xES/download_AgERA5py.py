@@ -2,7 +2,10 @@ import os
 import concurrent.futures
 from .cds_param import get_retrieve_params
 from .cds_api_key_manager import APIKeyManager
-import cdsapi
+try:
+    import cdsapi
+except ImportError:
+    print("Please install the cdsapi package using 'pip install cdsapi'")
 
 
 class AgERA5Downloader:

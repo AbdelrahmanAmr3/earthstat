@@ -2,7 +2,6 @@ try:
     import cdsapi
 except ImportError:
     print("Please install the cdsapi package using 'pip install cdsapi'")
-    exit(1)
 from pathlib import Path
 
 

@@ -74,7 +74,9 @@ markdown_extensions:
 nav:
     - Home: index.md
     - Installation: installation.md
-    - Usage: usage.md
+    - Usage:
+        - Main Workflow : usage/main_usage.md
+        - xEarthStat Workflow : usage/xES_usage.md
     - Contributing: contributing.md
     - FAQ: faq.md
     - Changelog: changelog.md

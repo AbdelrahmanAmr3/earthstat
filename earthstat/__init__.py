@@ -2,7 +2,7 @@
 
 __author__ = """Abdelrahman Saleh"""
 __email__ = "abdulrahman.amr.ali@gmail.com"
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 from .earthstat import EarthStat
 from .xearthstat import xEarthStat

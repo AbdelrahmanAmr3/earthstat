@@ -25,7 +25,7 @@ EarthStat's Library Workflows's Notebooks:
 
 ## Introduction
 
-Drawing inspiration from participating in the AgML community's "Regional Crop Yield Forecasting" activity, I've developed a Python library to build benchmarks for training Machine Learning models. As the sole developer, I've focused on creating a tool that efficiently processes large volumes of TIFF files, extracting statistical information and converting raster data into easily manageable CSV files. This library is particularly suited for training Machine Learning (ML) models or conducting in-depth environmental analyses.
+Inspired by my engagement with the AgML community's "Regional Crop Yield Forecasting" challenge, I created a Python library designed to set benchmarks for Machine Learning (ML) models. The library presents an efficient workflow for extracting statistical information from big remote sensing and climate datasets. Currently, The library presents two workflows. First, for dealing with GeoTIFF files, as the main workflow of EarthStat. In addition, it presents a unique workflow for AgERA5 datasets, which gives the user the power to download a huge amount of different variables using CDS API, extended to extract and aggregate all downloaded data. EarthStat's workflows provide multiprocessing and GPU for parallel computation as an option. This library is particularly suited for creating statistical information datasets for ML models or for environmental analyses and monitoring.
 
 ## EarthStat Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat from the initialized dataset to the created CSV file.
@@ -37,7 +37,7 @@ This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
 
 ![Geospatial Data Processing Workflow](docs/assests/xES_workflow.png)
 
-## EarthStat's Features
+## EarthStat Main Workflow Features
 
 EarthStat revolutionizes the extraction of statistical information from geographic data, offering a seamless workflow for effective data management:
 
@@ -56,6 +56,26 @@ EarthStat revolutionizes the extraction of statistical information from geograph
 - **Advanced Statistical Data Extraction:** Offers a variety of statistical aggregation methods.
 
 - **Efficient Parallel Processing:** Leverages the power of multiprocessing, significantly accelerating data processing across extensive datasets for quicker, more efficient computation.
+
+## EarthStat Main Workflow Features
+- **Unlimited AgERA5 Data Downloads**: The EarthStat workflow enables users to bypass the limitations of the CDS server, allowing for the download of any quantity of data for the required variables.
+- **Fully Automated**: This library is entirely automated and does not require any prior Python knowledge. Users simply need to select the variables for download and aggregation, specify the start and end years to determine the data volume, and define the shapefile containing the geometry objects.
+- **Parallel Computation**: EarthStat workflow intelligently detects GPU availability to shift aggregation processes for parallel computation on the GPU. It also offers users the option to leverage available CPU cores for multiprocessing (Parallel Execution), enhancing I/O-bound tasks.
+- **Aggregated Data as CSV**: Ultimately, the workflow provides users with a neatly organized CSV file, compiling all downloaded and aggregated variables.
+
+### EarthStat Google Colab Performance
+This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by useing Google Colab.
+
+| Data      | Variables | Number of Geo-Objects | Dataset | Processing Unit            | Time (Run: One Time) min |
+|-----------|-----------|-----------------------|---------|----------------------------|--------------------------|
+| Two year  | 7         | EU (478)              | Dekadal | CPU – Single Processing    | 13:56                    |
+| -         | -         | -                     | Dekadal | CPU – Multiprocessing     | 13:48                    |
+| -         | -         | -                     | Daily   | CPU – Single Processing    | 1:20:43                  |
+| -         | -         | -                     | Daily   | CPU – Multiprocessing     | 1:18:32                  |
+| -         | -         | -                     | Dekadal | T4 GPU – Single Processing | 04:32                    |
+| -         | -         | -                     | Dekadal | T4 GPU – Multiprocessing  | 04:12                    |
+| -         | -         | -                     | Daily   | T4 GPU – Single Processing | 06:35                    |
+| -         | -         | -                     | Daily   | T4 GPU – Multiprocessing  | 06:14                    |
 
 ## EarthStat Python Library - Improvements Roadmap
 ### EarthStat Main Workflow

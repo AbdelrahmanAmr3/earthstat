@@ -26,16 +26,10 @@ EarthStat's Library Workflows's Notebooks:
 
 Inspired by my engagement with the AgML community's "Regional Crop Yield Forecasting" challenge, I created a Python library designed to set benchmarks for Machine Learning (ML) models. The library presents an efficient workflow for extracting statistical information from big remote sensing and climate datasets. Currently, The library presents two workflows. First, for dealing with GeoTIFF files, as the main workflow of EarthStat. In addition, it presents a unique workflow for AgERA5 datasets, which gives the user the power to download a huge amount of different variables using CDS API, extended to extract and aggregate all downloaded data. EarthStat's workflows provide multiprocessing and GPU for parallel computation as an option. This library is particularly suited for creating statistical information datasets for ML models or for environmental analyses and monitoring.
 
-## EarthStat Workflow
+## EarthStat Main Workflow
 This diagram illustrates the workflow of the geospatial data processing implemented in EarthStat from the initialized dataset to the created CSV file.
 
 ![Geospatial Data Processing Workflow](docs/assests/workflow.png)
-
-## xEarthStat Workflow
-This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
-
-![Geospatial Data Processing Workflow](docs/assests/xES_workflow.png)
-
 ## EarthStat Main Workflow Features
 
 EarthStat revolutionizes the extraction of statistical information from geographic data, offering a seamless workflow for effective data management:
@@ -56,13 +50,19 @@ EarthStat revolutionizes the extraction of statistical information from geograph
 
 - **Efficient Parallel Processing:** Leverages the power of multiprocessing, significantly accelerating data processing across extensive datasets for quicker, more efficient computation.
 
+## xEarthStat Workflow For AgERA5
+This diagram illustrates the workflow of xEearthStat for AgERA5 data processing.
+
+![xEarthStat Workflow](docs/assests/xES_workflow.png)
+
+
 ## EarthStat Main Workflow Features
 - **Unlimited AgERA5 Data Downloads**: The EarthStat workflow enables users to bypass the limitations of the CDS server, allowing for the download of any quantity of data for the required variables.
 - **Fully Automated**: This library is entirely automated and does not require any prior Python knowledge. Users simply need to select the variables for download and aggregation, specify the start and end years to determine the data volume, and define the shapefile containing the geometry objects.
 - **Parallel Computation**: EarthStat workflow intelligently detects GPU availability to shift aggregation processes for parallel computation on the GPU. It also offers users the option to leverage available CPU cores for multiprocessing (Parallel Execution), enhancing I/O-bound tasks.
 - **Aggregated Data as CSV**: Ultimately, the workflow provides users with a neatly organized CSV file, compiling all downloaded and aggregated variables.
 
-### EarthStat Google Colab Performance
+### xEarthStat Workflow Performance on Google Colab
 This table demonstrates the workflow's performance across various configurations, ranging from multiprocessing to GPU usage for parallel computation by using Google Colab.
 
 | Data      | Variables | Number of Geo-Objects | Dataset | Processing Unit            | Time (Run: One Time) min |

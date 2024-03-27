@@ -130,6 +130,6 @@ class DailyDatasetBuilder:
         if aggregated_data:
             df = pd.DataFrame(aggregated_data)
             df.to_csv(
-                f'{self.area_name}_Aggregated_Daily/AgERA5_{self.area_name}_{ds_variable}_dekadal.csv', index=False)
+                f'{self.area_name}_aggregated_daily_csv/AgERA5_{self.area_name}_{ds_variable}_dekadal.csv', index=False)
         else:
             print(f"No data found for {ds_variable}")

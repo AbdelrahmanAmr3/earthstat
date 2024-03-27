@@ -160,7 +160,7 @@ class DekadalDatasetBuilder():
         if aggregated_data:
             df = pd.DataFrame(aggregated_data)
             df.to_csv(
-                f'{self.area_name}_Aggregated_Dekadal/AgERA5_{self.area_name}_{ds_variable}_dekadal.csv', index=False)
+                f'{self.area_name}_Aggregated_dekadal_csv/AgERA5_{self.area_name}_{ds_variable}_dekadal.csv', index=False)
         else:
             print(f"No data found for {ds_variable}")
 

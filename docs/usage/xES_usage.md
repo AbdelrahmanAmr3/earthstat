@@ -59,7 +59,6 @@ AgERA5_parameters = [
 | Wind Speed               | 10m_wind_speed              | 24_hour_mean              |
 | Vapour Pressure          | vapour_pressure             | 24_hour_mean              |
 
-
 ### Step 4: Define the Shapefile Path
 
 Provide the file path to your shapefile if you're using one:
@@ -99,8 +98,8 @@ EU_AgERA5.download_AgERA5(num_requests=6,
 
 
 ### Step 7: Aggregate Data
-
-xEarthStat's Aggregation process utilize the avilability of GPU for parallel computation, and using the avilalble CPU cores for multiprocessing. it automaticly detect if there is a GPU or not, if not it shift computational processing on CPU.
+f
+xEarthStat's Aggregation process utilize the availability of GPU for parallel computation, and using the avilalble CPU cores for multiprocessing. it automatically detect if there is a GPU or not, if not it shift computational processing on CPU.
 
 - `max_workers`: Default to total number of CPU's cores. You can change the number of cores that used in multiprocessing.
 - `all_touched`: Default to `False` to just consider pixels within the geometry object. `True` to consider all touched pixels by geo-object. 
@@ -118,7 +117,7 @@ EU_AgERA5.Aggregate_AgERA5(max_workers=cpu_cores, all_touched=False, stat='mean'
 
 Optionally, merge all generated datasets' csv files into one merged csv for all aggregated variables:
 - `kelvin_to_celsius`: To convert the temperature unit from kelvin to celsius.
-- `output_name`: option to add the name of merged csv, it's defualt to `AgERA5_{ROI_name}_merged_parameters_{workflow}_{timestamp}.csv`
+- `output_name`: option to add the name of merged csv, it's default to `AgERA5_{ROI_name}_merged_parameters_{workflow}_{timestamp}.csv`
 
 ```python
 EU_AgERA5.AgERA5_merged_csv(kelvin_to_celsius=False, 

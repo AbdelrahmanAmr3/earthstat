@@ -69,6 +69,7 @@ class EarthStat():
             print("TIFF data found. Loading...\n")
             # Proceed to load TIFF data without conversion
             self.predictor_paths = loadTiff(data_dir)
+
         else:
             # If no TIFF files, check for netCDF files
             has_netcdf = any(file.endswith('.nc')
@@ -79,15 +80,18 @@ class EarthStat():
                     "The data is in netCDF format. Do you want to convert it to TIFF? (y/n): ")
 
                 if convert_choice.lower() == 'y':
+
                     # If user chooses to convert, convert the data to TIFF
                     data_dir = convertToTIFF(data_dir)
                     print("Data converted to TIFF successfully.\n")
                     self.predictor_paths = loadTiff(data_dir)
+
                 else:
 
                     print(
                         "Data will not be converted. EarthStat just works with TIFF data.")
                     return
+
             else:
                 print("No netCDF or TIFF data found in the directory.")
                 return
@@ -104,6 +108,7 @@ class EarthStat():
         Args:
             mask_path (str): Path to the mask raster file.
         """
+
         self.mask_path = mask_path
         # Function to identify mask information
         self.mask_meta = maskSummary(self.mask_path)
@@ -116,6 +121,7 @@ class EarthStat():
         Args:
             shapefile_path (str): Path to the shapefile.
         """
+
         self.shapefile_path = shapefile_path
         self.shapefile_meta = shapefileMeta(self.shapefile_path)
 
@@ -132,13 +138,22 @@ class EarthStat():
         """
 
         compatibility_result = checkDataCompatibility(
-            self.predictor_example, self.mask_path, self.shapefile_path)
+
+            self.predictor_example,
+            self.mask_path,
+            self.shapefile_path
+
+        )
+
         self.process_compatibility = compatibility_result
+
         if self.process_compatibility['is_compatible']:
-            print("\nCOMPATIBILITY CHECK PASSED: The data is compatible. No resolution or projection mismatches were detected.")
+            print("\nCOMPATIBILITY CHECK PASSED: The data is compatible. "
+                  "No resolution or projection mismatches were detected.")
+
         else:
-            print(
-                "\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible based on the current checks.")
+            print("\nCOMPATIBILITY ISSUE DETECTED: The data is not compatible "
+                  "based on the current checks.")
 
     def fixCompatibilityIssues(self, rescale_factor=None, resampling_method="bilinear"):
         """
@@ -148,6 +163,7 @@ class EarthStat():
             rescale_factor (tuple, optional): Min and max values for rescaling the mask data.
             resampling_method (str): Method for resampling. Defaults to 'bilinear'.
         """
+
         print("Checking for compatibility issues...")
 
         if not self.process_compatibility['is_compatible']:
@@ -166,11 +182,22 @@ class EarthStat():
                 print("- The shapefile does not require reprojection.")
 
             updated_paths = processCompatibilityIssues(
-                self.process_compatibility, self.mask_path, self.predictor_example, self.shapefile_path, rescale_factor, resampling_method)
+
+                self.process_compatibility,
+                self.mask_path,
+                self.predictor_example,
+                self.shapefile_path,
+                rescale_factor,
+                resampling_method
+
+            )
 
             self.mask_path = updated_paths.get('crop_mask', self.mask_path)
+
             self.shapefile_path = updated_paths.get(
-                'shapefile', self.shapefile_path)
+                'shapefile',
+                self.shapefile_path
+            )
 
             if self.process_compatibility['resample_mask']:
                 print(
@@ -179,17 +206,26 @@ class EarthStat():
             print("\nRe-checking data compatibility after applying fixes...\n")
 
             self.process_compatibility = checkDataCompatibility(
-                self.predictor_example, self.mask_path, self.shapefile_path)
+
+                self.predictor_example,
+                self.mask_path,
+                self.shapefile_path
+            )
 
             if self.process_compatibility['is_compatible']:
                 print(
-                    "\nAll compatibility issues have been resolved. Data is now compatible.")
+                    "\nAll compatibility issues have been resolved."
+                    "Data is now compatible.")
+
             else:
                 print(
-                    "Some compatibility issues could not be resolved automatically. Further manual intervention required.")
+                    "Some compatibility issues could not be resolved"
+                    "automatically. Further manual intervention required.")
+
         else:
             print(
-                "No compatibility issues detected. Predictor, mask, and shapefile are already compatible.")
+                "No compatibility issues detected. Predictor, mask,"
+                "and shapefile are already compatible.")
 
     def selectRegionOfInterest(self, countries, country_column_name):
         """
@@ -199,38 +235,77 @@ class EarthStat():
             countries (list of str): Countries to include in the ROI.
             country_column_name (str): Column name in the shapefile containing country names.
         """
-        self.ROI = extractROI(self.shapefile_path,
-                              countries, country_column_name)
+
+        self.ROI = extractROI(
+
+            self.shapefile_path,
+            countries,
+            country_column_name
+
+        )
 
         if self.ROI:
-            print(
-                f"Region of Interest (ROI) successfully selected based on the specified countries: {', '.join(countries)}.")
-        else:
-            print("Failed to select the Region of Interest (ROI). Please check the country names and column name provided.")
 
-    def clipPredictor(self, invalid_values=None):
+            print(
+                f"Region of Interest (ROI) successfully selected based on "
+                f"the specified countries: {', '.join(countries)}.")
+
+        else:
+            print("Failed to select the Region of Interest (ROI)."
+                  "Please check the country names and column name provided.")
+
+    def clipPredictor(
+
+        self,
+        invalid_values=None
+
+    ):
         """
         Clips predictor data to the selected region of interest or the entire shapefile.
 
         Args:
             invalid_values (list, optional): List of values to treat as invalid in the raster data.
         """
+
         print("Clipping the predictor data...")
+
         if self.ROI:
+
             self.clipped_dir = clipRaster(
-                self.predictor_paths, self.ROI, invalid_values=invalid_values)
+
+                self.predictor_paths,
+                self.ROI,
+                invalid_values=invalid_values
+
+            )
+
             print("Clipping operation successful with the Region of Interest (ROI).")
 
         elif not self.ROI:
+
             self.clipped_dir = clipRaster(
-                self.predictor_paths, self.shapefile_path, invalid_values=invalid_values)
+
+                self.predictor_paths,
+                self.shapefile_path,
+                invalid_values=invalid_values
+
+            )
+
             print("Clipping operation successful with the main shapefile.")
 
         else:
             print(
                 "Failed to clip the predictor data. Check the shapefile and predictor paths")
 
-    def runAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
+    def runAggregation(
+
+        self,
+        use_mask=False,
+        invalid_values=None,
+        calculation_mode="overall_mean",
+        all_touched=False
+
+    ):
         """
         Runs the aggregation process for the selected region of interest or the entire shapefile.
 
@@ -240,33 +315,65 @@ class EarthStat():
             calculation_mode (str): Determines how values are aggregated.
             all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.
         """
+
         print("Starting aggregation...")
 
-        self.use_mask = use_mask
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        aggregate_output = f'Aggregated_{calculation_mode}_{self.predictor_name}_{timestamp}.csv'
+        aggregate_output = (
+            f'Aggregated_{calculation_mode}_{self.predictor_name}_'
+            f'{timestamp}.csv'
+        )
 
         # Check if a Region of Interest (ROI) has been selected for aggregation
         if self.ROI:
+
             print(
-                f"Starting aggregation with the selected Region of Interest (ROI) for {self.predictor_name}.")
-            self.aggregated_csv = conAggregate(self.predictor_dir, self.ROI, aggregate_output, self.mask_path,
-                                               use_mask, invalid_values, calculation_mode, predictor_name=self.predictor_name, all_touched=all_touched)
+                f"Starting aggregation with the selected Region of Interest (ROI) for {self.predictor_name}."
+            )
+
+            self.aggregated_csv = conAggregate(
+                self.predictor_dir,
+                self.ROI,
+                aggregate_output,
+                self.mask_path,
+                use_mask,
+                invalid_values,
+                calculation_mode,
+                predictor_name=self.predictor_name,
+                all_touched=all_touched
+            )
 
         else:
+
             print(
-                f"Starting aggregation with the original shapefile for {self.predictor_name}.")
-            self.aggregated_csv = conAggregate(self.predictor_dir,
-                                               self.shapefile_path,
-                                               aggregate_output,
-                                               self.mask_path,
-                                               use_mask=self.use_mask,
-                                               predictor_name=self.predictor_name)
+                f"Starting aggregation with the original shapefile for {self.predictor_name}."
+            )
+
+            self.aggregated_csv = conAggregate(
+                self.predictor_dir,
+                self.shapefile_path,
+                aggregate_output,
+                self.mask_path,
+                use_mask,
+                invalid_values,
+                calculation_mode,
+                predictor_name=self.predictor_name,
+                all_touched=all_touched
+            )
 
         print(f"Aggregation complete. Data saved to {aggregate_output}.")
 
-    def runParallelAggregation(self, use_mask=False, invalid_values=None, calculation_mode="overall_mean", all_touched=False):
+    def runParallelAggregation(
+
+        self,
+        use_mask=False,
+        invalid_values=None,
+        calculation_mode="overall_mean",
+        all_touched=False,
+        max_workers=None
+
+    ):
         """
         Runs the aggregation process in parallel for the selected region of interest or the entire shapefile.
 
@@ -276,28 +383,54 @@ class EarthStat():
             calculation_mode (str): Determines how values are aggregated.
             all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.
         """
+
         print("Starting Parallel Aggregation...")
 
-        self.use_mask = use_mask
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
 
-        aggregate_output = f'Aggregated_{calculation_mode}_{self.predictor_name}_{timestamp}.csv'
+        aggregate_output = (
+            f'Aggregated_{calculation_mode}_{self.predictor_name}_{timestamp}.csv'
+        )
 
         # Check if a Region of Interest (ROI) has been selected for aggregation
         if self.ROI:
+
             print(
-                f"Starting aggregation with the selected Region of Interest (ROI) for {self.predictor_name}.")
-            self.aggregated_csv = parallelAggregate(self.predictor_dir, self.ROI, aggregate_output, self.mask_path,
-                                                    use_mask, invalid_values, calculation_mode, predictor_name=self.predictor_name, all_touched=all_touched)
+                f"Starting aggregation with the selected"
+                f"Region of Interest (ROI) for {self.predictor_name}."
+            )
+
+            self.aggregated_csv = parallelAggregate(
+                self.predictor_dir,
+                self.ROI,
+                aggregate_output,
+                self.mask_path,
+                use_mask,
+                invalid_values,
+                calculation_mode,
+                predictor_name=self.predictor_name,
+                all_touched=all_touched,
+                max_workers=max_workers
+            )
 
         else:
+
             print(
-                f"Starting aggregation with the original shapefile for {self.predictor_name}.")
-            self.aggregated_csv = parallelAggregate(self.predictor_dir,
-                                                    self.shapefile_path,
-                                                    aggregate_output,
-                                                    self.mask_path,
-                                                    use_mask=self.use_mask,
-                                                    predictor_name=self.predictor_name)
+                f"Starting aggregation with the original"
+                f"shapefile for {self.predictor_name}."
+            )
+
+            self.aggregated_csv = parallelAggregate(
+                self.predictor_dir,
+                self.shapefile_path,
+                aggregate_output,
+                self.mask_path,
+                use_mask,
+                invalid_values,
+                calculation_mode,
+                predictor_name=self.predictor_name,
+                all_touched=all_touched,
+                max_workers=max_workers
+            )
 
         print(f"Aggregation complete. Data saved to {aggregate_output}.")

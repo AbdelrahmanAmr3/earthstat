@@ -11,7 +11,17 @@ from shapely.geometry import mapping
 from ..utils import extractDateFromFilename, loadTiff
 
 
-def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, use_mask=False, mask_path=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+def process_and_aggregate_raster(
+
+        raster_path,
+        shape_file,
+        invalid_values=None,
+        use_mask=False,
+        mask_path=None,
+        calculation_mode="overall_mean",
+        predictor_name="Value",
+        all_touched=False
+):
     """
     Processes a single raster for aggregation into shapefile geometries.
 
@@ -81,7 +91,20 @@ def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, u
     return aggregated_data
 
 
-def parallelAggregate(predictor_dir, shapefile_path, output_csv_path, mask_path=None, use_mask=False, invalid_values=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+def parallelAggregate(
+
+    predictor_dir,
+    shapefile_path,
+    output_csv_path,
+    mask_path=None,
+    use_mask=False,
+    invalid_values=None,
+    calculation_mode="overall_mean",
+    predictor_name="Value",
+    all_touched=False,
+    max_workers=None
+
+):
     """
     Aggregates raster data from a directory in parallel into shapefile geometries, optionally using a mask.
 
@@ -101,6 +124,10 @@ def parallelAggregate(predictor_dir, shapefile_path, output_csv_path, mask_path=
 
     Returns a CSV with aggregated data per shapefile geometry. Utilizes multiprocessing for efficiency.
     """
+
+    if not max_workers:
+        max_workers = os.cpu_count() - 1 if os.cpu_count() > 1 else 1
+
     predictor_paths = loadTiff(predictor_dir)
     data_list = []
 
@@ -109,7 +136,7 @@ def parallelAggregate(predictor_dir, shapefile_path, output_csv_path, mask_path=
     if use_mask and not mask_path:
         raise ValueError("Mask path must be provided if use_mask is True.")
 
-    with ProcessPoolExecutor(max_workers=os.cpu_count()) as executor:
+    with ProcessPoolExecutor(max_workers=max_workers) as executor:
 
         futures = [executor.submit(process_and_aggregate_raster, raster_path, shape_file, invalid_values,
                                    use_mask, mask_path, calculation_mode, predictor_name, all_touched) for raster_path in predictor_paths]

@@ -11,7 +11,17 @@ import geopandas as gpd
 from ..utils import extractDateFromFilename, loadTiff
 
 
-def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, use_mask=False, mask_path=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+def process_and_aggregate_raster(
+
+    raster_path,
+    shape_file,
+    invalid_values=None,
+    use_mask=False,
+    mask_path=None,
+    calculation_mode="overall_mean",
+    predictor_name="Value",
+    all_touched=False
+):
     """
     Processes a single raster for aggregation into shapefile geometries.
 
@@ -82,7 +92,18 @@ def process_and_aggregate_raster(raster_path, shape_file, invalid_values=None, u
     return aggregated_data
 
 
-def conAggregate(predictor_dir, shapefile_path, output_csv_path, mask_path=None, use_mask=False, invalid_values=None, calculation_mode="overall_mean", predictor_name="Value", all_touched=False):
+def conAggregate(
+
+        predictor_dir,
+        shapefile_path,
+        output_csv_path,
+        mask_path=None,
+        use_mask=False,
+        invalid_values=None,
+        calculation_mode="overall_mean",
+        predictor_name="Value",
+        all_touched=False
+):
     """
     Aggregates raster values to polygons in a shapefile, optionally using a crop mask for weighted calculations.
 

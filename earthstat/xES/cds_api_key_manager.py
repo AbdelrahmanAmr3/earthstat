@@ -26,6 +26,7 @@ class APIKeyManager:
                 with cdsapirc_path.open("w") as f:
                     f.write("url: https://cds.climate.copernicus.eu/api/v2\n")
                     f.write(f"key: {cdsApiKey}\n")
+                print("\nCDS API Key overwritten successfully")
 
             elif overwrite.lower() == "n":
                 print("CDS API Key not overwritten")

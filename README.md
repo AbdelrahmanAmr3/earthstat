@@ -13,7 +13,7 @@
 * PyPI: [https://pypi.org/project/earthstat](https://pypi.org/project/earthstat/)
 * Free software: MIT license
 
-EarthStat's Workflows' Notebooks:
+EarthStat's Workflows Notebooks:
 
 * Main Workflow: [Google Colab](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb),
 [Binder](https://colab.research.google.com/github/AbdelrahmanAmr3/earthstat/blob/master/docs/examples/intro.ipynb)

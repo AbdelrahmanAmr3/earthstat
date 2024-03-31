@@ -66,17 +66,20 @@ def process_and_aggregate_raster(
             if use_mask and mask_path and mask_src:
                 crop_mask, _ = mask(
                     mask_src, [geom], crop=True, all_touched=all_touched)
+
                 if calculation_mode == "weighted_mean":
                     valid_mask = (crop_mask[0] != mask_no_data_value)
                     valid_data = geom_mask[0][valid_mask]
                     valid_weights = crop_mask[0][valid_mask]
                     mean_value = np.nansum(valid_data * valid_weights) / np.nansum(
                         valid_weights) if np.nansum(valid_weights) > 0 else np.nan
+
                 elif calculation_mode == "filtered_mean":
                     valid_mask = (crop_mask[0] != mask_no_data_value)
                     masked_data = geom_mask[0][valid_mask]
                     mean_value = np.nanmean(masked_data) if np.nansum(
                         masked_data) > 0 else np.nan
+
             elif calculation_mode == "overall_mean" or not use_mask:
                 mean_value = np.nanmean(geom_mask)
 
@@ -138,8 +141,22 @@ def parallelAggregate(
 
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
 
-        futures = [executor.submit(process_and_aggregate_raster, raster_path, shape_file, invalid_values,
-                                   use_mask, mask_path, calculation_mode, predictor_name, all_touched) for raster_path in predictor_paths]
+        futures = [
+
+            executor.submit(
+
+                process_and_aggregate_raster,
+                raster_path,
+                shape_file,
+                invalid_values,
+                use_mask,
+                mask_path,
+                calculation_mode,
+                predictor_name,
+                all_touched
+
+            ) for raster_path in predictor_paths
+        ]
 
         for future in tqdm(as_completed(futures), total=len(futures), desc="Processing rasters", unit="raster"):
             data_list.extend(future.result())

@@ -67,17 +67,20 @@ def process_and_aggregate_raster(
             if use_mask and mask_path and mask_src:
                 crop_mask, _ = mask(
                     mask_src, [geom], crop=True, all_touched=all_touched)
+
                 if calculation_mode == "weighted_mean":
                     valid_mask = (crop_mask[0] != mask_no_data_value)
                     valid_data = geom_mask[0][valid_mask]
                     valid_weights = crop_mask[0][valid_mask]
                     mean_value = np.nansum(valid_data * valid_weights) / np.nansum(
                         valid_weights) if np.nansum(valid_weights) > 0 else np.nan
+
                 elif calculation_mode == "filtered_mean":
                     valid_mask = (crop_mask[0] != mask_no_data_value)
                     masked_data = geom_mask[0][valid_mask]
                     mean_value = np.nanmean(masked_data) if np.nansum(
                         masked_data) > 0 else np.nan
+
             elif calculation_mode == "overall_mean" or not use_mask:
                 mean_value = np.nanmean(geom_mask)
 
@@ -131,9 +134,20 @@ def conAggregate(
         raise ValueError("Mask path must be provided if use_mask is True.")
 
     for raster_path in tqdm(predictor_paths, desc="Processing rasters", unit="raster"):
+
         # Directly call the processing function for each raster
-        data = process_and_aggregate_raster(raster_path, shape_file, invalid_values,
-                                            use_mask, mask_path, calculation_mode, predictor_name, all_touched)
+        data = process_and_aggregate_raster(
+
+            raster_path,
+            shape_file,
+            invalid_values,
+            use_mask,
+            mask_path,
+            calculation_mode,
+            predictor_name,
+            all_touched
+        )
+
         data_list.extend(data)
 
     df = pd.DataFrame(data_list)

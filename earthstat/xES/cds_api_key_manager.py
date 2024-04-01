@@ -21,6 +21,7 @@ class APIKeyManager:
                     print(line)
             overwrite = input(
                 f"API Key found in {cdsapirc_path}. Do you want to overwrite it? (y/n): ")
+
             if overwrite.lower() == "y":
                 cdsApiKey = input("Please enter your CDS API Key: ")
                 with cdsapirc_path.open("w") as f:
@@ -30,6 +31,7 @@ class APIKeyManager:
 
             elif overwrite.lower() == "n":
                 print("CDS API Key not overwritten")
+
             else:
                 print("Invalid input. Please enter 'y' or 'n'")
                 self.add_cds_api_key()

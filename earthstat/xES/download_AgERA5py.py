@@ -9,7 +9,8 @@ except ImportError:
 
 
 class AgERA5Downloader:
-    def __init__(self, area_name, parameters, start_year, end_year, bounding_box):
+    def __init__(self, area_name, parameters, bounding_box, start_year, end_year):
+
         self.api_key_manager = APIKeyManager().add_cds_api_key()
         self.area_name = area_name
         self.parameters = parameters
@@ -33,10 +34,14 @@ class AgERA5Downloader:
                 future.result()
 
     def _AgERA5_Requests(self, year, parameter):
+
         parameter_path = os.path.join(self.area_name, parameter)
+
         os.makedirs(parameter_path, exist_ok=True)
+
         retrieve_params = get_retrieve_params(
             parameter, self.bounding_box, year)
+
         self.cds.retrieve(
             'sis-agrometeorological-indicators',
             retrieve_params,

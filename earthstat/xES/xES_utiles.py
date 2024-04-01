@@ -5,11 +5,10 @@ import re
 import logging
 
 
-def create_directories(area_name, build_dekadal_data=False):
+def create_directories(area_name):
     for param_folder in glob.glob(f'{area_name}/*'):
         try:
             os.makedirs(f'{param_folder}/Extracted', exist_ok=True)
-            os.makedirs(f'{param_folder}/Aggregated_CSV', exist_ok=True)
             logging.info(f"Created directories in {param_folder}")
         except Exception as e:
             logging.error(

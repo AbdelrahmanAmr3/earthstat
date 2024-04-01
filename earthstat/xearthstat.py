@@ -11,42 +11,43 @@ import geopandas as gpd
 
 
 class xEarthStat():
+    """
+    xEarthStat is a Python package that provides a simple interface to download and aggregate AgERA5 data for a given region of interest (ROI).
+    """
 
-    def __init__(self, area_name, shapefile_path, workflow='daily', multi_processing=False):
+    def __init__(self):
 
-        self.area_name = area_name  # create directories
-        self.workflow = workflow
-        self.processing = multi_processing
-
-        self._init_shapefile(
-            shapefile_path
-        )
-
-        self._check_missing(shapefile_path)
-
-    def _init_shapefile(self, shapefile_path):
-        self.shapefile = gpd.read_file(shapefile_path)
-        # make sure the shapefile with wg84 projection
-        self.shapefile = self.shapefile.to_crs(epsg=4326)
-
+        self.area_name = None
+        self.shapefile = None
+        self.aggregation_workflow = None
+        self.processing = None
     # create directories for xEarthStat workflow
 
-    def _check_missing(self, shapefile_path):
-        os.makedirs(self.area_name, exist_ok=True)
-        if not shapefile_path:
-            print("Shapefile not provided")
-            self.shapefile = input(
-                "Please provide the path to the shapefile: ")
+    def init_workflow(self, area_name, shapefile_path=None):
 
-    def init_AgERA5_downloader(self, parameters, start_year, end_year, bounding_box):
+        self.area_name = area_name  # Essential for creating directories
+        os.makedirs(self.area_name, exist_ok=True)
+
+        if shapefile_path:
+            self.shapefile = gpd.read_file(shapefile_path)
+            # make sure the shapefile with wg84 projection
+            self.shapefile = self.shapefile.to_crs(epsg=4326)
+
+        else:
+            print("No Shapefile Provided. You can download data without aggregation.")
+            print(
+                "If you plan to aggregate the data later, you will be asked to provide the shapefile path.")
+            self.shapefile = None
+
+    def init_AgERA5_downloader(self, parameters, bounding_box, start_year, end_year):
 
         self.data_downloader = AgERA5Downloader(
 
             self.area_name,
             parameters,
+            bounding_box,
             start_year,
-            end_year,
-            bounding_box
+            end_year
         )
 
     def download_AgERA5(self, num_requests, extract=True):
@@ -66,34 +67,26 @@ class xEarthStat():
         print("AgERA5 Data Extracted Successfully")
 
     def Aggregate_AgERA5(
+            self, dataset_type='dekadal', all_touched=False, stat='mean',
+            multi_processing=False, max_workers=os.cpu_count()):
 
-        self,
-        max_workers=os.cpu_count(),
-        all_touched=False,
-        stat='mean'
-    ):
+        self._check_shapefile()
+
+        self.aggregation_workflow = dataset_type
+        self.processing = multi_processing
 
         self._init_aggregation_workflow(
+            self.aggregation_workflow, all_touched=all_touched, stat=stat)
 
-            self.workflow,
-            all_touched=all_touched,
-            stat=stat
-        )
-
-        print(f"Building {self.workflow} ({stat}) Datasets...")
+        print(f"Building {self.aggregation_workflow} ({stat}) Datasets...")
         self.dataset_builder.build_datasets(max_workers=max_workers)
-        print(f"{self.workflow} Datasets Aggregated Successfully")
+        print(f"{self.aggregation_workflow} Datasets Aggregated Successfully")
 
     def _init_aggregation_workflow(
+            self, dataset_type, max_workers=os.cpu_count(),
+            all_touched=False, stat='mean'):
 
-        self,
-        workflow,
-        max_workers=os.cpu_count(),
-        all_touched=False,
-        stat='mean'
-    ):
-
-        if workflow == 'dekadal':
+        if dataset_type == 'dekadal':
 
             self.dataset_builder = DekadalDatasetBuilder(
 
@@ -105,8 +98,6 @@ class xEarthStat():
                 stat=stat
 
             )
-
-            self.workflow = workflow
 
         else:
 
@@ -121,9 +112,19 @@ class xEarthStat():
 
             )
 
-            self.workflow = 'daily'
-
     def AgERA5_merged_csv(self, kelvin_to_celsius=False, output_name=None):
-        get_merged_csv(self.area_name, self.workflow,
+        get_merged_csv(self.area_name, self.aggregation_workflow,
                        kelvin_to_celsius=kelvin_to_celsius, output_name=output_name)
         print("CSV Merged Successfully")
+
+    def _check_shapefile(self):
+        if not self.shapefile:
+
+            print("Shapefile not provided")
+
+            shapefile_path = input(
+                "Please provide the path to the shapefile: ")
+
+            self.shapefile = gpd.read_file(shapefile_path)
+            self.shapefile = self.shapefile.to_crs(epsg=4326)
+            print("Shapefile Loaded Successfully\n")

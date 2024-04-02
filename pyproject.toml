@@ -1,6 +1,6 @@
 [project]
 name = "earthstat"
-version = "0.8.1"
+version = "0.8.2"
 dynamic = [
     "dependencies",
 ]
@@ -54,7 +54,7 @@ universal = true
 
 
 [tool.bumpversion]
-current_version = "0.8.1"
+current_version = "0.8.2"
 commit = true
 tag = true
 

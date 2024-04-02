@@ -5,8 +5,9 @@ from rasterio.mask import mask
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-from concurrent.futures import ProcessPoolExecutor, as_completed
+# from concurrent.futures import ProcessPoolExecutor, as_completed
 from shapely.geometry import mapping
+import multiprocessing
 
 from ..utils import extractDateFromFilename, loadTiff
 
@@ -95,7 +96,6 @@ def process_and_aggregate_raster(
 
 
 def parallelAggregate(
-
     predictor_dir,
     shapefile_path,
     output_csv_path,
@@ -106,7 +106,6 @@ def parallelAggregate(
     predictor_name="Value",
     all_touched=False,
     max_workers=None
-
 ):
     """
     Aggregates raster data from a directory in parallel into shapefile geometries, optionally using a mask.
@@ -127,7 +126,6 @@ def parallelAggregate(
 
     Returns a CSV with aggregated data per shapefile geometry. Utilizes multiprocessing for efficiency.
     """
-
     if not max_workers:
         max_workers = os.cpu_count() - 1 if os.cpu_count() > 1 else 1
 
@@ -139,27 +137,27 @@ def parallelAggregate(
     if use_mask and not mask_path:
         raise ValueError("Mask path must be provided if use_mask is True.")
 
-    with ProcessPoolExecutor(max_workers=max_workers) as executor:
+    # Prepare arguments for starmap
+    task_args = [
+        (
+            raster_path,
+            shape_file,
+            invalid_values,
+            use_mask,
+            mask_path,
+            calculation_mode,
+            predictor_name,
+            all_touched
+        ) for raster_path in predictor_paths
+    ]
 
-        futures = [
+    with multiprocessing.Pool(processes=max_workers) as pool:
+        # Wrap pool.imap or pool.imap_unordered for a real-time tqdm progress bar
+        results = list(tqdm(pool.starmap(process_and_aggregate_raster, task_args), total=len(
+            task_args), desc="Processing rasters", unit="raster"))
 
-            executor.submit(
-
-                process_and_aggregate_raster,
-                raster_path,
-                shape_file,
-                invalid_values,
-                use_mask,
-                mask_path,
-                calculation_mode,
-                predictor_name,
-                all_touched
-
-            ) for raster_path in predictor_paths
-        ]
-
-        for future in tqdm(as_completed(futures), total=len(futures), desc="Processing rasters", unit="raster"):
-            data_list.extend(future.result())
+        for result in results:
+            data_list.extend(result)
 
     df = pd.DataFrame(data_list)
     df[predictor_name] = df[predictor_name].round(3)

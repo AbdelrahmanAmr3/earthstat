@@ -7,7 +7,7 @@ import numpy as np
 from tqdm import tqdm
 # from concurrent.futures import ProcessPoolExecutor, as_completed
 from shapely.geometry import mapping
-import multiprocessing
+from multiprocessing import Pool
 
 from ..utils import extractDateFromFilename, loadTiff
 
@@ -95,6 +95,10 @@ def process_and_aggregate_raster(
     return aggregated_data
 
 
+def process_wrapper(arg):
+    return process_and_aggregate_raster(*arg)
+
+
 def parallelAggregate(
     predictor_dir,
     shapefile_path,
@@ -151,12 +155,17 @@ def parallelAggregate(
         ) for raster_path in predictor_paths
     ]
 
-    with multiprocessing.Pool(processes=max_workers) as pool:
+    # with multiprocessing.Pool(processes=max_workers) as pool:
+    with Pool(processes=max_workers) as pool:
+        results = []
         # Wrap pool.imap or pool.imap_unordered for a real-time tqdm progress bar
-        results = list(tqdm(pool.starmap(process_and_aggregate_raster, task_args), total=len(
-            task_args), desc="Processing rasters", unit="raster"))
+        # results = list(tqdm(pool.starmap(process_and_aggregate_raster, task_args), total=len(
+        #     task_args), desc="Processing rasters", unit="raster"))
 
-        for result in results:
+        # for result in results:
+        #     data_list.extend(result)
+        for result in tqdm(pool.imap(process_wrapper, task_args, chunksize=1), total=len(task_args), desc="Processing rasters", unit="raster"):
+            results.append(result)
             data_list.extend(result)
 
     df = pd.DataFrame(data_list)

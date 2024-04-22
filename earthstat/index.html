@@ -1,0 +1,2448 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Geospatial tool for statistical data extraction, resampling, and reprojecting, with intuitive integration and export features.">
+      
+      
+        <meta name="author" content="AbdelrahmanAmr3">
+      
+      
+        <link rel="canonical" href="https://AbdelrahmanAmr3.github.io/earthstat/earthstat/">
+      
+      
+        <link rel="prev" href="../examples/intro/">
+      
+      
+        <link rel="next" href="../geo_meta_extractor/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>earthstat module - EarthStat</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:300,300i,400,400i,700,700i%7CRegular:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Google Sans";--md-code-font:"Regular"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#earthstat-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="EarthStat" class="md-header__button md-logo" aria-label="EarthStat" data-md-component="logo">
+      
+  <img src="../assests/logo_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EarthStat
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              earthstat module
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AbdelrahmanAmr3/earthstat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="EarthStat" class="md-nav__button md-logo" aria-label="EarthStat" data-md-component="logo">
+      
+  <img src="../assests/logo_white.png" alt="logo">
+
+    </a>
+    EarthStat
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AbdelrahmanAmr3/earthstat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/main_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Main Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage/xES_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    xEarthStat Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/AbdelrahmanAmr3/earthstat/issues" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    earthstat module
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    earthstat module
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#earthstat.earthstat" class="md-nav__link">
+    <span class="md-ellipsis">
+      earthstat.earthstat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat" class="md-nav__link">
+    <span class="md-ellipsis">
+      EarthStat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EarthStat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.DataCompatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      DataCompatibility()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.clipPredictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      clipPredictor()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.fixCompatibilityIssues" class="md-nav__link">
+    <span class="md-ellipsis">
+      fixCompatibilityIssues()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initDataDir" class="md-nav__link">
+    <span class="md-ellipsis">
+      initDataDir()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initMaskPath" class="md-nav__link">
+    <span class="md-ellipsis">
+      initMaskPath()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initShapefilePath" class="md-nav__link">
+    <span class="md-ellipsis">
+      initShapefilePath()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.runAggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      runAggregation()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.runParallelAggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      runParallelAggregation()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.selectRegionOfInterest" class="md-nav__link">
+    <span class="md-ellipsis">
+      selectRegionOfInterest()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geo_meta_extractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Metadata Extraction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_converter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Data Converter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data_compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check and Fix Data Compatibility Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../geo_data_processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Data Preprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analysis_aggregation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extract Statistical Information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#earthstat.earthstat" class="md-nav__link">
+    <span class="md-ellipsis">
+      earthstat.earthstat
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat" class="md-nav__link">
+    <span class="md-ellipsis">
+      EarthStat
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="EarthStat">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.DataCompatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      DataCompatibility()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.clipPredictor" class="md-nav__link">
+    <span class="md-ellipsis">
+      clipPredictor()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.fixCompatibilityIssues" class="md-nav__link">
+    <span class="md-ellipsis">
+      fixCompatibilityIssues()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initDataDir" class="md-nav__link">
+    <span class="md-ellipsis">
+      initDataDir()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initMaskPath" class="md-nav__link">
+    <span class="md-ellipsis">
+      initMaskPath()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.initShapefilePath" class="md-nav__link">
+    <span class="md-ellipsis">
+      initShapefilePath()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.runAggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      runAggregation()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.runParallelAggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      runParallelAggregation()
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#earthstat.earthstat.EarthStat.selectRegionOfInterest" class="md-nav__link">
+    <span class="md-ellipsis">
+      selectRegionOfInterest()
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+
+                  
+
+  
+  
+
+
+<h1 id="earthstat-module">earthstat module<a class="headerlink" href="#earthstat-module" title="Permanent link">&para;</a></h1>
+
+
+  <div class="doc doc-object doc-module">
+
+<a id="earthstat.earthstat"></a>
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h2 id="earthstat.earthstat.EarthStat" class="doc doc-heading">
+        <code>
+EarthStat        </code>
+
+
+
+<a href="#earthstat.earthstat.EarthStat" class="headerlink" title="Permanent link">&para;</a></h2>
+
+    <div class="doc doc-contents ">
+
+      <p>A class to manage and process geospatial data for EarthStat-compatible datasets.</p>
+
+<p><strong>Attributes:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>predictor_name</code></td>
+        <td><code>str</code></td>
+        <td><p>Name of the predictor variable.</p></td>
+      </tr>
+      <tr>
+        <td><code>predictor_paths</code></td>
+        <td><code>list</code></td>
+        <td><p>Paths to predictor raster files.</p></td>
+      </tr>
+      <tr>
+        <td><code>predictor_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>Directory containing predictor data.</p></td>
+      </tr>
+      <tr>
+        <td><code>predictor_example</code></td>
+        <td><code>str</code></td>
+        <td><p>An example file from predictor data.</p></td>
+      </tr>
+      <tr>
+        <td><code>mask_path</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the mask raster file.</p></td>
+      </tr>
+      <tr>
+        <td><code>shapefile_path</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the shapefile.</p></td>
+      </tr>
+      <tr>
+        <td><code>process_compatibility</code></td>
+        <td><code>dict</code></td>
+        <td><p>Results from compatibility check.</p></td>
+      </tr>
+      <tr>
+        <td><code>use_crop_mask</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use a cropping mask in processing.</p></td>
+      </tr>
+      <tr>
+        <td><code>predictory_meta,</code></td>
+        <td><code>mask_meta, shapefile_meta (dict</code></td>
+        <td><p>Metadata for respective data types.</p></td>
+      </tr>
+      <tr>
+        <td><code>ROI</code></td>
+        <td><code>GeoDataFrame</code></td>
+        <td><p>Selected region of interest.</p></td>
+      </tr>
+      <tr>
+        <td><code>clipped_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>Directory containing clipped raster data.</p></td>
+      </tr>
+      <tr>
+        <td><code>aggregated_csv</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the output aggregated CSV file.</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">EarthStat</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    A class to manage and process geospatial data for EarthStat-compatible datasets.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">        predictor_name (str): Name of the predictor variable.</span>
+<span class="sd">        predictor_paths (list): Paths to predictor raster files.</span>
+<span class="sd">        predictor_dir (str): Directory containing predictor data.</span>
+<span class="sd">        predictor_example (str): An example file from predictor data.</span>
+<span class="sd">        mask_path (str): Path to the mask raster file.</span>
+<span class="sd">        shapefile_path (str): Path to the shapefile.</span>
+<span class="sd">        process_compatibility (dict): Results from compatibility check.</span>
+<span class="sd">        use_crop_mask (bool): Whether to use a cropping mask in processing.</span>
+<span class="sd">        predictory_meta, mask_meta, shapefile_meta (dict): Metadata for respective data types.</span>
+<span class="sd">        ROI (GeoDataFrame): Selected region of interest.</span>
+<span class="sd">        clipped_dir (str): Directory containing clipped raster data.</span>
+<span class="sd">        aggregated_csv (str): Path to the output aggregated CSV file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">predictor_name</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span> <span class="o">=</span> <span class="n">predictor_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">use_crop_mask</span> <span class="o">=</span> <span class="kc">True</span>  <span class="c1"># IMPROVE: We have to change it relate the user</span>
+
+        <span class="c1"># Meta Data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictory_meta</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_meta</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_meta</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Modified Data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">clipped_dir</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="c1"># Aggregated Data path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">initDataDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the directory containing predictor data, checks for data format, and optionally converts netCDF to TIFF.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_dir (str): Path to the directory containing predictor data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">has_tiff</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tif&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">has_tiff</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TIFF data found. Loading...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="c1"># Proceed to load TIFF data without conversion</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span> <span class="o">=</span> <span class="n">loadTiff</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># If no TIFF files, check for netCDF files</span>
+            <span class="n">has_netcdf</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.nc&#39;</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">))</span>
+
+            <span class="k">if</span> <span class="n">has_netcdf</span><span class="p">:</span>
+                <span class="n">convert_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                    <span class="s2">&quot;The data is in netCDF format. Do you want to convert it to TIFF? (y/n): &quot;</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">convert_choice</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+
+                    <span class="c1"># If user chooses to convert, convert the data to TIFF</span>
+                    <span class="n">data_dir</span> <span class="o">=</span> <span class="n">convertToTIFF</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data converted to TIFF successfully.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span> <span class="o">=</span> <span class="n">loadTiff</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+
+                    <span class="nb">print</span><span class="p">(</span>
+                        <span class="s2">&quot;Data will not be converted. EarthStat just works with TIFF data.&quot;</span><span class="p">)</span>
+                    <span class="k">return</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No netCDF or TIFF data found in the directory.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span> <span class="o">=</span> <span class="n">data_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictory_meta</span> <span class="o">=</span> <span class="n">predictorMeta</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Predictor Paths Initialized Correctly, Initialize The Mask&#39;s Path&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initMaskPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the path to the mask raster and extracts its metadata.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mask_path (str): Path to the mask raster file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="o">=</span> <span class="n">mask_path</span>
+        <span class="c1"># Function to identify mask information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_meta</span> <span class="o">=</span> <span class="n">maskSummary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mask Initialized Correctly, Initialize The Shapefile&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initShapefilePath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapefile_path</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Initializes the path to the shapefile and extracts its metadata.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            shapefile_path (str): Path to the shapefile.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span> <span class="o">=</span> <span class="n">shapefile_path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_meta</span> <span class="o">=</span> <span class="n">shapefileMeta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Shapefile Initialized Correctly, You Can Check The Data Compatibility&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Shapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">DataCompatibility</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Checks data compatibility among the predictor, mask, and shapefile based on spatial resolution and CRS.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">compatibility_result</span> <span class="o">=</span> <span class="n">checkDataCompatibility</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span> <span class="o">=</span> <span class="n">compatibility_result</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COMPATIBILITY CHECK PASSED: The data is compatible. &quot;</span>
+                  <span class="s2">&quot;No resolution or projection mismatches were detected.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COMPATIBILITY ISSUE DETECTED: The data is not compatible &quot;</span>
+                  <span class="s2">&quot;based on the current checks.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fixCompatibilityIssues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rescale_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resampling_method</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Attempts to fix any detected compatibility issues between the predictor, mask, and shapefile.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            rescale_factor (tuple, optional): Min and max values for rescaling the mask data.</span>
+<span class="sd">            resampling_method (str): Method for resampling. Defaults to &#39;bilinear&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking for compatibility issues...&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compatibility issues detected. Starting the fix process...&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;resample_mask&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;- Resampling the mask to match the raster&#39;s resolution and extent.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- The mask does not require resampling.&quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;reproject_shapefile&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;- Reprojecting the shapefile to match the raster&#39;s coordinate reference system.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- The shapefile does not require reprojection.&quot;</span><span class="p">)</span>
+
+            <span class="n">updated_paths</span> <span class="o">=</span> <span class="n">processCompatibilityIssues</span><span class="p">(</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+                <span class="n">rescale_factor</span><span class="p">,</span>
+                <span class="n">resampling_method</span>
+
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="o">=</span> <span class="n">updated_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;crop_mask&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span> <span class="o">=</span> <span class="n">updated_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+                <span class="s1">&#39;shapefile&#39;</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;resample_mask&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Mask resampled successfully. Updated mask path: [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Re-checking data compatibility after applying fixes...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span> <span class="o">=</span> <span class="n">checkDataCompatibility</span><span class="p">(</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+            <span class="p">)</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All compatibility issues have been resolved.&quot;</span>
+                    <span class="s2">&quot;Data is now compatible.&quot;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Some compatibility issues could not be resolved&quot;</span>
+                    <span class="s2">&quot;automatically. Further manual intervention required.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;No compatibility issues detected. Predictor, mask,&quot;</span>
+                <span class="s2">&quot;and shapefile are already compatible.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">selectRegionOfInterest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">countries</span><span class="p">,</span> <span class="n">country_column_name</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Selects a region of interest (ROI) within the shapefile based on specified countries.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            countries (list of str): Countries to include in the ROI.</span>
+<span class="sd">            country_column_name (str): Column name in the shapefile containing country names.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span> <span class="o">=</span> <span class="n">extractROI</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+            <span class="n">countries</span><span class="p">,</span>
+            <span class="n">country_column_name</span>
+
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Region of Interest (ROI) successfully selected based on &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;the specified countries: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to select the Region of Interest (ROI).&quot;</span>
+                  <span class="s2">&quot;Please check the country names and column name provided.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">clipPredictor</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Clips predictor data to the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping the predictor data...&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">clipped_dir</span> <span class="o">=</span> <span class="n">clipRaster</span><span class="p">(</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="o">=</span><span class="n">invalid_values</span>
+
+            <span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping operation successful with the Region of Interest (ROI).&quot;</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">clipped_dir</span> <span class="o">=</span> <span class="n">clipRaster</span><span class="p">(</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="o">=</span><span class="n">invalid_values</span>
+
+            <span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping operation successful with the main shapefile.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Failed to clip the predictor data. Check the shapefile and predictor paths&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">runAggregation</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span><span class="p">,</span>
+        <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the aggregation process for the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            use_mask (bool): Whether to use a mask for the aggregation process.</span>
+<span class="sd">            invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">            calculation_mode (str): Determines how values are aggregated.</span>
+<span class="sd">            all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting aggregation...&quot;</span><span class="p">)</span>
+
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+
+        <span class="n">aggregate_output</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Aggregated_</span><span class="si">{</span><span class="n">calculation_mode</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s1">_&#39;</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Check if a Region of Interest (ROI) has been selected for aggregation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the selected Region of Interest (ROI) for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">conAggregate</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+                <span class="n">aggregate_output</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="n">use_mask</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="p">,</span>
+                <span class="n">calculation_mode</span><span class="p">,</span>
+                <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+                <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the original shapefile for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">conAggregate</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+                <span class="n">aggregate_output</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="n">use_mask</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="p">,</span>
+                <span class="n">calculation_mode</span><span class="p">,</span>
+                <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+                <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span>
+            <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aggregation complete. Data saved to </span><span class="si">{</span><span class="n">aggregate_output</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">runParallelAggregation</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span><span class="p">,</span>
+        <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">max_workers</span><span class="o">=</span><span class="kc">None</span>
+
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Runs the aggregation process in parallel for the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            use_mask (bool): Whether to use a mask for the aggregation process.</span>
+<span class="sd">            invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">            calculation_mode (str): Determines how values are aggregated.</span>
+<span class="sd">            all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting Parallel Aggregation...&quot;</span><span class="p">)</span>
+
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+
+        <span class="n">aggregate_output</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;Aggregated_</span><span class="si">{</span><span class="n">calculation_mode</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Check if a Region of Interest (ROI) has been selected for aggregation</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the selected&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Region of Interest (ROI) for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">parallelAggregate</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+                <span class="n">aggregate_output</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="n">use_mask</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="p">,</span>
+                <span class="n">calculation_mode</span><span class="p">,</span>
+                <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+                <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span><span class="p">,</span>
+                <span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the original&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;shapefile for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">parallelAggregate</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+                <span class="n">aggregate_output</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+                <span class="n">use_mask</span><span class="p">,</span>
+                <span class="n">invalid_values</span><span class="p">,</span>
+                <span class="n">calculation_mode</span><span class="p">,</span>
+                <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+                <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span><span class="p">,</span>
+                <span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span>
+            <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aggregation complete. Data saved to </span><span class="si">{</span><span class="n">aggregate_output</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.DataCompatibility" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">DataCompatibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.DataCompatibility" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Checks data compatibility among the predictor, mask, and shapefile based on spatial resolution and CRS.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">DataCompatibility</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Checks data compatibility among the predictor, mask, and shapefile based on spatial resolution and CRS.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">compatibility_result</span> <span class="o">=</span> <span class="n">checkDataCompatibility</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+
+    <span class="p">)</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span> <span class="o">=</span> <span class="n">compatibility_result</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COMPATIBILITY CHECK PASSED: The data is compatible. &quot;</span>
+              <span class="s2">&quot;No resolution or projection mismatches were detected.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">COMPATIBILITY ISSUE DETECTED: The data is not compatible &quot;</span>
+              <span class="s2">&quot;based on the current checks.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.clipPredictor" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">clipPredictor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.clipPredictor" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Clips predictor data to the selected region of interest or the entire shapefile.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>invalid_values</code></td>
+        <td><code>list</code></td>
+        <td><p>List of values to treat as invalid in the raster data.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">clipPredictor</span><span class="p">(</span>
+
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span>
+
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Clips predictor data to the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping the predictor data...&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clipped_dir</span> <span class="o">=</span> <span class="n">clipRaster</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="o">=</span><span class="n">invalid_values</span>
+
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping operation successful with the Region of Interest (ROI).&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">clipped_dir</span> <span class="o">=</span> <span class="n">clipRaster</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="o">=</span><span class="n">invalid_values</span>
+
+        <span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Clipping operation successful with the main shapefile.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;Failed to clip the predictor data. Check the shapefile and predictor paths&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.fixCompatibilityIssues" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fixCompatibilityIssues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rescale_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resampling_method</span><span class="o">=</span><span class="s1">&#39;bilinear&#39;</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.fixCompatibilityIssues" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Attempts to fix any detected compatibility issues between the predictor, mask, and shapefile.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>rescale_factor</code></td>
+        <td><code>tuple</code></td>
+        <td><p>Min and max values for rescaling the mask data.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>resampling_method</code></td>
+        <td><code>str</code></td>
+        <td><p>Method for resampling. Defaults to 'bilinear'.</p></td>
+        <td><code>&#39;bilinear&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fixCompatibilityIssues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rescale_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resampling_method</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Attempts to fix any detected compatibility issues between the predictor, mask, and shapefile.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        rescale_factor (tuple, optional): Min and max values for rescaling the mask data.</span>
+<span class="sd">        resampling_method (str): Method for resampling. Defaults to &#39;bilinear&#39;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking for compatibility issues...&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compatibility issues detected. Starting the fix process...&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;resample_mask&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;- Resampling the mask to match the raster&#39;s resolution and extent.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- The mask does not require resampling.&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;reproject_shapefile&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;- Reprojecting the shapefile to match the raster&#39;s coordinate reference system.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- The shapefile does not require reprojection.&quot;</span><span class="p">)</span>
+
+        <span class="n">updated_paths</span> <span class="o">=</span> <span class="n">processCompatibilityIssues</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+            <span class="n">rescale_factor</span><span class="p">,</span>
+            <span class="n">resampling_method</span>
+
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="o">=</span> <span class="n">updated_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;crop_mask&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span> <span class="o">=</span> <span class="n">updated_paths</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s1">&#39;shapefile&#39;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;resample_mask&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Mask resampled successfully. Updated mask path: [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Re-checking data compatibility after applying fixes...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span> <span class="o">=</span> <span class="n">checkDataCompatibility</span><span class="p">(</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_compatibility</span><span class="p">[</span><span class="s1">&#39;is_compatible&#39;</span><span class="p">]:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">All compatibility issues have been resolved.&quot;</span>
+                <span class="s2">&quot;Data is now compatible.&quot;</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="s2">&quot;Some compatibility issues could not be resolved&quot;</span>
+                <span class="s2">&quot;automatically. Further manual intervention required.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;No compatibility issues detected. Predictor, mask,&quot;</span>
+            <span class="s2">&quot;and shapefile are already compatible.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.initDataDir" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">initDataDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.initDataDir" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initializes the directory containing predictor data, checks for data format, and optionally converts netCDF to TIFF.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>data_dir</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the directory containing predictor data.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initDataDir</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_dir</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the directory containing predictor data, checks for data format, and optionally converts netCDF to TIFF.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        data_dir (str): Path to the directory containing predictor data.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">has_tiff</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.tif&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">has_tiff</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TIFF data found. Loading...</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="c1"># Proceed to load TIFF data without conversion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span> <span class="o">=</span> <span class="n">loadTiff</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># If no TIFF files, check for netCDF files</span>
+        <span class="n">has_netcdf</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.nc&#39;</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">data_dir</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">has_netcdf</span><span class="p">:</span>
+            <span class="n">convert_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                <span class="s2">&quot;The data is in netCDF format. Do you want to convert it to TIFF? (y/n): &quot;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">convert_choice</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span>
+
+                <span class="c1"># If user chooses to convert, convert the data to TIFF</span>
+                <span class="n">data_dir</span> <span class="o">=</span> <span class="n">convertToTIFF</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Data converted to TIFF successfully.</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span> <span class="o">=</span> <span class="n">loadTiff</span><span class="p">(</span><span class="n">data_dir</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+
+                <span class="nb">print</span><span class="p">(</span>
+                    <span class="s2">&quot;Data will not be converted. EarthStat just works with TIFF data.&quot;</span><span class="p">)</span>
+                <span class="k">return</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No netCDF or TIFF data found in the directory.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span> <span class="o">=</span> <span class="n">data_dir</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">predictor_example</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">predictory_meta</span> <span class="o">=</span> <span class="n">predictorMeta</span><span class="p">(</span><span class="n">data_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Predictor Paths Initialized Correctly, Initialize The Mask&#39;s Path&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.initMaskPath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">initMaskPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask_path</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.initMaskPath" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initializes the path to the mask raster and extracts its metadata.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mask_path</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the mask raster file.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initMaskPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the path to the mask raster and extracts its metadata.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mask_path (str): Path to the mask raster file.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="o">=</span> <span class="n">mask_path</span>
+    <span class="c1"># Function to identify mask information</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">mask_meta</span> <span class="o">=</span> <span class="n">maskSummary</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Mask Initialized Correctly, Initialize The Shapefile&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.initShapefilePath" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">initShapefilePath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapefile_path</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.initShapefilePath" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Initializes the path to the shapefile and extracts its metadata.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>shapefile_path</code></td>
+        <td><code>str</code></td>
+        <td><p>Path to the shapefile.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">initShapefilePath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shapefile_path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initializes the path to the shapefile and extracts its metadata.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        shapefile_path (str): Path to the shapefile.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span> <span class="o">=</span> <span class="n">shapefile_path</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_meta</span> <span class="o">=</span> <span class="n">shapefileMeta</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">predictor_paths</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Shapefile Initialized Correctly, You Can Check The Data Compatibility&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Shapefile Initialized Correctly, But The Mask or Predictor Paths are not initialized&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.runAggregation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">runAggregation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="o">=</span><span class="s1">&#39;overall_mean&#39;</span><span class="p">,</span> <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.runAggregation" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Runs the aggregation process for the selected region of interest or the entire shapefile.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>use_mask</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use a mask for the aggregation process.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>invalid_values</code></td>
+        <td><code>list</code></td>
+        <td><p>List of values to treat as invalid in the raster data.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>calculation_mode</code></td>
+        <td><code>str</code></td>
+        <td><p>Determines how values are aggregated.</p></td>
+        <td><code>&#39;overall_mean&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>all_touched</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include all pixels that touch the geometry in the aggregation.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">runAggregation</span><span class="p">(</span>
+
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span><span class="p">,</span>
+    <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the aggregation process for the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        use_mask (bool): Whether to use a mask for the aggregation process.</span>
+<span class="sd">        invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">        calculation_mode (str): Determines how values are aggregated.</span>
+<span class="sd">        all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting aggregation...&quot;</span><span class="p">)</span>
+
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+
+    <span class="n">aggregate_output</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Aggregated_</span><span class="si">{</span><span class="n">calculation_mode</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s1">_&#39;</span>
+        <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Check if a Region of Interest (ROI) has been selected for aggregation</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the selected Region of Interest (ROI) for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">conAggregate</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+            <span class="n">aggregate_output</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="n">use_mask</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="p">,</span>
+            <span class="n">calculation_mode</span><span class="p">,</span>
+            <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+            <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the original shapefile for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">conAggregate</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+            <span class="n">aggregate_output</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="n">use_mask</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="p">,</span>
+            <span class="n">calculation_mode</span><span class="p">,</span>
+            <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+            <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span>
+        <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aggregation complete. Data saved to </span><span class="si">{</span><span class="n">aggregate_output</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.runParallelAggregation" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">runParallelAggregation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="o">=</span><span class="s1">&#39;overall_mean&#39;</span><span class="p">,</span> <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_workers</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.runParallelAggregation" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Runs the aggregation process in parallel for the selected region of interest or the entire shapefile.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>use_mask</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use a mask for the aggregation process.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>invalid_values</code></td>
+        <td><code>list</code></td>
+        <td><p>List of values to treat as invalid in the raster data.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>calculation_mode</code></td>
+        <td><code>str</code></td>
+        <td><p>Determines how values are aggregated.</p></td>
+        <td><code>&#39;overall_mean&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>all_touched</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to include all pixels that touch the geometry in the aggregation.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">runParallelAggregation</span><span class="p">(</span>
+
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">invalid_values</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span><span class="p">,</span>
+    <span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_workers</span><span class="o">=</span><span class="kc">None</span>
+
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs the aggregation process in parallel for the selected region of interest or the entire shapefile.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        use_mask (bool): Whether to use a mask for the aggregation process.</span>
+<span class="sd">        invalid_values (list, optional): List of values to treat as invalid in the raster data.</span>
+<span class="sd">        calculation_mode (str): Determines how values are aggregated.</span>
+<span class="sd">        all_touched (bool): Whether to include all pixels that touch the geometry in the aggregation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting Parallel Aggregation...&quot;</span><span class="p">)</span>
+
+    <span class="n">timestamp</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">_%H%M%S&quot;</span><span class="p">)</span>
+
+    <span class="n">aggregate_output</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s1">&#39;Aggregated_</span><span class="si">{</span><span class="n">calculation_mode</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">timestamp</span><span class="si">}</span><span class="s1">.csv&#39;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Check if a Region of Interest (ROI) has been selected for aggregation</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the selected&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Region of Interest (ROI) for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">parallelAggregate</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">,</span>
+            <span class="n">aggregate_output</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="n">use_mask</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="p">,</span>
+            <span class="n">calculation_mode</span><span class="p">,</span>
+            <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+            <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span><span class="p">,</span>
+            <span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span>
+        <span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Starting aggregation with the original&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;shapefile for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">aggregated_csv</span> <span class="o">=</span> <span class="n">parallelAggregate</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">predictor_dir</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+            <span class="n">aggregate_output</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mask_path</span><span class="p">,</span>
+            <span class="n">use_mask</span><span class="p">,</span>
+            <span class="n">invalid_values</span><span class="p">,</span>
+            <span class="n">calculation_mode</span><span class="p">,</span>
+            <span class="n">predictor_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">predictor_name</span><span class="p">,</span>
+            <span class="n">all_touched</span><span class="o">=</span><span class="n">all_touched</span><span class="p">,</span>
+            <span class="n">max_workers</span><span class="o">=</span><span class="n">max_workers</span>
+        <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Aggregation complete. Data saved to </span><span class="si">{</span><span class="n">aggregate_output</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h3 id="earthstat.earthstat.EarthStat.selectRegionOfInterest" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">selectRegionOfInterest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">countries</span><span class="p">,</span> <span class="n">country_column_name</span><span class="p">)</span></code>
+
+
+<a href="#earthstat.earthstat.EarthStat.selectRegionOfInterest" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents ">
+
+      <p>Selects a region of interest (ROI) within the shapefile based on specified countries.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>countries</code></td>
+        <td><code>list of str</code></td>
+        <td><p>Countries to include in the ROI.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>country_column_name</code></td>
+        <td><code>str</code></td>
+        <td><p>Column name in the shapefile containing country names.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>earthstat/earthstat.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">selectRegionOfInterest</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">countries</span><span class="p">,</span> <span class="n">country_column_name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Selects a region of interest (ROI) within the shapefile based on specified countries.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        countries (list of str): Countries to include in the ROI.</span>
+<span class="sd">        country_column_name (str): Column name in the shapefile containing country names.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span> <span class="o">=</span> <span class="n">extractROI</span><span class="p">(</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">shapefile_path</span><span class="p">,</span>
+        <span class="n">countries</span><span class="p">,</span>
+        <span class="n">country_column_name</span>
+
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ROI</span><span class="p">:</span>
+
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Region of Interest (ROI) successfully selected based on &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;the specified countries: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">countries</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Failed to select the Region of Interest (ROI).&quot;</span>
+              <span class="s2">&quot;Please check the country names and column name provided.&quot;</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    2024-04-22
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2024 Abdelrahman Saleh
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>

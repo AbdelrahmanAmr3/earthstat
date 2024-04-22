@@ -1,0 +1,4 @@
+ 
+# earthstat module
+
+::: earthstat.earthstat

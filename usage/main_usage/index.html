@@ -1,0 +1,1267 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Geospatial tool for statistical data extraction, resampling, and reprojecting, with intuitive integration and export features.">
+      
+      
+        <meta name="author" content="AbdelrahmanAmr3">
+      
+      
+        <link rel="canonical" href="https://AbdelrahmanAmr3.github.io/earthstat/usage/main_usage/">
+      
+      
+        <link rel="prev" href="../../installation/">
+      
+      
+        <link rel="next" href="../xES_usage/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.18">
+    
+    
+      
+        <title>Main Workflow - EarthStat</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.66ac8b77.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans:300,300i,400,400i,700,700i%7CRegular:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Google Sans";--md-code-font:"Regular"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#earthstat-main-workflow-usage" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="EarthStat" class="md-header__button md-logo" aria-label="EarthStat" data-md-component="logo">
+      
+  <img src="../../assests/logo_white.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            EarthStat
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Main Workflow
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AbdelrahmanAmr3/earthstat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="EarthStat" class="md-nav__button md-logo" aria-label="EarthStat" data-md-component="logo">
+      
+  <img src="../../assests/logo_white.png" alt="logo">
+
+    </a>
+    EarthStat
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AbdelrahmanAmr3/earthstat" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Installation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Usage
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Usage
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Main Workflow
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Main Workflow
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initializing-the-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initializing the Library
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-configuration-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Configuration Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-the-earthstat-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize the EarthStat object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-predictordata-directory-mask-and-shapefile-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize Predictor/Data Directory, Mask, and Shapefile Path
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-data-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking Data Compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-data-compatibility-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolving Data Compatibility Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-region-of-interest-roi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting Region of Interest (ROI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clipping-predictor-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clipping Predictor Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-data-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing Data Aggregation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executing Data Aggregation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-processing-with-runparallelaggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel Processing with runParallelAggregation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../xES_usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    xEarthStat Workflow
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Contributing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FAQ
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../changelog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Changelog
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/AbdelrahmanAmr3/earthstat/issues" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Report Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            Examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/intro/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Intro
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+        
+          
+          <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    API Reference
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            API Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../earthstat/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    earthstat module
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo_meta_extractor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Metadata Extraction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_converter/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Data Converter
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data_compatibility/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check and Fix Data Compatibility Issues
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../geo_data_processing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Geospatial Data Preprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../analysis_aggregation/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Extract Statistical Information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#initializing-the-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initializing the Library
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#main-configuration-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Main Configuration Setup
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-the-earthstat-object" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize the EarthStat object
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialize-predictordata-directory-mask-and-shapefile-path" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize Predictor/Data Directory, Mask, and Shapefile Path
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#checking-data-compatibility" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checking Data Compatibility
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resolving-data-compatibility-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resolving Data Compatibility Issues
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#selecting-region-of-interest-roi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Selecting Region of Interest (ROI)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clipping-predictor-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clipping Predictor Data
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#executing-data-aggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Executing Data Aggregation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Executing Data Aggregation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parameters
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#parallel-processing-with-runparallelaggregation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parallel Processing with runParallelAggregation
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+
+
+
+                  
+
+  
+  
+
+
+<h1 id="earthstat-main-workflow-usage">EarthStat Main Workflow Usage<a class="headerlink" href="#earthstat-main-workflow-usage" title="Permanent link">&para;</a></h1>
+<p>EarthStat is a powerful tool for geospatial data processing and analysis. Below is a guide to the main workflow of EarthStat, including initialization, configuration, data processing, and aggregation.</p>
+<h3 id="initializing-the-library">Initializing the Library<a class="headerlink" href="#initializing-the-library" title="Permanent link">&para;</a></h3>
+<p>Import the library using:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="kn">from</span> <span class="nn">earthstat</span> <span class="kn">import</span> <span class="n">EarthStat</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="main-configuration-setup">Main Configuration Setup<a class="headerlink" href="#main-configuration-setup" title="Permanent link">&para;</a></h3>
+<p>Initialize the core settings:</p>
+<p><code>predictor_name</code>: The name of the predictor being used.<br />
+<code>predictor_dir</code>: The directory where the predictor's related files are stored.<br />
+<code>mask_file_path</code>: The file path to the mask file, used for calculate weighted mean or mask the raster.<br />
+<code>shapefile_file_path</code>: Path to the shapefile containing geographical boundaries.
+<code>selected_countries</code>: A list of countries - Region of interest (ROI).
+<code>country_column_name</code>: The column's name in the dataset that contains country names.<br />
+<code>invalid_values</code>: A list of values considered invalid within the dataset.</p>
+<blockquote>
+<p><strong>Important:</strong> Be sure to set <code>invalid_values</code> to <code>None</code> if you do not wish to exclude unprocessed values from the dataset.</p>
+</blockquote>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">predictor_name</span>              <span class="o">=</span> <span class="s1">&#39;FPAR&#39;</span>
+<span class="n">predictor_dir</span>               <span class="o">=</span> <span class="s1">&#39;FPAR_Data&#39;</span>
+<span class="n">mask_file_path</span>              <span class="o">=</span> <span class="s1">&#39;crop_mask/Percent_Maize.tif&#39;</span>
+<span class="n">shapefile_file_path</span>         <span class="o">=</span> <span class="s1">&#39;shapefile/gaul1_asap.shp&#39;</span>
+<span class="n">interested_ROI</span>              <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Norway&quot;</span><span class="p">,</span> <span class="s2">&quot;Spain&quot;</span><span class="p">]</span> 
+<span class="n">country_column_name</span>         <span class="o">=</span> <span class="s1">&#39;adm0_name&#39;</span> 
+<span class="n">invalid_values</span>              <span class="o">=</span><span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">254</span><span class="p">,</span> <span class="mi">251</span><span class="p">]</span> <span class="c1"># None-&gt; No Invalid Values</span>
+</code></pre></div></td></tr></table></div>
+<blockquote>
+<p><strong>Caution:</strong> An increase in ROI size may lead to system crashes due to insuffienct RAM size, if you will not do parallel aggregation.</p>
+</blockquote>
+<h3 id="initialize-the-earthstat-object">Initialize the EarthStat object<a class="headerlink" href="#initialize-the-earthstat-object" title="Permanent link">&para;</a></h3>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fpar_aggregator</span> <span class="o">=</span> <span class="n">EarthStat</span><span class="p">(</span><span class="n">predictor_name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="initialize-predictordata-directory-mask-and-shapefile-path">Initialize Predictor/Data Directory, Mask, and Shapefile Path<a class="headerlink" href="#initialize-predictordata-directory-mask-and-shapefile-path" title="Permanent link">&para;</a></h3>
+<p>Set up the foundational paths for your data processing pipeline. This includes initializing the directory for the predictor data, the path for the mask file, and the location of the shapefile. Each step is crucial for ensuring that the subsequent data processing and analysis can proceed smoothly.</p>
+<p>Example Usage:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Initialize the predictor data directory</span>
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">initDataDir</span><span class="p">(</span><span class="n">predictor_dir</span><span class="p">)</span>
+
+<span class="c1"># Set the path for the mask file</span>
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">initMaskPath</span><span class="p">(</span><span class="n">mask_file_path</span><span class="p">)</span>
+
+<span class="c1"># Define the location of the shapefile</span>
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">initShapefilePath</span><span class="p">(</span><span class="n">shapefile_file_path</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="checking-data-compatibility">Checking Data Compatibility<a class="headerlink" href="#checking-data-compatibility" title="Permanent link">&para;</a></h3>
+<p>Evaluate the compatibility of projections and pixel sizes across the mask, raster, and shapefile to ensure seamless data integration. This check confirms that the projection systems align for the mask, raster, and shapefile, and it also verifies that the pixel sizes between the raster and mask are compatible.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">DataCompatibility</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="resolving-data-compatibility-issues">Resolving Data Compatibility Issues<a class="headerlink" href="#resolving-data-compatibility-issues" title="Permanent link">&para;</a></h3>
+<p>This section addresses how to rectify issues identified by the data compatibility check. It focuses on resolving mismatches in pixel size between the raster and mask, or discrepancies in the Coordinate Reference System (CRS) among the raster, mask, and shapefile. The objective is to ensure uniformity in scale, resolution, and geospatial alignment across all datasets involved in the analysis.</p>
+<ul>
+<li><code>rescale_factor</code>: This parameter allows for the adjustment of the data's scale. By default, it is set to <code>None</code>, maintaining the original scale of the data. To alter the scale, specify a new range with a tuple, such as <code>(0,100)</code>.</li>
+<li><code>resampling_method</code>: This specifies the technique used to resample the data, with options including <code>"nearest"</code>, <code>"bilinear"</code>, <code>"cubic"</code>, and <code>"average"</code>. The default method is <code>"bilinear"</code>, suitable for a wide range of applications.</li>
+</ul>
+<p>Example usage:</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Disable rescaling and use default bilinear resampling</span>
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">fixCompatibilityIssues</span><span class="p">(</span><span class="n">rescale_factor</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">resampling_method</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+
+<span class="c1"># Rescale data to a new range (0, 100) and use default bilinear resampling</span>
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">fixCompatibilityIssues</span><span class="p">(</span><span class="n">rescale_factor</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">),</span> <span class="n">resampling_method</span><span class="o">=</span><span class="s2">&quot;bilinear&quot;</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="selecting-region-of-interest-roi">Selecting Region of Interest (ROI)<a class="headerlink" href="#selecting-region-of-interest-roi" title="Permanent link">&para;</a></h3>
+<p>Specify the area for data analysis by identifying the region of interest. Configure the target ROI and link it to the corresponding column that designates country or area names within the dataset.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">selectRegionOfInterest</span><span class="p">(</span><span class="n">interested_ROI</span><span class="p">,</span>
+                                      <span class="n">country_column_name</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="clipping-predictor-data">Clipping Predictor Data<a class="headerlink" href="#clipping-predictor-data" title="Permanent link">&para;</a></h3>
+<p>Clip the predictor data to the boundaries defined in a shapefile. If no specific Region of Interest (ROI) is selected by the previous function, the entire area within the main shapefile (Not filtered shapefile) will be used for clipping.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">clipPredictor</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div></p>
+<blockquote>
+<p><strong>Note &amp; Caution:</strong> The Function is a multiprocessing process. Using the main shapefile without filtering may led to system crash or error due to the big amount of geometry objects in original shapefile.</p>
+</blockquote>
+<h3 id="executing-data-aggregation">Executing Data Aggregation<a class="headerlink" href="#executing-data-aggregation" title="Permanent link">&para;</a></h3>
+<p>Start data aggregation process, leveraging the clipped predictor data, resampled mask, and the filtered shapefile.</p>
+<h4 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><code>use_mask</code> (<strong>bool</strong>): Specifies whether to apply a mask to the raster data. When set to <code>True</code>, the function will use the mask path provided (if applicable) to only process areas within the mask. Default is <code>False</code>.</p>
+</li>
+<li>
+<p><code>invalid_values</code> (<strong>list of int</strong>): A list of pixel values to be treated as invalid and excluded from the aggregation. For example, <code>[255, 254, 251]</code> can be used to ignore certain values that represent no data or errors in the raster files.</p>
+</li>
+<li>
+<p><code>calculation_mode</code> (<strong>str</strong>): Determines the mode of aggregation for pixel values. Supported modes include:</p>
+</li>
+<li><code>"overall_mean"</code>: Calculates the mean of all valid pixel values across the raster dataset.</li>
+<li><code>"weighted_mean"</code>: Calculates the weighted mean of the valid pixel values using the mask values as weights. This mode is applicable only when <code>use_mask</code> is <code>True</code> and a valid <code>mask_file_path</code> is provided.</li>
+<li>
+<p><code>"filtered_mean"</code>: Applies a filter using the validated mask values to mask the data before calculating the mean. This mode is intended for scenarios where only specific parts of the raster that meet certain conditions (defined by the mask) should contribute to the mean calculation.</p>
+</li>
+<li>
+<p><code>all_touched</code> (<strong>bool</strong>): If set to <code>True</code>, all pixels touched by geometries will be included in the mask. If <code>False</code>, only pixels whose center is within the geometry or touching the geometry boundary will be included. Default is <code>False</code>.</p>
+</li>
+</ul>
+<p>Usage Example:</p>
+<p>The following example demonstrates how to use <code>runAggregation</code> to process raster data without applying a mask, excluding specific invalid pixel values, calculating the overall mean of the valid pixels, and considering only pixels whose center is within the geometry:</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Without Mask </span>
+<span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span> <span class="c1"># True to use mask </span>
+<span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span> <span class="c1"># Options: weighted_mean, filtered_mean</span>
+<span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">runAggregation</span><span class="p">(</span><span class="n">use_mask</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="p">,</span> <span class="n">all_touched</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+In this example, it processes raster data by applying a mask, excluding defined invalid values and the values out of intersect between them, calculating the weighted mean using the mask values as weights values.</p>
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># With Mask</span>
+<span class="n">use_mask</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;weighted_mean&quot;</span>
+<span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">runAggregation</span><span class="p">(</span><span class="n">use_mask</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="p">,</span> <span class="n">all_touched</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+The last option is applying a mask to exclude the defined invalid values with the values out of intersect between raster and mask, calculating the overall mean.</p>
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># With Mask</span>
+<span class="n">use_mask</span><span class="o">=</span><span class="kc">True</span>
+<span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;filtered_mean&quot;</span>
+<span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">runAggregation</span><span class="p">(</span><span class="n">use_mask</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="p">,</span> <span class="n">all_touched</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="parallel-processing-with-runparallelaggregation">Parallel Processing with <code>runParallelAggregation</code><a class="headerlink" href="#parallel-processing-with-runparallelaggregation" title="Permanent link">&para;</a></h3>
+<p>The <code>runParallelAggregation</code> method is designed to process and aggregate raster data across multiple files in parallel, enhancing performance for large datasets. This method leverages multiple CPU cores to simultaneously process different portions of the data, reducing overall computation time.</p>
+<p>Usage Example:</p>
+<p>It follows the same structure of <code>runAggregation</code> and the same parameters.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="c1"># Without Mask </span>
+<span class="n">use_mask</span><span class="o">=</span><span class="kc">False</span> <span class="c1"># True to use mask </span>
+<span class="n">calculation_mode</span><span class="o">=</span><span class="s2">&quot;overall_mean&quot;</span> <span class="c1"># Options: weighted_mean, filtered_mean</span>
+<span class="n">all_touched</span><span class="o">=</span><span class="kc">False</span>
+
+<span class="n">fpar_aggregator</span><span class="o">.</span><span class="n">runParallelAggregation</span><span class="p">(</span><span class="n">use_mask</span><span class="p">,</span> <span class="n">invalid_values</span><span class="p">,</span> <span class="n">calculation_mode</span><span class="p">,</span> <span class="n">all_touched</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div></p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1-2.1-2M12.5 7v5.2l4 2.4-1 1L11 13V7h1.5M11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2v1.8Z"/></svg>
+    </span>
+    2024-04-22
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12Z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2024 Abdelrahman Saleh
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.instant", "navigation.tracking", "navigation.top", "search.highlight", "search.share"], "search": "../../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.3220b9d7.min.js"></script>
+      
+    
+  </body>
+</html>
